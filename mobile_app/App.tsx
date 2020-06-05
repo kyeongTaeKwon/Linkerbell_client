@@ -6,7 +6,7 @@ import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
 export default function App() {
-  let [isReady, setReady] = useState(false);
+  const [isReady, setReady] = useState(false);
 
   useEffect(() => {
     (async function () {
