@@ -5,7 +5,7 @@ import store from "./src/store/index";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 
-export default function App() {
+export default function App(): JSX.Element {
   const [isReady, setReady] = useState(false);
 
   useEffect(() => {
