@@ -4,6 +4,7 @@ import { LoginValue } from "../../models/LoginTypes";
 type err = {
   email: string | null;
   password: string | null;
+  passwordCheck: string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
