@@ -10,7 +10,7 @@ export const SubText = styled.Text`
   background-color: transparent;
   font-size: ${(props: Props) => (props.danger === true ? "16px" : "21px")};
   margin-left: 56px;
-  margin-top: ${(props: Props) => (props.danger === true ? "63.5px" : "56px")};
+  margin-top: ${(props: Props) => (props.danger === true ? "32px" : "28px")};
   color: ${(props: Props) => (props.danger === true ? "#ff2222" : "#000")};
   border-width: 0px;
 `;
