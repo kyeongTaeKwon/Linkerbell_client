@@ -1,5 +1,8 @@
 import styled from "styled-components/native";
 
+type Props = {
+  OS: string;
+};
 export const LoginBtn = styled.TouchableHighlight`
   width: 259px;
   height: 52px;
@@ -11,7 +14,7 @@ export const LoginBtn = styled.TouchableHighlight`
 `;
 export const LoginLabel = styled.Text`
   font-family: "NMedium";
-  margin-top: 8px;
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "8px" : "0px")};
   font-size: 20px;
   color: #000;
 `;
