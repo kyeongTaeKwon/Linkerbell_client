@@ -1,11 +1,10 @@
 import React from "react";
-import { Text, Platform } from "react-native";
+import { Text, Platform, Dimensions } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthParamList } from "../models/AuthParamList";
+import LoginBox from "../components/LoginBox";
 import { styled } from "../styles/StartStyles/StyleIndex";
 const {
-  LoginBtn,
-  LoginLabel,
   MainText,
   Container,
   LinkToSignUp,
@@ -29,16 +28,10 @@ const Start = ({
   return (
     <Container>
       <Wrapper>
-        <MainText>LinkerBell</MainText>
-        <LoginBtn>
-          <LoginLabel>Google 로그인</LoginLabel>
-        </LoginBtn>
-        <LoginBtn>
-          <LoginLabel>Kakao 로그인</LoginLabel>
-        </LoginBtn>
-        <LoginBtn onPress={handlePressLoginBtn}>
-          <LoginLabel>로그인</LoginLabel>
-        </LoginBtn>
+        <MainText height={Dimensions.get("window").height}>LinkerBell</MainText>
+        <LoginBox name="Google 로그인" />
+        <LoginBox name="Kakao 로그인" />
+        <LoginBox name="로그인" onPress={handlePressLoginBtn} />
         <LinkToSignUp onPress={hanldePressLinkToSignUp}>
           <LinkToBox>
             <Text

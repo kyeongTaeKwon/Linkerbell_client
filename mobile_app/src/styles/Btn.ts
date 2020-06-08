@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 
 type Props = {
   isEmpty?: boolean;
+  height?: number;
 };
 export const Btn = styled.TouchableOpacity`
   width: 260px;
@@ -11,7 +12,8 @@ export const Btn = styled.TouchableOpacity`
   border-radius: 4px;
   align-items: center;
   align-self: center;
-  margin-top: 220px;
+  position: absolute;
+  top: ${(props: Props) => (props.height ? props.height - 140 + "px" : "0px")};
 `;
 
 export const BtnText = styled.Text`
