@@ -1,10 +1,10 @@
 import React from "react";
 import { Platform } from "react-native";
 import { LoginValue } from "../models/LoginTypes";
-import { style } from "../styles/SigninStyles/StyleIndex";
 import { InputForm } from "../styles/Input";
 import { InputWrapper } from "../styles/InputWrapper";
 import { isEmail } from "../core/utils/emailValidate";
+import { style } from "../styles/SigninStyles/StyleIndex";
 const { SubText } = style;
 
 type stringOrNull = string | null;
@@ -81,11 +81,9 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     <InputWrapper>
       {renderSubText(value.err)}
       <InputForm
-
         autoCapitalize="none"
         OS={Platform.OS}
-        placeholder={`${placeholderKeyword} 입력해주세요`}
-
+        placeholder={`${signUpPlaceholder} 입력해주세요`}
         onChangeText={(val) => onChange({ ...value, [name]: val })}
         onFocus={() => initValidateEmail()}
         onBlur={() => (name === "email" ? validateEmail() : checkPassword())}

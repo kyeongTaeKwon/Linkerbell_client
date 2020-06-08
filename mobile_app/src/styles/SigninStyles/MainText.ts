@@ -5,7 +5,7 @@ export const MainText = styled.Text`
   font-size: 24px;
   padding: 0px;
   margin: 0px;
-  margin-top: 140px;
+  margin-top: 80px;
   margin-left: 44px;
   color: #000;
 `;
