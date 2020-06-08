@@ -21,7 +21,7 @@ type err = {
 };
 
 const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
-  const inputTitle = name === "email" ? "이메일" : "패스워드";
+  const inputTitle = name === "email" ? "이메일" : "비밀번호";
   const placeholderKeyword = `${inputTitle}${name === "email" ? "을" : "를"}`;
   const signUpPlaceholder = `${placeholderKeyword} ${
     name === "passwordCheck" ? "다시 " : ""
@@ -41,7 +41,9 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
         return <SubText danger={true}>{text}</SubText>;
       }
     }
-    return <SubText>{text}</SubText>;
+    return (
+      <SubText>{name === "passwordCheck" ? text + " 확인" : text}</SubText>
+    );
   };
 
   const validateEmail = () => {
@@ -57,10 +59,10 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
   };
 
   const checkPassword = () => {
-    const passwordCheck = value.passwordCheck ? value.password : "";
+    const passwordCheck = value.passwordCheck ? value.passwordCheck : "";
     if (name === "passwordCheck" && passwordCheck.length !== 0) {
       const err = { ...value.err };
-      if (passwordCheck !== value.passowrd) {
+      if (passwordCheck !== value.password) {
         err.passwordCheck = "different password";
       } else {
         delete err.passwordCheck;
