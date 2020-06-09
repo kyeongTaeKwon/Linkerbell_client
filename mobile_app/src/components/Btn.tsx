@@ -7,13 +7,22 @@ import loginRequest from "../core/apis/signin";
 type Props = {
   state: LoginValue;
   setState: React.Dispatch<React.SetStateAction<LoginValue>>;
+  name: string;
+  onPress?: any;
 };
 
-const LoginBtn = ({ state, setState }: Props): JSX.Element => {
-  const handlePress = () => {
-    //   if(loginRequest.status)
+const LoginBtn = ({ state, setState, name, onPress }: Props): JSX.Element => {
+  const renderBtnText = () => {
+    if (name === "signin") return "로그인";
+    if (name === "signup") return "회원가입";
+    // if(name === 'optionInfo') {
+    //   if(state){
+    //     return '완료'
+    //   }else{
+    //     return '건너뛰기'
+    //   }
+    // }
   };
-
   const renderBtn = () => {
     // eslint-disable-next-line react/prop-types
     const { err } = state;
@@ -23,7 +32,7 @@ const LoginBtn = ({ state, setState }: Props): JSX.Element => {
           onPress={() => console.log(state)}
           height={Dimensions.get("window").height}
         >
-          <BtnText>로그인</BtnText>
+          <BtnText>{renderBtnText()}</BtnText>
         </Btn>
       );
     }
@@ -34,7 +43,7 @@ const LoginBtn = ({ state, setState }: Props): JSX.Element => {
         disabled={true}
         height={Dimensions.get("window").height}
       >
-        <BtnText isEmpty>로그인</BtnText>
+        <BtnText isEmpty>{renderBtnText()}</BtnText>
       </Btn>
     );
   };

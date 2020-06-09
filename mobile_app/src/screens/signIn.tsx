@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { TouchableWithoutFeedback, Keyboard, Platform } from "react-native";
 import { LoginValue } from "../models/LoginTypes";
 import { validateValue } from "../core/utils/validate";
 import { style } from "../styles/SigninStyles/StyleIndex";
 import Input from "../components/Input";
 import Btn from "../components/Btn";
+import useAuth from "../hooks/useAuth";
 const { MainText, Container } = style;
 
 const Login = (): JSX.Element => {
@@ -13,6 +14,7 @@ const Login = (): JSX.Element => {
     password: "",
     err: {},
   });
+  const { user_id, age, gender, onLogin } = useAuth();
 
   useEffect(() => {
     validateValue(value, setValue);
@@ -21,10 +23,10 @@ const Login = (): JSX.Element => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
-        <MainText>로그인하기</MainText>
+        <MainText OS={Platform.OS}>로그인하기</MainText>
         <Input name="email" value={value} onChange={setValue} />
         <Input name="password" value={value} onChange={setValue} />
-        <Btn state={value} setState={setValue} />
+        <Btn name="signin" state={value} setState={setValue} />
       </Container>
     </TouchableWithoutFeedback>
   );

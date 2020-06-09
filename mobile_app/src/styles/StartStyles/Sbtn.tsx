@@ -14,7 +14,7 @@ export const LoginBtn = styled.TouchableHighlight`
 `;
 export const LoginLabel = styled.Text`
   font-family: "NMedium";
-  margin-top: ${(props: Props) => (props.OS === "ios" ? "8px" : "0px")};
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "8px" : "-4px")};
   font-size: 20px;
   color: #000;
 `;

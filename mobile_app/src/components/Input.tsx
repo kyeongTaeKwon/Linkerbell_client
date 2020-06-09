@@ -32,17 +32,28 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     if (name in err) {
       if (name === "email" && err[name] === `wrong ${name}`) {
         text = "이메일 형식이 잘못되었습니다";
-        return <SubText danger={true}>{text}</SubText>;
+        return (
+          <SubText danger={true} OS={Platform.OS}>
+            {text}
+          </SubText>
+        );
       } else if (
         name === "passwordCheck" &&
         err[name] === "different password"
       ) {
         text = "비밀번호가 다릅니다";
-        return <SubText danger={true}>{text}</SubText>;
+        return (
+          <SubText danger={true} OS={Platform.OS}>
+            {text}
+          </SubText>
+        );
       }
     }
+
     return (
-      <SubText>{name === "passwordCheck" ? text + " 확인" : text}</SubText>
+      <SubText OS={Platform.OS}>
+        {name === "passwordCheck" ? text + " 확인" : text}
+      </SubText>
     );
   };
 

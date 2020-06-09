@@ -13,8 +13,8 @@ export const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="UserDetail"
-        // screenOptions={{ header: () => null }}
+        initialRouteName="Start"
+        screenOptions={{ header: () => null }}
       >
         <Stack.Screen name="Start" component={Start} />
         <Stack.Screen name="Signin" component={Signin} />
