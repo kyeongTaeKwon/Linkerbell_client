@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     width: "60%",
     minHeight: 40,
     marginLeft: 50,
+    backgroundColor: "transparent",
   },
 });
 
