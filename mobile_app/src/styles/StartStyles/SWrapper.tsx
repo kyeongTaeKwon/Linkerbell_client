@@ -1,5 +1,14 @@
 import styled from "styled-components/native";
 
+type Props = {
+  OS?: string;
+};
 export const Wrapper = styled.View`
-  margin-top: 160px;
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "160px" : "140px")};
+`;
+
+export const BtnWrapper = styled.View`
+  position: relative;
+  align-self: center;
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "200px" : "100px")};
 `;

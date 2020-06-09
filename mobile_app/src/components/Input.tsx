@@ -1,10 +1,10 @@
 import React from "react";
 import { Platform } from "react-native";
 import { LoginValue } from "../models/LoginTypes";
-import { style } from "../styles/SigninStyles/StyleIndex";
 import { InputForm } from "../styles/Input";
 import { InputWrapper } from "../styles/InputWrapper";
 import { isEmail } from "../core/utils/emailValidate";
+import { style } from "../styles/SigninStyles/StyleIndex";
 const { SubText } = style;
 
 type stringOrNull = string | null;
@@ -32,16 +32,24 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     if (name in err) {
       if (name === "email" && err[name] === `wrong ${name}`) {
         text = "이메일 형식이 잘못되었습니다";
-        return <SubText danger={true}>{text}</SubText>;
+        return (
+          <SubText danger={true} OS={Platform.OS}>
+            {text}
+          </SubText>
+        );
       } else if (
         name === "passwordCheck" &&
         err[name] === "different password"
       ) {
         text = "비밀번호가 다릅니다";
-        return <SubText danger={true}>{text}</SubText>;
+        return (
+          <SubText danger={true} OS={Platform.OS}>
+            {text}
+          </SubText>
+        );
       }
     }
-    return <SubText>{text}</SubText>;
+    return <SubText OS={Platform.OS}>{text}</SubText>;
   };
 
   const validateEmail = () => {
@@ -57,10 +65,10 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
   };
 
   const checkPassword = () => {
-    const passwordCheck = value.passwordCheck ? value.password : "";
+    const passwordCheck = value.passwordCheck ? value.passwordCheck : "";
     if (name === "passwordCheck" && passwordCheck.length !== 0) {
       const err = { ...value.err };
-      if (passwordCheck !== value.passowrd) {
+      if (passwordCheck !== value.password) {
         err.passwordCheck = "different password";
       } else {
         delete err.passwordCheck;
@@ -81,11 +89,9 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     <InputWrapper>
       {renderSubText(value.err)}
       <InputForm
-
         autoCapitalize="none"
         OS={Platform.OS}
-        placeholder={`${placeholderKeyword} 입력해주세요`}
-
+        placeholder={`${signUpPlaceholder} 입력해주세요`}
         onChangeText={(val) => onChange({ ...value, [name]: val })}
         onFocus={() => initValidateEmail()}
         onBlur={() => (name === "email" ? validateEmail() : checkPassword())}

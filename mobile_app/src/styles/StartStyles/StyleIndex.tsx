@@ -7,7 +7,7 @@ import {
   LinkToLabel,
   LinkToBox,
 } from "./Sbtn";
-import { Wrapper } from "./SWrapper";
+import { Wrapper, BtnWrapper } from "./SWrapper";
 export const styled = {
   MainText,
   Container,
@@ -16,5 +16,6 @@ export const styled = {
   LinkToSignUp,
   LinkToLabel,
   Wrapper,
+  BtnWrapper,
   LinkToBox,
 };

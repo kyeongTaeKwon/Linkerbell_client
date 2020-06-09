@@ -4,8 +4,8 @@ export const USER_LOGOUT = "USER_LOGOUT" as const;
 
 type authState = {
   user_id: number;
-  age: number;
-  gender: number;
+  age?: number;
+  gender?: number;
 };
 export const userLogin = (userInfo: authState) => ({
   type: USER_LOGIN,

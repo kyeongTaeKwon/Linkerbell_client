@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { TouchableWithoutFeedback, Keyboard, Platform } from "react-native";
 import { LoginValue } from "../models/LoginTypes";
 import { validateValue } from "../core/utils/validate";
 import { style } from "../styles/SigninStyles/StyleIndex";
@@ -22,7 +22,7 @@ const SignUp = (): JSX.Element => {
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
-        <MainText>회원가입하기</MainText>
+        <MainText OS={Platform.OS}>회원가입하기</MainText>
         <Input name="email" value={value} onChange={setValue} />
         <Input name="password" value={value} onChange={setValue} />
         <Input name="passwordCheck" value={value} onChange={setValue} />
