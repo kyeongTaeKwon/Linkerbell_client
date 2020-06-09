@@ -10,8 +10,8 @@ type err = {
 };
 
 export const validateValue = (
-  setAciton: React.Dispatch<React.SetStateAction<LoginValue>>,
   value: LoginValue,
+  setAciton: React.Dispatch<React.SetStateAction<LoginValue>>,
 ): void => {
   const err: err = { ...value.err };
   for (const key in value) {

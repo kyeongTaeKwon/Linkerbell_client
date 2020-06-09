@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+// import { Dropdown } from "react-native-material-dropdown";
 import { style } from "../styles/SigninStyles/StyleIndex";
 import { Picker } from "@react-native-community/picker";
 // import RadioButton from "../components/RadioButton";
@@ -32,6 +33,13 @@ const UserDetail = (): JSX.Element => {
     err: {},
   });
 
+  // const ageValues = [
+  //   { value: "10대" },
+  //   { value: "20대" },
+  //   { value: "30대" },
+  //   { value: "40대" },
+  //   { value: "50대 이상" },
+  // ];
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
@@ -51,7 +59,15 @@ const UserDetail = (): JSX.Element => {
           <Picker.Item label="40대" value="4" />
           <Picker.Item label="50대 이상" value="5" />
         </Picker>
+        {/* <Dropdown
+          style={[styles.picker]}
+          data={ageValues}
+          onChangeText={(itemValue) => {
+            setValue({ age: itemValue });
+          }}
+        ></Dropdown> */}
         <SubText>성별</SubText>
+
         {/* <RadioButton genderOptions={genderOptions} /> */}
         <View>
           {value.gender?.map((item, i) => (

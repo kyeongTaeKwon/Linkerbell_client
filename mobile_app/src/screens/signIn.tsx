@@ -15,7 +15,7 @@ const Login = (): JSX.Element => {
   });
 
   useEffect(() => {
-    validateValue(setValue, value);
+    validateValue(value, setValue);
   }, [value.email, value.password]);
 
   return (
