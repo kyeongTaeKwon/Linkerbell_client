@@ -2,11 +2,13 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { Btn, BtnText } from "../styles/Btn";
 import { LoginValue } from "../models/LoginTypes";
-import loginRequest from "../apis/signin";
+import loginRequest from "../core/apis/signin";
+
 type Props = {
   state: LoginValue;
   setState: React.Dispatch<React.SetStateAction<LoginValue>>;
 };
+
 const LoginBtn = ({ state, setState }: Props): JSX.Element => {
   const handlePress = () => {
     //   if(loginRequest.status)

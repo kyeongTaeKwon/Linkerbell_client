@@ -21,7 +21,7 @@ type err = {
 };
 
 const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
-  const inputTitle = name === "email" ? "이메일" : "패스워드";
+  const inputTitle = name === "email" ? "이메일" : "비밀번호";
   const placeholderKeyword = `${inputTitle}${name === "email" ? "을" : "를"}`;
   const signUpPlaceholder = `${placeholderKeyword} ${
     name === "passwordCheck" ? "다시 " : ""
@@ -49,7 +49,12 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
         );
       }
     }
-    return <SubText OS={Platform.OS}>{text}</SubText>;
+
+    return (
+      <SubText OS={Platform.OS}>
+        {name === "passwordCheck" ? text + " 확인" : text}
+      </SubText>
+    );
   };
 
   const validateEmail = () => {

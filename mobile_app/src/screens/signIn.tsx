@@ -17,7 +17,7 @@ const Login = (): JSX.Element => {
   const { user_id, age, gender, onLogin } = useAuth();
 
   useEffect(() => {
-    validateValue(setValue, value);
+    validateValue(value, setValue);
   }, [value.email, value.password]);
 
   return (
