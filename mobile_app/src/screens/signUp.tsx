@@ -16,7 +16,7 @@ const SignUp = (): JSX.Element => {
   });
 
   useEffect(() => {
-    validateValue(setValue, value);
+    validateValue(value, setValue);
   }, [value.email, value.passowrd, value.passwordCheck]);
 
   return (
