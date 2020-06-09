@@ -26,7 +26,7 @@ const Login = (): JSX.Element => {
         <MainText OS={Platform.OS}>로그인하기</MainText>
         <Input name="email" value={value} onChange={setValue} />
         <Input name="password" value={value} onChange={setValue} />
-        <Btn state={value} setState={setValue} />
+        <Btn name="signin" state={value} setState={setValue} />
       </Container>
     </TouchableWithoutFeedback>
   );

@@ -26,7 +26,7 @@ const SignUp = (): JSX.Element => {
         <Input name="email" value={value} onChange={setValue} />
         <Input name="password" value={value} onChange={setValue} />
         <Input name="passwordCheck" value={value} onChange={setValue} />
-        <Btn state={value} setState={setValue} />
+        <Btn name="signup" state={value} setState={setValue} />
       </Container>
     </TouchableWithoutFeedback>
   );
