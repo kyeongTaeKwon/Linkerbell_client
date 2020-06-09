@@ -16,7 +16,7 @@ export const validateValue = (
   const err: err = { ...value.err };
   for (const key in value) {
     if (key !== "err") {
-      if (value[key].length < 9 && err[key] !== "wrong email") {
+      if (value[key].length < 8 && err[key] !== "wrong email") {
         err[key] = `empty ${key}`;
       } else if (err.email !== "wrong email") {
         delete err[key];

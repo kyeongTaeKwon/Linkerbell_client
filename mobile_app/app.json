@@ -2,11 +2,7 @@
   "expo": {
     "name": "LinkerBell",
     "slug": "LinkerBell",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,10 +14,14 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "expo.exp.exponent",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "586259967632-jq36j98db3m26aqu2i5c614rpruuvnel.apps.googleusercontent.com"
+        }
+      },
       "supportsTablet": true
     },
     "description": ""
