@@ -23,8 +23,7 @@ const renderNavigator = (user_id: number) => {
     const Stack = createStackNavigator();
     return (
       <Stack.Navigator
-
-        initialRouteName="SignIn"
+        initialRouteName="UserDetail"
         screenOptions={{ header: () => null }}
       >
         <Stack.Screen name="Start" component={Start} />
