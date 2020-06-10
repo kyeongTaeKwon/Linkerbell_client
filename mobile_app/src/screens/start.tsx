@@ -55,15 +55,11 @@ const Start = ({
   const signInWithFacebookAsync = async () => {
     try {
       await Facebook.initializeAsync("924191098007571");
-      const {
-        type,
-        token,
-        expires,
-        permissions,
-        declinedPermissions,
-      }: any = await Facebook.logInWithReadPermissionsAsync({
-        permissions: ["public_profile"],
-      });
+      const { type, token }: any = await Facebook.logInWithReadPermissionsAsync(
+        {
+          permissions: ["public_profile"],
+        },
+      );
       if (type === "success") {
         // Get the user's name using Facebook's Graph API
         // console.log(token);
