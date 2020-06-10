@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 import url from "./url";
 
 type SignUpProps = {
@@ -14,7 +14,7 @@ const SignUpRequest = async (data: SignUpProps): Promise<any> => {
       "Content-Type": "application/json",
     },
   };
-  return await Axios.post(`${url}/users/signup`, data, opt);
+  return await axios.post(`${url}/users/signup`, data, opt);
 };
 
 export default SignUpRequest;

@@ -4,6 +4,8 @@ import { style } from "../styles/SigninStyles/StyleIndex";
 import Btn from "../components/Btn";
 import RadioButtons from "../components/RadioButtons";
 import AgeSelect from "../components/AgeSelect";
+import useAuth from "../hooks/useAuth";
+import ProfileRequest from "../core/apis/profile";
 const { MainText, Container, SubText } = style;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -23,8 +25,23 @@ const UserDetail = (): JSX.Element => {
     err: {},
   });
 
-  const onPress = (): void => {
-    console.log("button clicked");
+  const { user_id, updateProfile } = useAuth();
+
+  const onPress = async (): Promise<void> => {
+    const { age, gender } = value;
+    const data = {
+      user_id,
+      age,
+      gender,
+    };
+    try {
+      const res = await ProfileRequest(data);
+      console.log("button clicked");
+      console.log("res", res);
+      updateProfile(res.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
