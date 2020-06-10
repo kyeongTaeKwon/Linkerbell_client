@@ -29,7 +29,7 @@ const LoginBtn = ({ state, setState, name, onPress }: Props): JSX.Element => {
     if (Object.keys(err).length === 0) {
       return (
         <Btn
-          onPress={() => console.log(state)}
+          onPress={() => onPress(state)}
           height={Dimensions.get("window").height}
         >
           <BtnText>{renderBtnText()}</BtnText>
@@ -37,12 +37,7 @@ const LoginBtn = ({ state, setState, name, onPress }: Props): JSX.Element => {
       );
     }
     return (
-      <Btn
-        onPress={() => console.log(state)}
-        isEmpty
-        disabled={true}
-        height={Dimensions.get("window").height}
-      >
+      <Btn isEmpty disabled={true} height={Dimensions.get("window").height}>
         <BtnText isEmpty>{renderBtnText()}</BtnText>
       </Btn>
     );
