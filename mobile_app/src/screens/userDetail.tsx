@@ -34,7 +34,7 @@ const UserDetail = (): JSX.Element => {
         <SubText OS={Platform.OS}>나이</SubText>
         <AgeSelect value={value} setValue={setValue} />
         <SubText OS={Platform.OS}>성별</SubText>
-        <RadioButtons />
+        <RadioButtons value={value} setValue={setValue} />
         <Btn
           name="optionInfo"
           state={value}
