@@ -19,7 +19,7 @@ function* fetchUserInfo$(action: any) {
     const userInfo = { ...res.data };
     yield put({ type: USER_LOGIN_SUCCESS, payload: { userInfo } });
   } catch (e) {
-    console.log(e);
-    yield put({ type: USER_LOGIN_FAILED, payload });
+    console.log(e.response.data);
+    yield put({ type: USER_LOGIN_FAILED, payload: { text: e.response.data } });
   }
 }

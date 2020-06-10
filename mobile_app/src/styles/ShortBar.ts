@@ -6,6 +6,8 @@ export const ShortBar = styled.View`
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 44px;
-  margin-right: 336px;
+  /* margin-right: 300px; */
+  width: 60px;
+  /* border: 2px solid; */
   border-bottom-width: 2px;
 `;
