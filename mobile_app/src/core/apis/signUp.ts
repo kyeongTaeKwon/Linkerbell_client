@@ -1,19 +1,20 @@
-// import Axios from "axios";
-// import url from "./url";
+import Axios from "axios";
+import url from "./url";
 
-// type SignUpProps = {
-//   email: string;
-//   password: string;
-// };
+type SignUpProps = {
+  email: string;
+  password: string;
+};
 
-// type Response = {
-//   user_id: number;
-//   age: number;
-//   gender: number;
-// };
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// const SignInRequest = async (data: LoginProps): Promise<any> => {
-//   return await Axios.post(`${url}/users/signin`, data);
-// };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const SignUpRequest = async (data: SignUpProps): Promise<any> => {
+  const opt = {
+    headers: {
+      withCredentials: true,
+      "Content-Type": "application/json",
+    },
+  };
+  return await Axios.post(`${url}/users/signup`, data, opt);
+};
 
-// export default SignInRequest;
+export default SignUpRequest;
