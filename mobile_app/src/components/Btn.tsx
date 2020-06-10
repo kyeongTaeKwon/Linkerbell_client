@@ -15,13 +15,13 @@ const LoginBtn = ({ state, setState, name, onPress }: Props): JSX.Element => {
   const renderBtnText = () => {
     if (name === "signin") return "로그인";
     if (name === "signup") return "회원가입";
-    // if(name === 'optionInfo') {
-    //   if(state){
-    //     return '완료'
-    //   }else{
-    //     return '건너뛰기'
-    //   }
-    // }
+    if (name === "optionInfo") {
+      if (state) {
+        return "완료";
+      } else {
+        return "건너뛰기";
+      }
+    }
   };
   const renderBtn = () => {
     // eslint-disable-next-line react/prop-types

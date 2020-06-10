@@ -14,6 +14,7 @@ import Signup from "../screens/signUp";
 import Loding from "../screens/loading";
 import UserDetail from "../screens/userDetail";
 import Home from "../screens/home";
+
 // interface RoutesProps {}
 import useAuth from "../hooks/useAuth";
 
@@ -22,6 +23,7 @@ const renderNavigator = (user_id: number) => {
     const Stack = createStackNavigator();
     return (
       <Stack.Navigator
+
         initialRouteName="SignIn"
         screenOptions={{ header: () => null }}
       >
@@ -30,6 +32,7 @@ const renderNavigator = (user_id: number) => {
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="UserDetail" component={UserDetail} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     );
   } else {

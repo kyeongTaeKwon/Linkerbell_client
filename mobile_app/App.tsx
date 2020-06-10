@@ -4,6 +4,8 @@ import store from "./src/store/index";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import { Routes } from "./src/routes";
+import * as eva from "@eva-design/eva";
+import { ApplicationProvider } from "@ui-kitten/components";
 import firebase from "firebase";
 import { firebaseConfig } from "./config";
 
@@ -22,9 +24,11 @@ export default function App(): JSX.Element {
 
   if (isReady) {
     return (
-      <Provider store={store}>
-        <Routes />
-      </Provider>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <Provider store={store}>
+          <Routes />
+        </Provider>
+      </ApplicationProvider>
     );
   } else {
     return <AppLoading startAsync={getFonts} onFinish={() => setReady(true)} />;
