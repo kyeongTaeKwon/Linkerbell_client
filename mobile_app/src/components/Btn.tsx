@@ -2,10 +2,11 @@ import React from "react";
 import { Dimensions } from "react-native";
 import { Btn, BtnText } from "../styles/Btn";
 import { LoginValue } from "../models/LoginTypes";
+import { UserDetailValue } from "../screens/userDetail";
 import loginRequest from "../core/apis/signin";
 
 type Props = {
-  state: LoginValue;
+  state: LoginValue | UserDetailValue;
   setState: React.Dispatch<React.SetStateAction<LoginValue>>;
   name: string;
   onPress?: any;
