@@ -5,6 +5,7 @@ import Start from "../screens/start";
 import Signin from "../screens/signIn";
 import Signup from "../screens/signUp";
 import UserDetail from "../screens/userDetail";
+import Home from "../screens/home";
 
 // interface RoutesProps {}
 
@@ -20,6 +21,7 @@ export const Routes: React.FC = () => {
         <Stack.Screen name="Signin" component={Signin} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="UserDetail" component={UserDetail} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );
