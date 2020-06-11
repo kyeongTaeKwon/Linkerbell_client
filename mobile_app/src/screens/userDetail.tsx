@@ -6,6 +6,8 @@ import RadioButtons from "../components/RadioButtons";
 import AgeSelect from "../components/AgeSelect";
 import useAuth from "../hooks/useAuth";
 import ProfileRequest from "../core/apis/profile";
+import { AuthParamList } from "../models/AuthParamList";
+import { StackNavigationProp } from "@react-navigation/stack";
 const { MainText, Container, SubText } = style;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -17,7 +19,11 @@ export type UserDetailValue = {
   [key: string]: any;
 };
 
-const UserDetail = (): JSX.Element => {
+const UserDetail = ({
+  navigation,
+}: {
+  navigation: StackNavigationProp<AuthParamList, "UserDetail">;
+}): JSX.Element => {
   const [value, setValue] = useState<UserDetailValue>({
     age: 0,
     gender: 0,
@@ -27,7 +33,7 @@ const UserDetail = (): JSX.Element => {
 
   const { user_id, updateProfile } = useAuth();
 
-  const onPress = async (): Promise<void> => {
+  const onPress = async (value: UserDetailValue): Promise<void> => {
     const { age, gender } = value;
     const data = {
       user_id,
@@ -39,6 +45,7 @@ const UserDetail = (): JSX.Element => {
       console.log("button clicked");
       console.log("res", res);
       updateProfile();
+      navigation.navigate("Signin");
     } catch (error) {
       console.error(error);
     }
