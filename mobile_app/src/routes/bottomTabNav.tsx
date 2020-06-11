@@ -1,14 +1,28 @@
 import React from "react";
 import { Animated, StyleProp, ViewStyle } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Favorite from "../screens/favorite";
 import Home from "../screens/home";
 import Trending from "../screens/trending";
-
+import List from "../screens/list";
 type NavProps = {
   focused: boolean;
   color: string;
+};
+
+const HomeStack = (): JSX.Element => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator
+      initialRouteName="Signup"
+      screenOptions={{ header: () => null }}
+    >
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="List" component={List} />
+    </Stack.Navigator>
+  );
 };
 
 const BottomTabNav = (): JSX.Element => {
@@ -36,6 +50,7 @@ const BottomTabNav = (): JSX.Element => {
       elevation: 19,
     };
   };
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -64,7 +79,7 @@ const BottomTabNav = (): JSX.Element => {
     >
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarLabel: "",
         }}

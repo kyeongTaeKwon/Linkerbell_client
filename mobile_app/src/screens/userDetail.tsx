@@ -45,7 +45,7 @@ const UserDetail = ({
       console.log("button clicked");
       console.log("res", res);
       updateProfile();
-      navigation.navigate("Signin");
+      navigation.navigate("Start");
     } catch (error) {
       console.error(error);
     }
