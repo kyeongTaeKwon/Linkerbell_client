@@ -64,12 +64,11 @@ export const userSignupFailure = (text: string) => ({
   },
 });
 
-export const profileUpdate = (userInfo: authState) => ({
+export const profileUpdate = () => ({
   type: USER_PROFILE,
-  payload: { userInfo },
 });
 
-const inintialAuthState: authState = {
+const initialAuthState: authState = {
   user_id: -1,
   age: 0,
   gender: 0,
@@ -86,7 +85,7 @@ export type authActions =
   | ReturnType<typeof profileUpdate>
   | ReturnType<typeof oauthLoginSuccess>;
 
-const reducer = (state = inintialAuthState, action: authActions) => {
+const reducer = (state = initialAuthState, action: authActions) => {
   switch (action.type) {
     case USER_LOGIN_SUCCESS: {
       const { user_id, age, gender } = action.payload.userInfo;
@@ -102,7 +101,7 @@ const reducer = (state = inintialAuthState, action: authActions) => {
       return { ...state, user_id };
     }
     case USER_LOGOUT:
-      return { ...inintialAuthState };
+      return { ...initialAuthState };
     case USER_SIGNUP_SUCCESS: {
       const { user_id } = action.payload.userInfo;
       return { ...state, user_id };
@@ -112,8 +111,7 @@ const reducer = (state = inintialAuthState, action: authActions) => {
       return { ...state, err: text };
     }
     case USER_PROFILE: {
-      const { age, gender } = action.payload.userInfo;
-      return { ...state, age, gender };
+      return { ...initialAuthState };
     }
     default:
       return state;

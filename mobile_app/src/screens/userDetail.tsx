@@ -38,7 +38,7 @@ const UserDetail = (): JSX.Element => {
       const res = await ProfileRequest(data);
       console.log("button clicked");
       console.log("res", res);
-      updateProfile(res.data);
+      updateProfile();
     } catch (error) {
       console.error(error);
     }
