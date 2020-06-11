@@ -9,7 +9,7 @@ type RadioProps = {
 };
 
 const RadioButtons = ({ value, setValue }: RadioProps): JSX.Element => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = React.useState(2);
 
   return (
     <Layout style={styles.radioContainer} level="1">
@@ -18,11 +18,12 @@ const RadioButtons = ({ value, setValue }: RadioProps): JSX.Element => {
         onChange={(index) => {
           setSelectedIndex(index);
           setValue({ ...value, gender: index });
+          console.log(index);
         }}
       >
-        <Radio style={styles.radio}>해당없음</Radio>
         <Radio style={styles.radio}>여성</Radio>
         <Radio style={styles.radio}>남성</Radio>
+        <Radio style={styles.radio}>선택안함</Radio>
       </RadioGroup>
     </Layout>
   );
