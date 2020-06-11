@@ -5,8 +5,8 @@ import StackNav from "./stackNav";
 import BtmNav from "./bottomTabNav";
 import useAuth from "../hooks/useAuth";
 
-const renderNavigator = (user_id: number) => {
-  if (user_id === -1) {
+const renderNavigator = (isLogin: boolean) => {
+  if (!isLogin) {
     return <StackNav />;
   } else {
     return <BtmNav />;
@@ -14,6 +14,6 @@ const renderNavigator = (user_id: number) => {
 };
 
 export const Routes: React.FC = () => {
-  const { user_id } = useAuth();
-  return <NavigationContainer>{renderNavigator(user_id)}</NavigationContainer>;
+  const { isLogin } = useAuth();
+  return <NavigationContainer>{renderNavigator(isLogin)}</NavigationContainer>;
 };

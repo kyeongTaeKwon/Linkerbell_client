@@ -20,15 +20,15 @@ const Login = ({
     password: "",
     err: {},
   });
-  const { onLogin, user_id } = useAuth();
+  const { onLogin, isLogin } = useAuth();
 
   useEffect(() => {
     validateValue(value, setValue);
   }, [value.email, value.password]);
 
   useEffect(() => {
-    user_id !== -1 && navigation.navigate("Home");
-  }, [user_id]);
+    isLogin && navigation.navigate("Home");
+  }, [isLogin]);
 
   const handlePress = (value: LoginValue) => {
     const { email, password } = value;

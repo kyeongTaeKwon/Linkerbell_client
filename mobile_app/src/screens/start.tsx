@@ -24,14 +24,14 @@ const Start = ({
 }: {
   navigation: StackNavigationProp<AuthParamList, "Start">;
 }): JSX.Element => {
-  const { onLogin, onOauthLogin, user_id } = useAuth();
+  const { onLogin, onOauthLogin, isLogin } = useAuth();
   useEffect(() => {
     onLogin({});
   }, []);
 
   useEffect(() => {
-    user_id !== -1 && navigation.navigate("Home");
-  }, [user_id]);
+    isLogin && navigation.navigate("Home");
+  }, [isLogin]);
 
   const handleGoogleLogin = async () => {
     try {
