@@ -70,7 +70,7 @@ export const profileUpdate = (userInfo: authState) => ({
 });
 
 const inintialAuthState: authState = {
-  user_id: 0,
+  user_id: -1,
   age: 0,
   gender: 0,
   err: "",

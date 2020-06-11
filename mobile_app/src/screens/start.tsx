@@ -30,7 +30,7 @@ const Start = ({
   }, []);
 
   useEffect(() => {
-    user_id !== 0 && navigation.navigate("Home");
+    user_id !== -1 && navigation.navigate("Home");
   }, [user_id]);
 
   const handleGoogleLogin = async () => {

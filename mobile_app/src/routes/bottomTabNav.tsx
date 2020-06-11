@@ -10,6 +10,7 @@ type NavProps = {
   focused: boolean;
   color: string;
 };
+
 const BottomTabNav = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
 
