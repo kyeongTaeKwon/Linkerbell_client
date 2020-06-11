@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/module/index";
-import { callLoginAPi, oauthLoginSuccess } from "../store/module/auth";
+import { callLoginAPi, profileUpdate, oauthLoginSuccess } from "../store/module/auth";
 import { useCallback } from "react";
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -24,12 +24,20 @@ export default function useAuth() {
     [dispatch],
   );
 
+  const updateProfile = useCallback(
+    (userInfo) => {
+      dispatch(profileUpdate(userInfo));
+    },
+    [dispatch],
+  );
+
   return {
     user_id,
     age,
     gender,
     err,
     onLogin,
+    updateProfile,
     onOauthLogin,
   };
 }
