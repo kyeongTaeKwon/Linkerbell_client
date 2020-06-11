@@ -4,6 +4,7 @@ import {
   callLoginAPi,
   profileUpdate,
   oauthLoginSuccess,
+  signup,
 } from "../store/module/auth";
 import { useCallback } from "react";
 
@@ -28,7 +29,12 @@ export default function useAuth() {
     },
     [dispatch],
   );
-
+  const onSignup = useCallback(
+    (signupValue) => {
+      dispatch(signup(signupValue));
+    },
+    [dispatch],
+  );
   const updateProfile = useCallback(() => {
     dispatch(profileUpdate());
   }, [dispatch]);
@@ -41,6 +47,7 @@ export default function useAuth() {
     onLogin,
     updateProfile,
     onOauthLogin,
+    onSignup,
     isLogin,
   };
 }

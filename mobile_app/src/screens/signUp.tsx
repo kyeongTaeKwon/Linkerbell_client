@@ -22,7 +22,12 @@ const SignUp = ({
     err: {},
   });
 
-  const { user_id } = useAuth();
+  const { user_id, onSignup } = useAuth();
+
+  const onPress = (value: LoginValue) => {
+    const { email, password } = value;
+    onSignup({ email, password });
+  };
 
   useEffect(() => {
     validateValue(value, setValue);
@@ -39,7 +44,12 @@ const SignUp = ({
         <Input name="email" value={value} onChange={setValue} />
         <Input name="password" value={value} onChange={setValue} />
         <Input name="passwordCheck" value={value} onChange={setValue} />
-        <Btn name="signup" state={value} setState={setValue} />
+        <Btn
+          name="signup"
+          state={value}
+          setState={setValue}
+          onPress={onPress}
+        />
       </Container>
     </TouchableWithoutFeedback>
   );

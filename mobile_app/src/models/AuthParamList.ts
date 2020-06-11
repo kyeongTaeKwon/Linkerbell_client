@@ -3,4 +3,5 @@ export type AuthParamList = {
   Signin: undefined;
   Signup: undefined;
   Home: undefined;
+  UserDetail: undefined;
 };
