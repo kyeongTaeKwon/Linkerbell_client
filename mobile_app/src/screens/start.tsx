@@ -36,7 +36,6 @@ const Start = ({
   const handleGoogleLogin = async () => {
     try {
       const res = await loginWithGoogleApiRequest();
-      console.log(res);
       if (res) {
         (res.status === 200 || res.status === 201) && onOauthLogin(res.data);
       }

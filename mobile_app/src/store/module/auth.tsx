@@ -3,7 +3,7 @@
 
 export const USER_LOGIN_REQUEST = "USER_LOGIN_REQUEST" as const;
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS" as const;
-export const USER_LOGIN_FAILED = "USER_LOGIN_FAILURE" as const;
+export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE" as const;
 export const USER_LOGOUT = "USER_LOGOUT" as const;
 export const USER_OAUTH_LOGIN_SUECCESS = "USER_OAUTH_LOGIN_SUECESS" as const;
 
@@ -14,9 +14,13 @@ type authState = {
   isLoding: boolean;
   err: string;
 };
-export const callLoginAPi = (userInfo: authState) => ({
+type value = {
+  email: string;
+  password: string;
+};
+export const callLoginAPi = (loginValue: value) => ({
   type: USER_LOGIN_REQUEST,
-  payload: { userInfo },
+  payload: { loginValue },
 });
 
 export const userLoginSuccess = (userInfo: authState) => ({
@@ -25,7 +29,7 @@ export const userLoginSuccess = (userInfo: authState) => ({
 });
 
 export const userLoginFailure = (text: string) => ({
-  type: USER_LOGIN_FAILED,
+  type: USER_LOGIN_FAILURE,
   payload: {
     text,
   },
@@ -58,7 +62,7 @@ const reducer = (state = inintialAuthState, action: authActions) => {
       const { user_id, age, gender } = action.payload.userInfo;
       return { ...state, user_id, age, gender };
     }
-    case USER_LOGIN_FAILED: {
+    case USER_LOGIN_FAILURE: {
       const { text } = action.payload;
       return { ...state, err: text };
     }

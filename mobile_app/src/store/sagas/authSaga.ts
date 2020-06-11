@@ -5,7 +5,7 @@ import callLoginApi from "../../core/apis/signin";
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILED,
+  USER_LOGIN_FAILURE,
 } from "../module/auth";
 
 export default function* authSaga() {
@@ -15,11 +15,11 @@ export default function* authSaga() {
 function* fetchUserInfo$(action: any) {
   const { payload } = action;
   try {
-    const res = yield callLoginApi(payload.userInfo);
+    const res = yield callLoginApi(payload.loginValue);
     const userInfo = { ...res.data };
     yield put({ type: USER_LOGIN_SUCCESS, payload: { userInfo } });
   } catch (e) {
     console.log(e.response.data);
-    yield put({ type: USER_LOGIN_FAILED, payload: { text: e.response.data } });
+    yield put({ type: USER_LOGIN_FAILURE, payload: { text: e.response.data } });
   }
 }

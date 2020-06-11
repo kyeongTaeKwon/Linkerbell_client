@@ -12,8 +12,8 @@ export default function useAuth() {
   const dispatch = useDispatch();
 
   const onLogin = useCallback(
-    (userInfo) => {
-      dispatch(callLoginAPi(userInfo));
+    (loginValue) => {
+      dispatch(callLoginAPi(loginValue));
     },
     [dispatch],
   );
