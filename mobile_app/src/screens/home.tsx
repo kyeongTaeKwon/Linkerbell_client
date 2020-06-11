@@ -1,13 +1,22 @@
-
 import React, { useState } from "react";
-import { TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
+import {
+  TouchableWithoutFeedback,
+  Keyboard,
+  StyleSheet,
+  // Button,
+} from "react-native";
 import { Button, Layout } from "@ui-kitten/components";
 // import { LoginValue } from "../models/LoginTypes";
+import { StackNavigationProp } from "@react-navigation/stack";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { ShortBar } from "../styles/ShortBar";
 const { UpperText, TitleText, CategoryText, HContainer } = style;
 
-const Home = (): JSX.Element => {
+const Home = ({
+  navigation,
+}: {
+  navigation: StackNavigationProp<any>;
+}): JSX.Element => {
   //   const [value, setValue] = useState</*types*/>({});
 
   return (
@@ -18,7 +27,11 @@ const Home = (): JSX.Element => {
         <TitleText>카테고리</TitleText>
         <Layout style={styles.container} level="1">
           <CategoryText>🥘 음식</CategoryText>
-          <Button style={styles.isnewbutton} size="tiny">
+          <Button
+            style={styles.isnewbutton}
+            size="tiny"
+            // onPress={() => navigation.navigate("list")} // 리스트페이지로 네비게이트
+          >
             12
           </Button>
         </Layout>

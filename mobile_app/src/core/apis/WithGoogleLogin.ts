@@ -1,12 +1,10 @@
 import * as Google from "expo-google-app-auth";
-
+import { googleKey } from "../../../config";
 const signInWithGoogleAsync = async (): Promise<any> => {
   try {
     const result = await Google.logInAsync({
-      androidClientId:
-        "147556589644-04r747fl2tqmt9bi5og8cuk73rm38f8u.apps.googleusercontent.com",
-      iosClientId:
-        "147556589644-kh89d71eo39krfuj4aj8s8ml3psh6do5.apps.googleusercontent.com",
+      androidClientId: googleKey.AndroidKey,
+      iosClientId: googleKey.iosKey,
       scopes: ["profile", "email"],
     });
 

@@ -18,7 +18,7 @@ export default {
     data: {
       list: [
         {
-          user_url_id: 1,
+          url_id: 1,
           url: "https://velog.io/@glassestae",
           title: "음식이 맛있는 제주도 맛집 Top 10",
           text: "음식이 맛있는 제주도 맛집",
@@ -28,7 +28,7 @@ export default {
           tags: ["맛집", "제주도", "3월여행"],
         },
         {
-          user_url_id: 2,
+          url_id: 2,
           url: "https://blog.naver.com/k2ok1102/221957188890",
           title: "성수 쌀국수 추천,성수 벱 BEP,벱 주차",
           text: "서울 성동구 성수일로 4가길 2 1층",
@@ -38,7 +38,7 @@ export default {
           tags: ["맛집", "성수"],
         },
         {
-          user_url_id: 3,
+          url_id: 3,
           url: "https://blog.naver.com/etudejin/221342886647",
           title: "광화문 칵테일바 포시즌스호텔 서울 비밀스러운 찰스 H 바",
           text:
@@ -56,7 +56,7 @@ export default {
     data: {
       list: [
         {
-          user_url_id: 1,
+          url_id: 1,
           url: "https://velog.io/@glassestae",
           title: "음식이 맛있는 제주도 맛집 Top 10",
           text: "음식이 맛있는 제주도 맛집",
@@ -66,7 +66,7 @@ export default {
           tags: ["맛집", "제주도", "3월여행"],
         },
         {
-          user_url_id: 2,
+          url_id: 2,
           url: "https://blog.naver.com/k2ok1102/221957188890",
           title: "성수 쌀국수 추천,성수 벱 BEP,벱 주차",
           text: "서울 성동구 성수일로 4가길 2 1층",
@@ -77,7 +77,7 @@ export default {
           tags: ["맛집", "성수"],
         },
         {
-          user_url_id: 3,
+          url_id: 3,
           url: "https://blog.naver.com/etudejin/221342886647",
           title: "광화문 칵테일바 포시즌스호텔 서울 비밀스러운 찰스 H 바",
           text:
@@ -89,7 +89,7 @@ export default {
           tags: ["맛집", "바"],
         },
         {
-          user_url_id: 4,
+          url_id: 4,
           url:
             "https://post.naver.com/viewer/postView.nhn?volumeNo=28437559&memberNo=44865264",
           title: "속쓰림 심하면 어떤 음료 마셔야 할까?",
@@ -102,7 +102,7 @@ export default {
           tags: ["역류성식도염"],
         },
         {
-          user_url_id: 5,
+          url_id: 5,
           url: "https://post.naver.com/viewer/postView.nhn?volumeNo=28450157",
           title:
             "파도가 집어삼킨 강남 한복판 외신이 앞다퉈 보도한 한국의 3D 물결",

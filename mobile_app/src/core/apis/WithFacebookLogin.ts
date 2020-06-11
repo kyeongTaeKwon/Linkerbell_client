@@ -1,9 +1,9 @@
 import * as Facebook from "expo-facebook";
 import Axios from "axios";
-
+import { facebookKey } from "../../../config";
 const signInWithFacebookAsync = async (): Promise<any> => {
   try {
-    await Facebook.initializeAsync("924191098007571");
+    await Facebook.initializeAsync(facebookKey.key);
     const { type, token }: any = await Facebook.logInWithReadPermissionsAsync({
       permissions: ["public_profile"],
     });
