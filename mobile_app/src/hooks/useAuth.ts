@@ -14,6 +14,7 @@ export default function useAuth() {
   const age = useSelector((state: RootState) => state.auth.age);
   const gender = useSelector((state: RootState) => state.auth.gender);
   const err = useSelector((state: RootState) => state.auth.err);
+  const isLogin = useSelector((state: RootState) => state.auth.isLogin);
   const dispatch = useDispatch();
 
   const onLogin = useCallback(
@@ -47,5 +48,6 @@ export default function useAuth() {
     updateProfile,
     onOauthLogin,
     onSignup,
+    isLogin,
   };
 }
