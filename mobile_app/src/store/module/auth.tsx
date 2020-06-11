@@ -9,6 +9,7 @@ export const USER_SIGNUP_REQUEST = "USER_SIGNUP_REQUEST" as const;
 export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS" as const;
 export const USER_SIGNUP_FAILURE = "USER_SIGNUP_FAILURE" as const;
 export const USER_PROFILE = "USER_PROFILE" as const;
+export const USER_OAUTH_LOGIN_SUECCESS = "USER_OAUTH_LOGIN_SUECESS" as const;
 
 type authState = {
   user_id: number;
@@ -38,7 +39,10 @@ export const userLoginFailure = (text: string) => ({
     text,
   },
 });
-
+export const oauthLoginSuccess = (user_id: authState) => ({
+  type: USER_OAUTH_LOGIN_SUECCESS,
+  payload: user_id,
+});
 export const userLogout = () => ({
   type: USER_LOGOUT,
 });
@@ -79,7 +83,8 @@ export type authActions =
   | ReturnType<typeof signup>
   | ReturnType<typeof userSignupSuccess>
   | ReturnType<typeof userSignupFailure>
-  | ReturnType<typeof profileUpdate>;
+  | ReturnType<typeof profileUpdate>
+  | ReturnType<typeof oauthLoginSuccess>;
 
 const reducer = (state = inintialAuthState, action: authActions) => {
   switch (action.type) {
@@ -90,6 +95,11 @@ const reducer = (state = inintialAuthState, action: authActions) => {
     case USER_LOGIN_FAILED: {
       const { text } = action.payload;
       return { ...state, err: text };
+    }
+    case USER_OAUTH_LOGIN_SUECCESS: {
+      const { user_id } = action.payload;
+      console.log(user_id);
+      return { ...state, user_id };
     }
     case USER_LOGOUT:
       return { ...inintialAuthState };

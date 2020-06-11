@@ -23,7 +23,6 @@ const AgeSelect = ({ value, setValue }: AgeProps): JSX.Element => {
       <Select
         placeholder={"나이를 입력하세요"}
         value={displayValue}
-        // value={(evaProps) => <Text {...evaProps}>10대</Text>}
         selectedIndex={selectedIndex}
         onSelect={(index: any) => {
           setSelectedIndex(index);
