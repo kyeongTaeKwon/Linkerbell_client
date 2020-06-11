@@ -6,7 +6,7 @@ import BtmNav from "./bottomTabNav";
 import useAuth from "../hooks/useAuth";
 
 const renderNavigator = (user_id: number) => {
-  if (user_id === 0) {
+  if (user_id === -1) {
     return <StackNav />;
   } else {
     return <BtmNav />;

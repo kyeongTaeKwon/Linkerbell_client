@@ -27,7 +27,7 @@ const Login = ({
   }, [value.email, value.password]);
 
   useEffect(() => {
-    user_id !== 0 && navigation.navigate("Home");
+    user_id !== -1 && navigation.navigate("Home");
   }, [user_id]);
 
   const handlePress = (value: LoginValue) => {
