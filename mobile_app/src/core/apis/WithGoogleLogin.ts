@@ -3,7 +3,6 @@ import * as Google from "expo-google-app-auth";
 const signInWithGoogleAsync = async (): Promise<any> => {
   try {
     const result = await Google.logInAsync({
-      // behavior: "web",
       androidClientId:
         "147556589644-04r747fl2tqmt9bi5og8cuk73rm38f8u.apps.googleusercontent.com",
       iosClientId:

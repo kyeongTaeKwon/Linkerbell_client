@@ -20,7 +20,7 @@ const Login = ({
     password: "",
     err: {},
   });
-  const { onLogin, err, user_id } = useAuth();
+  const { onLogin, user_id } = useAuth();
 
   useEffect(() => {
     validateValue(value, setValue);
