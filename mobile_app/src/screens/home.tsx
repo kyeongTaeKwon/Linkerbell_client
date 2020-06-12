@@ -42,23 +42,23 @@ const Home = ({
   ]);
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <HContainer>
-        <UpperText>전체 글 보기</UpperText>
-        <ShortBar />
-        <TitleText>카테고리</TitleText>
-        <View style={styles.outerContainer}>
-          <FlatList
-            keyExtractor={(item) => item.category_id.toString()}
-            data={data}
-            renderItem={({ item }) => <Item item={item} />}
-          />
-        </View>
-        {/* <Input name="email" value={value} onChange={setValue} />
+    <HContainer>
+      <UpperText>전체 글 보기</UpperText>
+      <ShortBar />
+      <TitleText onPress={() => navigation.navigate("List")}>
+        카테고리
+      </TitleText>
+      <View style={styles.outerContainer}>
+        <FlatList
+          keyExtractor={(item) => item.category_id.toString()}
+          data={data}
+          renderItem={({ item }) => <Item item={item} />}
+        />
+      </View>
+      {/* <Input name="email" value={value} onChange={setValue} />
         <Input name="password" value={value} onChange={setValue} />
         <Btn name="signin" state={value} setState={setValue} /> */}
-      </HContainer>
-    </TouchableWithoutFeedback>
+    </HContainer>
   );
 };
 
