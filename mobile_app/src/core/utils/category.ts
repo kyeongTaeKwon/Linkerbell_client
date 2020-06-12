@@ -1,7 +1,6 @@
 export interface Category {
   name: string;
   emoji: string;
-  [index: number]: any;
 }
 
 interface Categories {
@@ -10,7 +9,7 @@ interface Categories {
   [index: number]: Category;
 }
 
-export const renderCategoryText = (category_id: number): Categories => {
+export const renderCategoryText = (category_id: number): Category => {
   const category_object: Categories = {
     1: { name: "문화·예술", emoji: "🎨" },
     2: { name: "자동차", emoji: "🚙" },

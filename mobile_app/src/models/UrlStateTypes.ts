@@ -1,5 +1,5 @@
 export type Url = {
-  user_url_id: number;
+  url_id: number;
   url: string;
   title: string;
   text: string;
