@@ -1,10 +1,12 @@
-interface Category {
+export interface Category {
   name: string;
   emoji: string;
   [index: number]: any;
 }
 
 interface Categories {
+  name: string;
+  emoji: string;
   [index: number]: Category;
 }
 

@@ -8,7 +8,7 @@ export const CategoryText = styled.Text`
   font-size: 18px;
   padding: 0px;
   margin: 10px;
-  margin-left: 44px;
+  margin-left: 10px;
   color: #000;
 `;
 
