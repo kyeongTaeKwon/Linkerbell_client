@@ -16,8 +16,8 @@ const HomeStack = (): JSX.Element => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="Signup"
       screenOptions={{ header: () => null }}
+      initialRouteName="Home"
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="List" component={List} />

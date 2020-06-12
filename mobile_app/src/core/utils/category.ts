@@ -1,13 +1,13 @@
-export interface Category {
+export type Category = {
   name: string;
   emoji: string;
-}
+};
 
-interface Categories {
-  name: string;
-  emoji: string;
+export type Categories = {
+  // name: string;
+  // emoji: string;
   [index: number]: Category;
-}
+};
 
 export const renderCategoryText = (category_id: number): Category => {
   const category_object: Categories = {
