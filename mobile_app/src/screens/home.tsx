@@ -7,7 +7,6 @@ import { ShortBar } from "../styles/ShortBar";
 const { UpperText, TitleText, HContainer } = style;
 import useLinkData from "../hooks/useLinkData";
 import Item from "../components/Category";
-
 // import FakeData from "../core/services/fakeData";
 // const { home } = FakeData;
 import fetchCategoryRequest from "../core/apis/fetchCategory";
@@ -15,8 +14,7 @@ import { Category } from "../models/UrlStateTypes";
 // const { categories } = initialLinkDataState;
 import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
-import LinkModal from "../components/addLinkModal";
-import AddLinkModal from "../components/AddLinkModal";
+import LinkModal from "../components/AddLinkModal";
 
 const Home = ({
   navigation,
@@ -24,8 +22,9 @@ const Home = ({
   navigation: StackNavigationProp<any>;
 }): JSX.Element => {
   const [data, setData] = useState<Category[]>([]);
-
   const { onHome, categories } = useLinkData();
+  const [isModalVisible, setModalVisible] = useState(false);
+  const { getCopiedUrl, copiedUrl } = useServices();
 
   const onPress = (category_id: number) => {
     navigation.navigate("List", { category_id });
@@ -44,10 +43,6 @@ const Home = ({
     setData(categories);
     console.log(categories);
   }, [categories]);
-  
-  const [isModalVisible, setModalVisible] = useState(false);
-  const { getCopiedUrl, copiedUrl } = useServices();
-
 
   const _getContent = async () => {
     const content = await Clipboard.getString();
@@ -77,38 +72,20 @@ const Home = ({
     checkClipboard();
   });
   return (
-    <HContainer>
-      <UpperText>전체 글 보기</UpperText>
-      <ShortBar />
-      <TitleText>카테고리</TitleText>
-      <View style={styles.outerContainer}>
-        <FlatList
-          keyExtractor={(item) => item.category_id.toString()}
-          data={data}
-          renderItem={({ item }) => <Item item={item} onPress={onPress} />}
-        />
-      </View>
-    </HContainer>
-/////
     <React.Fragment>
       <HContainer>
         <UpperText>전체 글 보기</UpperText>
         <ShortBar />
-        <TitleText onPress={() => navigation.navigate("List")}>
-          카테고리
-        </TitleText>
+        <TitleText>카테고리</TitleText>
         <View style={styles.outerContainer}>
           <FlatList
             keyExtractor={(item) => item.category_id.toString()}
             data={data}
-            renderItem={({ item }) => <Item item={item} />}
+            renderItem={({ item }) => <Item item={item} onPress={onPress} />}
           />
         </View>
-        {/* <Input name="email" value={value} onChange={setValue} />
-        <Input name="password" value={value} onChange={setValue} />
-        <Btn name="signin" state={value} setState={setValue} /> */}
       </HContainer>
-      <AddLinkModal isVisible={isModalVisible} toggleModal={closeModal} />
+      <LinkModal isVisible={isModalVisible} toggleModal={closeModal} />
     </React.Fragment>
   );
 };
