@@ -1,45 +1,45 @@
-import React, { useState } from "react";
-import {
-  TouchableWithoutFeedback,
-  Keyboard,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  ScrollView,
-} from "react-native";
-import { Button, Layout } from "@ui-kitten/components";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
 // import { LoginValue } from "../models/LoginTypes";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { ShortBar } from "../styles/ShortBar";
 const { UpperText, TitleText, CategoryText, HContainer } = style;
-import { renderCategoryText } from "../core/utils/category";
-// import { initialLinkDataState } from "../store/module/linkData";
+import useLinkData from "../hooks/useLinkData";
 import Item from "../components/Category";
-// const { categories } = initialLinkDataState;
+// import FakeData from "../core/services/fakeData";
+// const { home } = FakeData;
+import fetchCategoryRequest from "../core/apis/fetchCategory";
+import { Category } from "../models/UrlStateTypes";
 
 const Home = ({
   navigation,
 }: {
   navigation: StackNavigationProp<any>;
 }): JSX.Element => {
-  //   const [value, setValue] = useState</*types*/>({});
+  const [data, setData] = useState<Category[]>([]);
+
+  const { onHome, categories } = useLinkData();
+
+  const getCategoryList = async () => {
+    const categories = await fetchCategoryRequest();
+    onHome(categories);
+  };
+
+  // const onPress = () => {
+  //   navigation.navigate("list");
+  // };
+
+  useEffect(() => {
+    getCategoryList();
+  }, []);
+
+  useEffect(() => {
+    setData(categories);
+    console.log(categories);
+  }, [categories]);
+
   // onPress={() => navigation.navigate("list")} // 리스트페이지로 네비게이트
-  const [data, setData] = useState([
-    { category_id: 1, isnew: 1, count: 12 },
-    { category_id: 2, isnew: 0, count: 8 },
-    { category_id: 3, isnew: 0, count: 5 },
-    { category_id: 4, isnew: 1, count: 3 },
-    { category_id: 5, isnew: 1, count: 12 },
-    { category_id: 6, isnew: 0, count: 8 },
-    { category_id: 7, isnew: 0, count: 5 },
-    { category_id: 8, isnew: 1, count: 3 },
-    { category_id: 9, isnew: 1, count: 12 },
-    { category_id: 10, isnew: 0, count: 8 },
-    { category_id: 11, isnew: 0, count: 5 },
-    { category_id: 12, isnew: 1, count: 3 },
-  ]);
 
   return (
     <HContainer>
@@ -52,12 +52,9 @@ const Home = ({
         <FlatList
           keyExtractor={(item) => item.category_id.toString()}
           data={data}
-          renderItem={({ item }) => <Item item={item} />}
+          renderItem={({ item }) => <Item item={item} /*onPress={onPress}*/ />}
         />
       </View>
-      {/* <Input name="email" value={value} onChange={setValue} />
-        <Input name="password" value={value} onChange={setValue} />
-        <Btn name="signin" state={value} setState={setValue} /> */}
     </HContainer>
   );
 };

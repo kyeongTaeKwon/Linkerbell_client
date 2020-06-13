@@ -1,8 +1,22 @@
 import Axios from "axios";
 import url from "./url";
-const fetchCategoryRequest = async (data): Promise<any> => {
-  const { user_id } = data;
-  return Axios.get(`${url}/links/home?user_id=${user_id}`);
+import fakeData from "../services/fakeData";
+import { Category } from "../../models/UrlStateTypes";
+
+// type Category = {
+//   category_id: number;
+//   isnew: 0 | 1;
+//   count: number;
+// };
+
+const fetchCategoryRequest = async (): Promise<Category[]> => {
+  // return await fakeData.home.data;
+
+  const res = await Axios.get(`${url}/links/home`);
+  // console.log(res.data);
+  return res.data;
+
+  // return await (await Axios.get(`${url}/links/home`)).data;
 };
 
 export default fetchCategoryRequest;

@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import authReducer from "./auth";
-// import LinkDataReducer from "./linkdata";
+import LinkDataReducer from "./linkData";
 const rootReducer = combineReducers({
   auth: authReducer,
-  // linkData: LinkDataReducer,
+  linkData: LinkDataReducer,
 });
 
 export default rootReducer;

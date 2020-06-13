@@ -9,7 +9,7 @@ import { Category } from "../core/utils/category";
 const { CategoryText, HContainer } = style;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const Item = ({ item }: Category): JSX.Element => {
+const Item = ({ item /*onPress*/ }: Category): JSX.Element => {
   return (
     <View style={styles.container}>
       <CategoryText>{renderCategoryText(item.category_id).emoji}</CategoryText>
