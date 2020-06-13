@@ -15,6 +15,7 @@ import { Category } from "../models/UrlStateTypes";
 import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
+import { renderCategoryText } from "../core/utils/category";
 
 const Home = ({
   navigation,
@@ -32,7 +33,18 @@ const Home = ({
 
   const getCategoryList = async () => {
     const categories = await fetchCategoryRequest();
+    await sortCategory(categories);
+    // console.log("!!!!SORTED", sortedCategories);
     onHome(categories);
+  };
+
+  const sortCategory = (array: any) => {
+    array.sort((a, b) => {
+      if (a.isnew > b.isnew) return -1;
+      if (a.isnew < b.isnew) return 1;
+      if (a.count > b.count) return -1;
+      if (a.count < b.count) return 1;
+    });
   };
 
   useEffect(() => {
