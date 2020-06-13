@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Platform, FlatList } from "react-native";
+import React from "react";
+import { FlatList } from "react-native";
 import { SelectTagBtn } from "../styles/listStyles/tag";
-import { Url } from "../models/UrlStateTypes";
+// import { Url } from "../models/UrlStateTypes";
+
 type Props = {
   currentTag: string;
   tags: string[];
