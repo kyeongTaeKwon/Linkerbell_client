@@ -73,7 +73,6 @@ const List = (): JSX.Element => {
         <CategoryText>{categoryName}</CategoryText>
         <View style={styles.searchSection}>
           <TextInput
-            // placeholder="제목 검색..."
             onChangeText={(text) => setValue({ ...value, text })}
             style={styles.input}
             underlineColorAndroid="transparent"
