@@ -38,7 +38,7 @@ const Start = ({
     try {
       const res = await loginWithGoogleApiRequest();
       if (res) {
-        (res.status === 200 || res.status === 201) && onOauthLogin(res.data);
+        (res.status === 203 || res.status === 201) && onOauthLogin(res.data);
       }
     } catch (e) {
       console.log(e);
@@ -48,7 +48,7 @@ const Start = ({
   const handleFacebookLogin = async () => {
     try {
       const res = await loginWithFacebookApiRequest();
-      (res.status === 200 || res.status === 201) && onOauthLogin(res.data);
+      (res.status === 203 || res.status === 201) && onOauthLogin(res.data);
     } catch (e) {
       console.log(e);
     }

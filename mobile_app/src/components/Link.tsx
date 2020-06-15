@@ -10,6 +10,7 @@ import { _Url } from "../styles/listStyles/LinkUrl";
 import { Tag } from "../styles/listStyles/LinkTag";
 import { Img } from "../styles/listStyles/LinkImg";
 import sendFavoriteRequest from "../core/apis/favorite";
+import Favorite from "../screens/favorite";
 const link = ({ data }: Url): JSX.Element => {
   const [lastTap, setLastTap] = useState<number>(Date.now());
   const sliceText = (text: string, length: number) => {
@@ -20,26 +21,29 @@ const link = ({ data }: Url): JSX.Element => {
     return <Desc>{sliceText(description, 20)}</Desc>;
   };
 
-  const handleDoubleTap = (url_id: number) => {
+  const handleDoubleTap = (url_id: number, favorite: boolean) => {
     const now = Date.now();
     const DOUBLE_PRESS_DELAY = 300;
     if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
-      handleFavoriteDoublePress(url_id);
+      handleFavoriteDoublePress(url_id, favorite);
     } else {
       setLastTap(now);
       // lastTap = now;
     }
   };
-  const handleFavoriteDoublePress = async (url_id: number) => {
+  const handleFavoriteDoublePress = async (
+    url_id: number,
+    favorite: boolean,
+  ) => {
     try {
-      const res = await sendFavoriteRequest(url_id);
+      const res = await sendFavoriteRequest(url_id, favorite);
       console.log(res.status);
     } catch (e) {
       console.log(e);
     }
   };
   return (
-    <LinkBox onPress={() => handleDoubleTap(data.url_id)}>
+    <LinkBox onPress={() => handleDoubleTap(data.id, data.favorite)}>
       <Title
         onPress={() => Linking.openURL(data.url)}
         adjustsFontSizeToFit={true}
