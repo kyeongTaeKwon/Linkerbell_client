@@ -6,6 +6,7 @@ type Props = {
 export const MainText = styled.Text`
   font-family: "NBold";
   font-size: 24px;
+  line-height: ${24 * 1.6}px;
   padding: 0px;
   margin: 0px;
   margin-top: ${(props: Props) => (props.OS === "ios" ? "100px" : "80px")};

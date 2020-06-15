@@ -20,6 +20,8 @@ export const SubText = styled.Text`
   font-family: "NMedium";
   background-color: transparent;
   font-size: ${(props: Props) => (props.danger === true ? "16px" : "21px")};
+  line-height: ${(props: Props) =>
+    props.danger === true ? `${16 * 1.6}px` : `${21 * 1.6}px`};
   margin-left: 56px;
   ${(props: Props) => adjustMarginByOS(props.OS, props.danger)};
   color: ${(props: Props) => (props.danger === true ? "#ff2222" : "#000")};

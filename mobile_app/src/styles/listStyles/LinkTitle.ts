@@ -7,4 +7,5 @@ export const Title = styled.Text`
   margin-bottom: 4px;
   font-size: 15px;
   color: #3e3e3e;
+  letter-spacing: -0.5px;
 `;

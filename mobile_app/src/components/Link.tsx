@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Linking } from "expo";
 import { truncate } from "lodash";
-import { FlatList } from "react-native";
+import { FlatList, View, TouchableOpacity } from "react-native";
 import { Url } from "../models/UrlStateTypes";
 import { LinkBox } from "../styles/listStyles/Linkbox";
 import { Title } from "../styles/listStyles/LinkTitle";
@@ -9,10 +9,10 @@ import { Desc } from "../styles/listStyles/LinkDesc";
 import { _Url } from "../styles/listStyles/LinkUrl";
 import { Tag } from "../styles/listStyles/LinkTag";
 import { Img } from "../styles/listStyles/LinkImg";
+import { AntDesign } from "@expo/vector-icons";
 import sendFavoriteRequest from "../core/apis/favorite";
-import Favorite from "../screens/favorite";
 const link = ({ data }: Url): JSX.Element => {
-  const [lastTap, setLastTap] = useState<number>(Date.now());
+  // const [lastTap, setLastTap] = useState<number>(Date.now());
   const sliceText = (text: string, length: number) => {
     return truncate(text, { length });
   };
@@ -21,16 +21,16 @@ const link = ({ data }: Url): JSX.Element => {
     return <Desc>{sliceText(description, 20)}</Desc>;
   };
 
-  const handleDoubleTap = (url_id: number, favorite: boolean) => {
-    const now = Date.now();
-    const DOUBLE_PRESS_DELAY = 300;
-    if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
-      handleFavoriteDoublePress(url_id, favorite);
-    } else {
-      setLastTap(now);
-      // lastTap = now;
-    }
-  };
+  // const handleDoubleTap = (url_id: number, favorite: boolean) => {
+  //   const now = Date.now();
+  //   const DOUBLE_PRESS_DELAY = 300;
+  //   if (lastTap && now - lastTap < DOUBLE_PRESS_DELAY) {
+  //     handleFavoriteDoublePress(url_id, favorite);
+  //   } else {
+  //     setLastTap(now);
+  //     // lastTap = now;
+  //   }
+  // };
   const handleFavoriteDoublePress = async (
     url_id: number,
     favorite: boolean,
@@ -43,26 +43,46 @@ const link = ({ data }: Url): JSX.Element => {
     }
   };
   return (
-    <LinkBox onPress={() => handleDoubleTap(data.id, data.favorite)}>
-      <Title
+    <LinkBox>
+      <TouchableOpacity>
+        <AntDesign
+          name={data.favorite ? "star" : "staro"}
+          size={20}
+          style={{
+            width: 32,
+            height: 32,
+            top: 20,
+            left: 20,
+
+            position: "absolute",
+            color: `${data.favorite ? "#ffd93b" : "#dedede"}`,
+          }}
+        />
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={{ marginLeft: 64 }}
         onPress={() => Linking.openURL(data.url)}
-        adjustsFontSizeToFit={true}
-        numberOfLines={1}
-        minimumFontScale={0.01}
       >
-        {sliceText(data.og_title, 17)}
-      </Title>
-      {data.og_description && renderDesc(data.og_description)}
-      <_Url>{sliceText(data.url, 36)}</_Url>
-      <FlatList
-        data={data.tags}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 0 }}
-        scrollEnabled={false}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => <Tag>{item}</Tag>}
-      />
+        <Title
+          adjustsFontSizeToFit={true}
+          numberOfLines={1}
+          minimumFontScale={0.01}
+        >
+          {sliceText(data.og_title, 17)}
+        </Title>
+        {data.og_description && renderDesc(data.og_description)}
+        <_Url>{sliceText(data.url, 36)}</_Url>
+        {/* <FlatList
+          data={data.tags}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ flexGrow: 0 }}
+          scrollEnabled={false}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => <Tag>{item}</Tag>}
+        /> */}
+      </TouchableOpacity>
       <Img
         source={{
           uri: `${data.og_image}`,

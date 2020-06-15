@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store/module/index";
-import { fetchCategories } from "../store/module/linkData";
+import { fetchCategories, fetchAllListRequest } from "../store/module/linkData";
 import { useCallback } from "react";
 
 export default function useLinkData() {
@@ -14,6 +14,9 @@ export default function useLinkData() {
   const all_tag_list = useSelector(
     (state: RootState) => state.linkData.all_tag_list,
   );
+  const categories_url_list = useSelector(
+    (state: RootState) => state.linkData.categories_url_list,
+  );
   const dispatch = useDispatch();
 
   const onHome = useCallback(
@@ -22,10 +25,15 @@ export default function useLinkData() {
     },
     [dispatch],
   );
+  const fetchAllList = useCallback(() => {
+    dispatch(fetchAllListRequest());
+  }, [dispatch]);
   return {
     categories,
     all_category_url_list,
     all_tag_list,
     onHome,
+    fetchAllList,
+    categories_url_list,
   };
 }
