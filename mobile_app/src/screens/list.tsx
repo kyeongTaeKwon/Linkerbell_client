@@ -10,15 +10,19 @@ import LinkList from "../components/LinksList";
 import { EvilIcons } from "@expo/vector-icons";
 import fetchList from "../core/apis/fetchList";
 import fetchAllList from "../core/apis/fetchAllList";
+import sortLink from "../core/utils/sortLink";
+import SortButton from "../components/SortButton";
+
 const { Container, CategoryText } = styled;
 
-type value = {
+export type value = {
   category_name: string;
   cur_tag: string;
   tags: string[];
   cur_list: Url[];
   list: Url[];
   text: string;
+  orderType: string;
 };
 type ListProps = {
   route: any;
@@ -32,6 +36,7 @@ const List = ({ route }: ListProps): JSX.Element => {
     cur_list: [],
     category_name: renderCategoryName(route.params.category_id),
     text: "",
+    orderType: "asc",
   });
 
   useEffect(() => {
@@ -40,20 +45,11 @@ const List = ({ route }: ListProps): JSX.Element => {
   }, [value.text]);
 
   useEffect(() => {
-    const sortLink = (array: Url[]) => {
-      return array.sort((a, b) => {
-        if (a.isnew > b.isnew) return 1;
-        if (a.isnew < b.isnew) return -1;
-        if (a.og_title > b.og_title) return -1;
-        if (a.og_title > b.og_title) return 1;
-      });
-    };
-
     const updateList = async (category_id: number) => {
       const res = await fetchList(category_id);
       const { lists, tag_list } = res.data;
       const tags = ["All", ...tag_list];
-      const cur_list = sortLink(lists);
+      const cur_list = sortLink(lists, value.orderType);
       console.log(cur_list);
       setValue({
         ...value,
@@ -66,7 +62,7 @@ const List = ({ route }: ListProps): JSX.Element => {
       const res = await fetchAllList();
       const { lists, tag_list } = res.data;
       const tags = ["All", ...tag_list];
-      const cur_list = sortLink(lists);
+      const cur_list = sortLink(lists, value.orderType);
       // console.log(cur_list);
       setValue({
         ...value,
@@ -107,10 +103,15 @@ const List = ({ route }: ListProps): JSX.Element => {
     return list;
   };
 
+  // const handleSortButton = () => {
+  //   const { orderType } = value;
+  // };
+
   return (
     <Container OS={Platform.OS}>
       <View style={styles.container}>
         <CategoryText>{value.category_name}</CategoryText>
+        <SortButton orderType={value.orderType} />
         <View style={styles.searchSection}>
           <TextInput
             onChangeText={(text) => setValue({ ...value, text })}
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
     paddingRight: 18,
   },
   searchSection: {
-    marginLeft: 25,
+    marginLeft: 50,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
