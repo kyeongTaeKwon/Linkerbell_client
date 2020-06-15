@@ -8,7 +8,7 @@ export const UpperText = styled.Text`
   font-size: 20px;
   padding: 0px;
   margin: 0px;
-  margin-left: 44px;
-  margin-top: 140px;
+  margin-left: 36px;
+  margin-top: 100px;
   color: #000;
 `;

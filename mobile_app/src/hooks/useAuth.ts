@@ -5,6 +5,7 @@ import {
   profileUpdate,
   oauthLoginSuccess,
   signup,
+  logout,
 } from "../store/module/auth";
 import { useCallback } from "react";
 
@@ -39,6 +40,10 @@ export default function useAuth() {
     dispatch(profileUpdate());
   }, [dispatch]);
 
+  const onLogOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
   return {
     user_id,
     age,
@@ -49,5 +54,6 @@ export default function useAuth() {
     onOauthLogin,
     onSignup,
     isLogin,
+    onLogOut,
   };
 }

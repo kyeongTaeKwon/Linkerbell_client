@@ -26,6 +26,9 @@ const Home = ({
   const [isModalVisible, setModalVisible] = useState(false);
   const { getCopiedUrl, copiedUrl } = useServices();
 
+  const handleAllListbtnPress = () => {
+    navigation.navigate("List", { category_id: 0 });
+  };
   const onPress = (category_id: number) => {
     navigation.navigate("List", { category_id });
   };
@@ -41,8 +44,12 @@ const Home = ({
 
   useEffect(() => {
     setData(categories);
-    console.log(categories);
+    // console.log(categories);
   }, [categories]);
+
+  useFocusEffect(() => {
+    checkClipboard();
+  });
 
   const _getContent = async () => {
     const content = await Clipboard.getString();
@@ -65,16 +72,15 @@ const Home = ({
       console.log(err);
     }
   };
+
   const closeModal = () => {
     setModalVisible(false);
   };
-  useFocusEffect(() => {
-    checkClipboard();
-  });
+
   return (
     <React.Fragment>
       <HContainer>
-        <UpperText>전체 글 보기</UpperText>
+        <UpperText onPress={handleAllListbtnPress}>전체 글 보기</UpperText>
         <ShortBar />
         <TitleText>카테고리</TitleText>
         <View style={styles.outerContainer}>

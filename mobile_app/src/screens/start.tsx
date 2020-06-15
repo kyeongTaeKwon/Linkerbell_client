@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Text, Platform } from "react-native";
+import { Text, Platform, Image } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AuthParamList } from "../models/AuthParamList";
 import LoginBox from "../components/LoginBox";
@@ -64,11 +64,26 @@ const Start = ({
   return (
     <Container>
       <Wrapper OS={Platform.OS}>
-        <MainText>LinkerBell</MainText>
+        <Image
+          source={require("../../assets/logo.png")}
+          style={{ alignSelf: "center", marginRight: 20 }}
+        />
         <BtnWrapper OS={Platform.OS}>
-          <LoginBox name="Google 로그인" onPress={handleGoogleLogin} />
-          <LoginBox name="Facebook 로그인" onPress={handleFacebookLogin} />
-          <LoginBox name="로그인" onPress={handlePressLoginBtn} />
+          <LoginBox
+            name="Facebook으로 로그인"
+            onPress={handleFacebookLogin}
+            route={"facebook"}
+          />
+          <LoginBox
+            name="Google로 로그인"
+            onPress={handleGoogleLogin}
+            route={"google"}
+          />
+          <LoginBox
+            name="이메일로 로그인"
+            onPress={handlePressLoginBtn}
+            route={"email"}
+          />
           <LinkToSignUp onPress={hanldePressLinkToSignUp}>
             <LinkToBox>
               <Text
