@@ -8,12 +8,26 @@ type Props = {
   onPress?: any;
 };
 
-const SortButton = ({ orderType }: Props): JSX.Element => {
+const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
   const renderSortButton = () => {
     if (orderType === "asc") {
-      return <Ionicons name="ios-arrow-down" size={24} color="black" />;
+      return (
+        <Ionicons
+          name="ios-arrow-down"
+          size={24}
+          color="black"
+          onPress={() => onPress("desc")}
+        />
+      );
     }
-    return <Ionicons name="ios-arrow-up" size={24} color="black" />;
+    return (
+      <Ionicons
+        name="ios-arrow-up"
+        size={24}
+        color="black"
+        onPress={() => onPress("asc")}
+      />
+    );
   };
   return <React.Fragment>{renderSortButton()}</React.Fragment>;
 };

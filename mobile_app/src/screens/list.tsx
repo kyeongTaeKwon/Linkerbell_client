@@ -87,6 +87,11 @@ const List = ({ route }: ListProps): JSX.Element => {
       return _.filter(list, (link) => _.includes(link.tags, cur_tag));
     }
   };
+  useEffect(() => {
+    const { list, orderType } = value;
+    const cur_list = sortLink(list, orderType);
+    setValue({ ...value, cur_list });
+  }, [value.orderType]);
 
   const handlePress = (tagName: string): void => {
     setValue({ ...value, cur_tag: tagName });
@@ -103,15 +108,15 @@ const List = ({ route }: ListProps): JSX.Element => {
     return list;
   };
 
-  // const handleSortButton = () => {
-  //   const { orderType } = value;
-  // };
+  const handleSortButton = (order: string) => {
+    setValue({ ...value, orderType: order });
+  };
 
   return (
     <Container OS={Platform.OS}>
       <View style={styles.container}>
         <CategoryText>{value.category_name}</CategoryText>
-        <SortButton orderType={value.orderType} />
+        <SortButton orderType={value.orderType} onPress={handleSortButton} />
         <View style={styles.searchSection}>
           <TextInput
             onChangeText={(text) => setValue({ ...value, text })}
