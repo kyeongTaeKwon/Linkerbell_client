@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Platform, TextInput, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
-import { EvilIcons } from "@expo/vector-icons";
 import fetchList from "../core/apis/fetchList";
 import fetchAllList from "../core/apis/fetchAllList";
-const { Container, CategoryText } = styled;
+import Header from "../components/ListHeader";
+const { Container } = styled;
 
 type value = {
   category_name: string;
@@ -35,6 +35,15 @@ const List = ({ route }: ListProps): JSX.Element => {
   });
 
   useEffect(() => {
+    const filterLinkBySearch = () => {
+      const { list, text } = value;
+      if (text !== "") {
+        return list.filter((link) =>
+          link.og_title.toLowerCase().includes(text.toLowerCase()),
+        );
+      }
+      return list;
+    };
     const cur_list = filterLinkBySearch();
     setValue({ ...value, cur_list });
   }, [value.text]);
@@ -80,51 +89,31 @@ const List = ({ route }: ListProps): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    const filterLinkByTag = () => {
+      const { cur_tag, list } = value;
+      if (cur_tag === "All") return list;
+      else {
+        return _.filter(list, (link) => _.includes(link.tags, cur_tag));
+      }
+    };
     const cur_list = filterLinkByTag();
     setValue({ ...value, cur_list });
   }, [value.cur_tag]);
-
-  const filterLinkByTag = () => {
-    const { cur_tag, list } = value;
-    if (cur_tag === "All") return list;
-    else {
-      return _.filter(list, (link) => _.includes(link.tags, cur_tag));
-    }
-  };
 
   const handlePress = (tagName: string): void => {
     setValue({ ...value, cur_tag: tagName });
     console.log(value.list[1].image);
   };
-
-  const filterLinkBySearch = () => {
-    const { list, text } = value;
-    if (text !== "") {
-      return list.filter((link) =>
-        link.og_title.toLowerCase().includes(text.toLowerCase()),
-      );
-    }
-    return list;
+  const handleTextChange = (text: string) => {
+    setValue({ ...value, text });
   };
 
   return (
     <Container OS={Platform.OS}>
-      <View style={styles.container}>
-        <CategoryText>{value.category_name}</CategoryText>
-        <View style={styles.searchSection}>
-          <TextInput
-            onChangeText={(text) => setValue({ ...value, text })}
-            style={styles.input}
-            underlineColorAndroid="transparent"
-          />
-          <EvilIcons
-            name="search"
-            size={35}
-            color="black"
-            style={styles.searchIcon}
-          />
-        </View>
-      </View>
+      <Header
+        category_name={value.category_name}
+        onTextChange={handleTextChange}
+      />
       <ShortBar />
       <TagList
         currentTag={value.cur_tag}
