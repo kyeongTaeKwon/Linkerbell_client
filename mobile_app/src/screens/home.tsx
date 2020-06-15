@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { style } from "../styles/HomeStyles/HStyleIndex";
@@ -15,7 +20,8 @@ import { Category } from "../models/UrlStateTypes";
 import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
-
+import { Ionicons } from "@expo/vector-icons";
+import { renderCategoryText } from "../core/utils/category";
 const Home = ({
   navigation,
 }: {
@@ -32,7 +38,18 @@ const Home = ({
 
   const getCategoryList = async () => {
     const categories = await fetchCategoryRequest();
+    await sortCategory(categories);
+    // console.log("!!!!SORTED", sortedCategories);
     onHome(categories);
+  };
+
+  const sortCategory = (array: any) => {
+    array.sort((a, b) => {
+      if (a.isnew > b.isnew) return -1;
+      if (a.isnew < b.isnew) return 1;
+      if (a.count > b.count) return -1;
+      if (a.count < b.count) return 1;
+    });
   };
 
   useEffect(() => {
@@ -71,12 +88,20 @@ const Home = ({
   useFocusEffect(() => {
     checkClipboard();
   });
+
   return (
     <React.Fragment>
       <HContainer>
         <UpperText>전체 글 보기</UpperText>
         <ShortBar />
-        <TitleText>카테고리</TitleText>
+        <TouchableWithoutFeedback>
+          <View style={styles.titleContainer}>
+            <TitleText>카테고리</TitleText>
+            <Ionicons name="ios-arrow-down" size={24} color="black" />
+            {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
+          </View>
+        </TouchableWithoutFeedback>
+
         <View style={styles.outerContainer}>
           <FlatList
             keyExtractor={(item) => item.category_id.toString()}
@@ -98,5 +123,9 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 120,
     backgroundColor: "transparent",
+  },
+  titleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
