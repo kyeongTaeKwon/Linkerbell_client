@@ -9,7 +9,6 @@ import FakeData from "../core/services/fakeData";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
 import { EvilIcons } from "@expo/vector-icons";
-
 const { Container, CategoryText } = styled;
 const { Clist } = FakeData;
 
@@ -70,6 +69,7 @@ const List = (): JSX.Element => {
 
   const handlePress = (tagName: string): void => {
     setValue({ ...value, cur_tag: tagName });
+    console.log(value.list[1].image);
   };
 
   const filterLinkBySearch = () => {

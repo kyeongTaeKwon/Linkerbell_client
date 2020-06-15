@@ -20,6 +20,7 @@ import { Category } from "../models/UrlStateTypes";
 import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { renderCategoryText } from "../core/utils/category";
 const Home = ({
@@ -107,6 +108,14 @@ const Home = ({
             keyExtractor={(item) => item.category_id.toString()}
             data={data}
             renderItem={({ item }) => <Item item={item} onPress={onPress} />}
+            showsVerticalScrollIndicator={false}
+          />
+          <MaterialIcons
+            name="add-box"
+            size={75}
+            color="#FFD93B"
+            style={styles.addButton}
+            onPress={() => console.log("add button clicked")}
           />
         </View>
       </HContainer>
@@ -123,6 +132,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 120,
     backgroundColor: "transparent",
+    marginLeft: 44,
+    marginRight: 24,
+  },
+  addButton: {
+    alignSelf: "flex-end",
+    position: "absolute",
+    flexDirection: "row",
+    marginTop: 350,
+    // shadowOffset
   },
   titleContainer: {
     flexDirection: "row",

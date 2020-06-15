@@ -36,7 +36,7 @@ const link = ({ data }: Url): JSX.Element => {
       />
       <Img
         source={{
-          uri: "https://picsum.photos/200/300",
+          uri: "https://picsum.photos/200",
         }}
       />
     </LinkBox>
