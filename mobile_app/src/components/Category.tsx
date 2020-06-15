@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { renderCategoryText } from "../core/utils/category";
 
-const { CategoryText, HContainer } = style;
+const { CategoryText } = style;
 
 type Props = {
   category_id: number;
@@ -25,7 +25,9 @@ const Item = ({ item, onPress }: Props): JSX.Element => {
     >
       <CategoryText>{renderCategoryText(item.category_id).emoji}</CategoryText>
       <CategoryText>{renderCategoryText(item.category_id).name}</CategoryText>
-      <Text style={styles.isnewbutton}>{item.count}</Text>
+      <Text style={[item.isnew ? styles.isnewCount : styles.count]}>
+        {item.count}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -37,8 +39,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     flexWrap: "wrap",
+    backgroundColor: "transparent",
+    marginLeft: 44,
+    marginRight: 44,
   },
-  isnewbutton: {
+  isnewCount: {
     marginLeft: 2,
     borderRadius: 12,
     minWidth: 34,
@@ -47,23 +52,28 @@ const styles = StyleSheet.create({
     padding: 3,
     paddingLeft: 10,
     paddingRight: 10,
-
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
     overflow: "hidden",
+    color: "#ffffff",
+    fontFamily: "NMedium",
+    fontSize: 14,
   },
-  button: {
+  count: {
     marginLeft: 2,
-    borderRadius: 17,
-    height: 4,
+    borderRadius: 12,
     minWidth: 34,
     backgroundColor: "#686868",
     borderWidth: 0,
-  },
-  outerContainer: {
-    flex: 1,
-    marginBottom: 90,
-    backgroundColor: "transparent",
+    padding: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    overflow: "hidden",
+    fontFamily: "NMedium",
+    fontSize: 14,
   },
 });
