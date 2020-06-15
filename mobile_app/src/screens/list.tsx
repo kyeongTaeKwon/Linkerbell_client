@@ -33,11 +33,25 @@ const List = (): JSX.Element => {
   });
 
   useEffect(() => {
-    const cur_list = filterLinkList();
+    const { list } = value;
+    const cur_list = sortLink(list);
+    setValue({ ...value, cur_list });
+  }, []);
+
+  useEffect(() => {
+    const cur_list = filterLinkByTag();
     setValue({ ...value, cur_list });
   }, [value.cur_tag]);
 
-  const filterLinkList = () => {
+  const sortLink = (array: Url[]) => {
+    array.sort((a, b) => {
+      if (a.isnew > b.isnew) return -1;
+      if (a.isnew < b.isnew) return 1;
+      if (a.title > b.title) return 1;
+      if (a.title > b.title) return -1;
+    });
+  };
+  const filterLinkByTag = () => {
     const { cur_tag, list } = value;
     if (cur_tag === "All") return list;
     else {
