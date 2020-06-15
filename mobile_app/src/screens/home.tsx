@@ -19,7 +19,7 @@ import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import AddLinkButton from "../components/AddLinkBtn";
 const Home = ({
   navigation,
 }: {
@@ -96,6 +96,11 @@ const Home = ({
     checkClipboard();
   });
 
+  const handleAddLinkBtn = () => {
+    console.log("Add link button clicked");
+    setModalVisible(true);
+  };
+
   return (
     <React.Fragment>
       <HContainer>
@@ -103,8 +108,6 @@ const Home = ({
         <ShortBar />
 
         <TitleText>카테고리</TitleText>
-        {/* <Ionicons name="ios-arrow-down" size={24} color="black" /> */}
-        {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
 
         <FlatList
           keyExtractor={(item) => item.category_id.toString()}
@@ -113,13 +116,7 @@ const Home = ({
           showsVerticalScrollIndicator={false}
           style={styles.listContainer}
         />
-        <MaterialIcons
-          name="add-box"
-          size={75}
-          color="#FFD93B"
-          style={styles.addButton}
-          onPress={() => console.log("add button clicked")}
-        />
+        <AddLinkButton onPress={handleAddLinkBtn} />
       </HContainer>
       <LinkModal
         isVisible={isModalVisible}

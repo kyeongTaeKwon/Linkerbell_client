@@ -35,7 +35,7 @@ const BottomTabNav = (): JSX.Element => {
     return {
       borderTopLeftRadius: 32,
       borderTopRightRadius: 32,
-      borderRadiuse: 32,
+      borderRadius: 32,
       backgroundColor: "#fff",
       position: "absolute",
       bottom: 0,
