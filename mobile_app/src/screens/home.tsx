@@ -12,8 +12,6 @@ import { ShortBar } from "../styles/ShortBar";
 const { UpperText, TitleText, HContainer } = style;
 import useLinkData from "../hooks/useLinkData";
 import Item from "../components/Category";
-// import FakeData from "../core/services/fakeData";
-// const { home } = FakeData;
 import fetchCategoryRequest from "../core/apis/fetchCategory";
 import { Category } from "../models/UrlStateTypes";
 // const { categories } = initialLinkDataState;
@@ -22,7 +20,6 @@ import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { renderCategoryText } from "../core/utils/category";
 const Home = ({
   navigation,
 }: {
@@ -112,14 +109,13 @@ const Home = ({
           </View>
         </TouchableWithoutFeedback>
 
-        {/* <View style={styles.outerContainer}> */}
         <FlatList
           keyExtractor={(item) => item.category_id.toString()}
           data={data}
           renderItem={({ item }) => <Item item={item} onPress={onPress} />}
           showsVerticalScrollIndicator={false}
+          style={styles.listContainer}
         />
-        {/* </View> */}
         <MaterialIcons
           name="add-box"
           size={75}
@@ -140,25 +136,18 @@ const Home = ({
 export default Home;
 
 const styles = StyleSheet.create({
-  outerContainer: {
-    paddingTop: 20,
-    flex: 1,
-    marginBottom: 120,
-    backgroundColor: "transparent",
-    // marginLeft: 44,
-    marginRight: 24,
-  },
   addButton: {
     alignSelf: "flex-end",
-    // position: "absolute",
-    flexDirection: "row",
-    marginBottom: 100,
-    marginRight: 24,
-    // shadowOffset
+    position: "absolute",
+    marginTop: 680,
   },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
     // marginBottom: 20,
+  },
+  listContainer: {
+    marginBottom: 100,
+    position: "relative",
   },
 });

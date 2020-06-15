@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { renderCategoryText } from "../core/utils/category";
 
-const { CategoryText } = style;
+const { CategoryText, Count } = style;
 
 type Props = {
   category_id: number;
@@ -25,9 +25,7 @@ const Item = ({ item, onPress }: Props): JSX.Element => {
     >
       <CategoryText>{renderCategoryText(item.category_id).emoji}</CategoryText>
       <CategoryText>{renderCategoryText(item.category_id).name}</CategoryText>
-      <Text style={[item.isnew ? styles.isnewCount : styles.count]}>
-        {item.count}
-      </Text>
+      <Count isnew={item.isnew}> {item.count} </Count>
     </TouchableOpacity>
   );
 };
@@ -40,43 +38,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
     backgroundColor: "transparent",
-    marginLeft: 44,
-    marginRight: 44,
-  },
-  isnewCount: {
-    marginLeft: 2,
-    borderRadius: 12,
-    minWidth: 34,
-    lineHeight: 20,
-    backgroundColor: "#FF5E5E",
-    borderWidth: 0,
-    padding: 3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    overflow: "hidden",
-    color: "#ffffff",
-    fontFamily: "NMedium",
-    fontSize: 14,
-  },
-  count: {
-    marginLeft: 2,
-    borderRadius: 12,
-    minWidth: 34,
-    backgroundColor: "#686868",
-    borderWidth: 0,
-    lineHeight: 20,
-    padding: 3,
-    paddingLeft: 10,
-    paddingRight: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    overflow: "hidden",
-    fontFamily: "NMedium",
-    color: "#ffffff",
-    fontSize: 14,
+    marginLeft: 36,
+    marginRight: 36,
+    height: 80,
   },
 });
