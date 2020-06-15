@@ -12,9 +12,13 @@ import { Category } from "../../models/UrlStateTypes";
 const fetchCategoryRequest = async (): Promise<Category[]> => {
   // return await fakeData.home.data;
 
-  const res = await Axios.get(`${url}/links/home`);
-  // console.log(res.data);
-  return res.data;
+  try {
+    const res = await Axios.get(`${url}/links/home`);
+    // console.log(res.data);
+    return res.data;
+  } catch (e) {
+    console.log(e);
+  }
 
   // return await (await Axios.get(`${url}/links/home`)).data;
 };

@@ -46,7 +46,7 @@ const link = ({ data }: Url): JSX.Element => {
         numberOfLines={1}
         minimumFontScale={0.01}
       >
-        {sliceText(data.og_title, 21)}
+        {sliceText(data.og_title, 17)}
       </Title>
       {data.og_description && renderDesc(data.og_description)}
       <_Url>{sliceText(data.url, 36)}</_Url>
@@ -61,7 +61,7 @@ const link = ({ data }: Url): JSX.Element => {
       />
       <Img
         source={{
-          uri: "https://picsum.photos/200",
+          uri: `${data.og_image}`,
         }}
       />
     </LinkBox>

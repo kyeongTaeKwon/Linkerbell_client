@@ -62,7 +62,7 @@ const Home = ({
 
   useEffect(() => {
     setData(categories);
-    // console.log(categories);
+    console.log(categories);
   }, [categories]);
 
   useFocusEffect(() => {
@@ -107,19 +107,19 @@ const Home = ({
         <TouchableWithoutFeedback>
           <View style={styles.titleContainer}>
             <TitleText>카테고리</TitleText>
-            <Ionicons name="ios-arrow-down" size={24} color="black" />
+            {/* <Ionicons name="ios-arrow-down" size={24} color="black" /> */}
             {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
           </View>
         </TouchableWithoutFeedback>
 
-        <View style={styles.outerContainer}>
-          <FlatList
-            keyExtractor={(item) => item.category_id.toString()}
-            data={data}
-            renderItem={({ item }) => <Item item={item} onPress={onPress} />}
-            showsVerticalScrollIndicator={false}
-          />
-        </View>
+        {/* <View style={styles.outerContainer}> */}
+        <FlatList
+          keyExtractor={(item) => item.category_id.toString()}
+          data={data}
+          renderItem={({ item }) => <Item item={item} onPress={onPress} />}
+          showsVerticalScrollIndicator={false}
+        />
+        {/* </View> */}
         <MaterialIcons
           name="add-box"
           size={75}
@@ -128,7 +128,11 @@ const Home = ({
           onPress={() => console.log("add button clicked")}
         />
       </HContainer>
-      <LinkModal isVisible={isModalVisible} toggleModal={closeModal} />
+      <LinkModal
+        isVisible={isModalVisible}
+        toggleModal={closeModal}
+        onReload={getCategoryList}
+      />
     </React.Fragment>
   );
 };
@@ -148,12 +152,13 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     // position: "absolute",
     flexDirection: "row",
-    marginBottom: 80,
+    marginBottom: 100,
     marginRight: 24,
     // shadowOffset
   },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
+    // marginBottom: 20,
   },
 });
