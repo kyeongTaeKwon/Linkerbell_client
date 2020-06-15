@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     borderRadius: 12,
     minWidth: 34,
+    lineHeight: 20,
     backgroundColor: "#FF5E5E",
     borderWidth: 0,
     padding: 3,
@@ -66,6 +67,7 @@ const styles = StyleSheet.create({
     minWidth: 34,
     backgroundColor: "#686868",
     borderWidth: 0,
+    lineHeight: 20,
     padding: 3,
     paddingLeft: 10,
     paddingRight: 10,
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     overflow: "hidden",
     fontFamily: "NMedium",
+    color: "#ffffff",
     fontSize: 14,
   },
 });

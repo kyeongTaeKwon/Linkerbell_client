@@ -9,13 +9,19 @@ const { LinkAddBtn, LinkModal, MainText, SubText } = styled;
 type Props = {
   isVisible: boolean;
   toggleModal: () => void;
+  onReload: () => void;
 };
 
-const AddLinkModal = ({ isVisible, toggleModal }: Props): JSX.Element => {
+const AddLinkModal = ({
+  isVisible,
+  toggleModal,
+  onReload,
+}: Props): JSX.Element => {
   const { copiedUrl } = useServices();
   const handlePress = async () => {
     try {
       await postUrl(copiedUrl);
+      await onReload();
       toggleModal();
     } catch (e) {
       console.log(e);

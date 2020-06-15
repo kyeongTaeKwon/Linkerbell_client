@@ -9,6 +9,7 @@ export const TitleText = styled.Text`
   padding: 0px;
   margin: 0px;
   margin-left: 36px;
+  margin-bottom: 32px;
   color: #000;
 `;
 // margin-top: ${(props: Props) => (props.OS === "ios" ? "140px" : "80px")};
