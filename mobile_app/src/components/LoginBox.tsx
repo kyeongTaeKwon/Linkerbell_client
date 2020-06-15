@@ -6,11 +6,14 @@ const { LoginBtn, LoginLabel } = styled;
 type Props = {
   name: string;
   onPress?: VoidFunction;
+  route: string;
 };
-const LoginBox = ({ name, onPress }: Props): JSX.Element => {
+const LoginBox = ({ name, onPress, route }: Props): JSX.Element => {
   return (
-    <LoginBtn onPress={onPress}>
-      <LoginLabel OS={Platform.OS}>{name}</LoginLabel>
+    <LoginBtn onPress={onPress} route={route}>
+      <LoginLabel OS={Platform.OS} route={route}>
+        {name}
+      </LoginLabel>
     </LoginBtn>
   );
 };

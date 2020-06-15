@@ -29,3 +29,12 @@ export const renderCategoryText = (category_id: number): Category => {
   };
   return category_object[category_id];
 };
+export const renderCategoryName = (category_id = 0): string => {
+  console.log(category_id);
+  if (category_id === 0) {
+    return "전체글";
+  }
+  const { emoji, name } = renderCategoryText(category_id);
+  const title = `${emoji} ${name}`;
+  return title;
+};

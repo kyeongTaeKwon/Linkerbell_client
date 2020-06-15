@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import { Platform, TextInput, StyleSheet, View } from "react-native";
-import { renderCategoryText } from "../core/utils/category";
+import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
-import FakeData from "../core/services/fakeData";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
 import { EvilIcons } from "@expo/vector-icons";
+import fetchList from "../core/apis/fetchList";
+import fetchAllList from "../core/apis/fetchAllList";
 const { Container, CategoryText } = styled;
-const { Clist } = FakeData;
 
 type value = {
+  category_name: string;
   cur_tag: string;
   tags: string[];
   cur_list: Url[];
@@ -20,17 +21,16 @@ type value = {
   text: string;
 };
 type ListProps = {
-  category_id: number;
+  route: any;
 };
 
-const List = (): JSX.Element => {
-  const { name, emoji } = renderCategoryText(7);
-  const categoryName = `${emoji}  ${name}`;
+const List = ({ route }: ListProps): JSX.Element => {
   const [value, setValue] = useState<value>({
     cur_tag: "All",
-    tags: ["All", ...Clist.data.tag_list],
-    list: [...Clist.data.list],
+    tags: ["All"],
+    list: [],
     cur_list: [],
+    category_name: renderCategoryName(route.params.category_id),
     text: "",
   });
 
@@ -40,10 +40,43 @@ const List = (): JSX.Element => {
   }, [value.text]);
 
   useEffect(() => {
-    const cur_list = filterLinkList();
-    const { list } = value;
-    const cur_list = sortLink(list);
-    setValue({ ...value, cur_list });
+    const sortLink = (array: Url[]) => {
+      return array.sort((a, b) => {
+        if (a.isnew > b.isnew) return 1;
+        if (a.isnew < b.isnew) return -1;
+        if (a.og_title > b.og_title) return -1;
+        if (a.og_title > b.og_title) return 1;
+      });
+    };
+
+    const updateList = async (category_id: number) => {
+      const res = await fetchList(category_id);
+      const { lists, tag_list } = res.data;
+      const tags = ["All", ...tag_list];
+      const cur_list = sortLink(lists);
+      console.log(cur_list);
+      setValue({
+        ...value,
+        list: lists,
+        cur_list,
+        tags,
+      });
+    };
+    const updateAllList = async () => {
+      const res = await fetchAllList();
+      const { lists, tag_list } = res.data;
+      const tags = ["All", ...tag_list];
+      const cur_list = sortLink(lists);
+      // console.log(cur_list);
+      setValue({
+        ...value,
+        list: lists,
+        cur_list,
+        tags,
+      });
+    };
+    const { category_id } = route.params;
+    category_id === 0 ? updateAllList() : updateList(category_id);
   }, []);
 
   useEffect(() => {
@@ -51,14 +84,6 @@ const List = (): JSX.Element => {
     setValue({ ...value, cur_list });
   }, [value.cur_tag]);
 
-  const sortLink = (array: Url[]) => {
-    array.sort((a, b) => {
-      if (a.isnew > b.isnew) return -1;
-      if (a.isnew < b.isnew) return 1;
-      if (a.title > b.title) return 1;
-      if (a.title > b.title) return -1;
-    });
-  };
   const filterLinkByTag = () => {
     const { cur_tag, list } = value;
     if (cur_tag === "All") return list;
@@ -76,7 +101,7 @@ const List = (): JSX.Element => {
     const { list, text } = value;
     if (text !== "") {
       return list.filter((link) =>
-        link.title.toLowerCase().includes(text.toLowerCase()),
+        link.og_title.toLowerCase().includes(text.toLowerCase()),
       );
     }
     return list;
@@ -85,7 +110,7 @@ const List = (): JSX.Element => {
   return (
     <Container OS={Platform.OS}>
       <View style={styles.container}>
-        <CategoryText>{categoryName}</CategoryText>
+        <CategoryText>{value.category_name}</CategoryText>
         <View style={styles.searchSection}>
           <TextInput
             onChangeText={(text) => setValue({ ...value, text })}

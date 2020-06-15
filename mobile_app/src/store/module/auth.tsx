@@ -44,7 +44,7 @@ export const oauthLoginSuccess = (user_id: authState) => ({
   type: USER_OAUTH_LOGIN_SUECCESS,
   payload: user_id,
 });
-export const userLogout = () => ({
+export const logout = () => ({
   type: USER_LOGOUT,
 });
 
@@ -80,7 +80,7 @@ export type authActions =
   | ReturnType<typeof callLoginAPi>
   | ReturnType<typeof userLoginSuccess>
   | ReturnType<typeof userLoginFailure>
-  | ReturnType<typeof userLogout>
+  | ReturnType<typeof logout>
   | ReturnType<typeof signup>
   | ReturnType<typeof userSignupSuccess>
   | ReturnType<typeof userSignupFailure>
@@ -104,6 +104,7 @@ const reducer = (state = initialAuthState, action: authActions) => {
     }
     case USER_LOGOUT:
       return { ...initialAuthState };
+
     case USER_SIGNUP_SUCCESS: {
       const { user_id } = action.payload.userInfo;
       return { ...state, user_id };
