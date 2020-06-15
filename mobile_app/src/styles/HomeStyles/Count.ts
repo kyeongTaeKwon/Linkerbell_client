@@ -13,10 +13,11 @@ export const Count = styled.Text`
   color: #000;
   border-radius: 12px;
   min-width: 42px;
+  overflow: hidden;
   background-color: ${(props: Props) => (props.isnew ? "#FF5E5E" : "#686868")};
   border-width: 0px;
   padding: 3px;
-  padding-left: 10px;
+  padding-left: 8px;
   padding-right: 10px;
   align-items: center;
   justify-content: center;

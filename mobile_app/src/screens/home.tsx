@@ -118,12 +118,13 @@ const Home = ({
         />
         <MaterialIcons
           name="add-box"
-          size={75}
+          size={60}
           color="#FFD93B"
           style={styles.addButton}
           onPress={() => console.log("add button clicked")}
         />
       </HContainer>
+
       <LinkModal
         isVisible={isModalVisible}
         toggleModal={closeModal}
@@ -139,7 +140,9 @@ const styles = StyleSheet.create({
   addButton: {
     alignSelf: "flex-end",
     position: "absolute",
-    marginTop: 680,
+    bottom: 88,
+    right: 24,
+    // marginTop: 680,
   },
   titleContainer: {
     flexDirection: "row",
