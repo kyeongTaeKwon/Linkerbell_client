@@ -33,6 +33,9 @@ const Home = ({
   const [isModalVisible, setModalVisible] = useState(false);
   const { getCopiedUrl, copiedUrl } = useServices();
 
+  const handleAllListbtnPress = () => {
+    navigation.navigate("List", { category_id: 0 });
+  };
   const onPress = (category_id: number) => {
     navigation.navigate("List", { category_id });
   };
@@ -59,8 +62,12 @@ const Home = ({
 
   useEffect(() => {
     setData(categories);
-    console.log(categories);
+    // console.log(categories);
   }, [categories]);
+
+  useFocusEffect(() => {
+    checkClipboard();
+  });
 
   const _getContent = async () => {
     const content = await Clipboard.getString();
@@ -83,9 +90,11 @@ const Home = ({
       console.log(err);
     }
   };
+
   const closeModal = () => {
     setModalVisible(false);
   };
+
   useFocusEffect(() => {
     checkClipboard();
   });
@@ -93,7 +102,7 @@ const Home = ({
   return (
     <React.Fragment>
       <HContainer>
-        <UpperText>전체 글 보기</UpperText>
+        <UpperText onPress={handleAllListbtnPress}>전체 글 보기</UpperText>
         <ShortBar />
         <TouchableWithoutFeedback>
           <View style={styles.titleContainer}>
@@ -110,14 +119,14 @@ const Home = ({
             renderItem={({ item }) => <Item item={item} onPress={onPress} />}
             showsVerticalScrollIndicator={false}
           />
-          <MaterialIcons
-            name="add-box"
-            size={75}
-            color="#FFD93B"
-            style={styles.addButton}
-            onPress={() => console.log("add button clicked")}
-          />
         </View>
+        <MaterialIcons
+          name="add-box"
+          size={75}
+          color="#FFD93B"
+          style={styles.addButton}
+          onPress={() => console.log("add button clicked")}
+        />
       </HContainer>
       <LinkModal isVisible={isModalVisible} toggleModal={closeModal} />
     </React.Fragment>
@@ -132,14 +141,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 120,
     backgroundColor: "transparent",
-    marginLeft: 44,
+    // marginLeft: 44,
     marginRight: 24,
   },
   addButton: {
     alignSelf: "flex-end",
-    position: "absolute",
+    // position: "absolute",
     flexDirection: "row",
-    marginTop: 350,
+    marginBottom: 80,
+    marginRight: 24,
     // shadowOffset
   },
   titleContainer: {

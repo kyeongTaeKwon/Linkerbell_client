@@ -7,6 +7,7 @@ import Favorite from "../screens/favorite";
 import Home from "../screens/home";
 import Trending from "../screens/trending";
 import List from "../screens/list";
+import Mypage from "../screens/myPage";
 type NavProps = {
   focused: boolean;
   color: string;
@@ -65,6 +66,8 @@ const BottomTabNav = (): JSX.Element => {
             iconName = "bookmark-multiple";
           } else if (name === "Trending") {
             iconName = "file-document-box";
+          } else if (name === "Mypage") {
+            iconName = "account";
           }
           return (
             <MaterialCommunityIcons
@@ -94,6 +97,13 @@ const BottomTabNav = (): JSX.Element => {
       <Tab.Screen
         name="Trending"
         component={Trending}
+        options={{
+          tabBarLabel: "",
+        }}
+      />
+      <Tab.Screen
+        name="Mypage"
+        component={Mypage}
         options={{
           tabBarLabel: "",
         }}

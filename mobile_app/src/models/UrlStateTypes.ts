@@ -1,8 +1,8 @@
 export type Url = {
   url_id: number;
   url: string;
-  title: string;
-  text: string;
+  og_title: string;
+  og_description: string;
   image?: string;
   favorite: 0 | 1;
   isnew: 0 | 1;

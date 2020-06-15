@@ -9,8 +9,9 @@ const signInWithGoogleAsync = async (): Promise<any> => {
     });
 
     if (result.type === "success") {
-      const { email } = result.user;
-      return email;
+      console.log(result);
+      const { idToken } = result;
+      return idToken;
     } else {
       return "login cancel";
     }
