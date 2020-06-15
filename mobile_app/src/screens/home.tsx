@@ -114,6 +114,7 @@ const Home = ({
           data={data}
           renderItem={({ item }) => <Item item={item} onPress={onPress} />}
           showsVerticalScrollIndicator={false}
+          style={styles.listContainer}
         />
         <MaterialIcons
           name="add-box"
@@ -134,12 +135,14 @@ const styles = StyleSheet.create({
   addButton: {
     alignSelf: "flex-end",
     position: "absolute",
-    flexDirection: "row",
-    marginTop: 700,
-    marginRight: 24,
+    marginTop: 680,
   },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  listContainer: {
+    marginBottom: 100,
+    position: "relative",
   },
 });

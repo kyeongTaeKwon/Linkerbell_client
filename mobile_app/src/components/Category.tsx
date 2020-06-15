@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     flexWrap: "wrap",
-    backgroundColor: "pink",
+    backgroundColor: "transparent",
     marginLeft: 36,
     marginRight: 36,
+    height: 80,
   },
 });
