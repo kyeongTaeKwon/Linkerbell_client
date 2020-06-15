@@ -101,13 +101,10 @@ const Home = ({
       <HContainer>
         <UpperText onPress={handleAllListbtnPress}>전체 글 보기</UpperText>
         <ShortBar />
-        <TouchableWithoutFeedback>
-          <View style={styles.titleContainer}>
-            <TitleText>카테고리</TitleText>
-            {/* <Ionicons name="ios-arrow-down" size={24} color="black" /> */}
-            {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
-          </View>
-        </TouchableWithoutFeedback>
+
+        <TitleText>카테고리</TitleText>
+        {/* <Ionicons name="ios-arrow-down" size={24} color="black" /> */}
+        {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
 
         <FlatList
           keyExtractor={(item) => item.category_id.toString()}
@@ -141,13 +138,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: 680,
   },
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    // marginBottom: 20,
-  },
+
   listContainer: {
-    marginBottom: 100,
+    marginBottom: 75,
     position: "relative",
   },
 });
