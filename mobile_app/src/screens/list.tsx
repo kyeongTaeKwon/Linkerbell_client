@@ -11,15 +11,19 @@ import fetchList from "../core/apis/fetchList";
 import fetchAllList from "../core/apis/fetchAllList";
 import Header from "../components/ListHeader";
 import useLinkData from "../hooks/useLinkData";
-const { Container } = styled;
+import sortLink from "../core/utils/sortLink";
+import SortButton from "../components/SortButton";
 
-type value = {
+const { Container, CategoryText } = styled;
+
+export type value = {
   category_name: string;
   cur_tag: string;
   tags: string[];
   cur_list: Url[];
   list: Url[];
   text: string;
+  orderType: string;
 };
 type ListProps = {
   route: any;
@@ -33,6 +37,7 @@ const List = ({ route }: ListProps): JSX.Element => {
     cur_list: [],
     category_name: renderCategoryName(route.params.category_id),
     text: "",
+    orderType: "asc",
   });
   const { all_category_url_list, categories_url_list } = useLinkData();
 
@@ -84,6 +89,7 @@ const List = ({ route }: ListProps): JSX.Element => {
     const { category_id } = route.params;
     updateList(category_id);
   }, [categories_url_list]);
+  
   useEffect(() => {
     // const updateList = async (category_id: number) => {
     //   const res = await fetchList(category_id);
@@ -115,11 +121,21 @@ const List = ({ route }: ListProps): JSX.Element => {
     updateList(category_id);
   }, []);
 
+  useEffect(() => {
+    const { list, orderType } = value;
+    const cur_list = sortLink(list, orderType);
+    setValue({ ...value, cur_list });
+  }, [value.orderType]);
+
   const handlePress = (tagName: string): void => {
     setValue({ ...value, cur_tag: tagName });
   };
   const handleTextChange = (text: string) => {
     setValue({ ...value, text });
+  };
+
+  const handleSortButton = (order: string) => {
+    setValue({ ...value, orderType: order });
   };
 
   return (
@@ -128,6 +144,7 @@ const List = ({ route }: ListProps): JSX.Element => {
         category_name={value.category_name}
         onTextChange={handleTextChange}
       />
+       <SortButton orderType={value.orderType} onPress={handleSortButton} />   
       <ShortBar />
       <TagList
         currentTag={value.cur_tag}
@@ -149,7 +166,7 @@ const styles = StyleSheet.create({
     paddingRight: 18,
   },
   searchSection: {
-    marginLeft: 25,
+    marginLeft: 50,
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",

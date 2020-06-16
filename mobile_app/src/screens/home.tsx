@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { style } from "../styles/HomeStyles/HStyleIndex";
@@ -14,12 +9,11 @@ import useLinkData from "../hooks/useLinkData";
 import Item from "../components/Category";
 import fetchCategoryRequest from "../core/apis/fetchCategory";
 import { Category } from "../models/UrlStateTypes";
-// const { categories } = initialLinkDataState;
 import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
+import AddLinkButton from "../components/AddLinkBtn";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 const Home = ({
   navigation,
 }: {
@@ -40,7 +34,6 @@ const Home = ({
   const getCategoryList = async () => {
     const categories = await fetchCategoryRequest();
     await sortCategory(categories);
-    // console.log("!!!!SORTED", sortedCategories);
     onHome(categories);
   };
 
@@ -96,19 +89,17 @@ const Home = ({
     checkClipboard();
   });
 
+  const handleAddLinkBtn = () => {
+    console.log("Add link button clicked");
+    setModalVisible(true);
+  };
+
   return (
     <React.Fragment>
       <HContainer>
         <UpperText onPress={handleAllListbtnPress}>전체 글 보기</UpperText>
         <ShortBar />
-        <TouchableWithoutFeedback>
-          <View style={styles.titleContainer}>
-            <TitleText>카테고리</TitleText>
-            {/* <Ionicons name="ios-arrow-down" size={24} color="black" /> */}
-            {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
-          </View>
-        </TouchableWithoutFeedback>
-
+        <TitleText>카테고리</TitleText>
         <FlatList
           keyExtractor={(item) => item.category_id.toString()}
           data={data}
@@ -116,13 +107,7 @@ const Home = ({
           showsVerticalScrollIndicator={false}
           style={styles.listContainer}
         />
-        <MaterialIcons
-          name="add-box"
-          size={60}
-          color="#FFD93B"
-          style={styles.addButton}
-          onPress={() => console.log("add button clicked")}
-        />
+        <AddLinkButton onPress={handleAddLinkBtn} />
       </HContainer>
 
       <LinkModal
@@ -137,20 +122,8 @@ const Home = ({
 export default Home;
 
 const styles = StyleSheet.create({
-  addButton: {
-    alignSelf: "flex-end",
-    position: "absolute",
-    bottom: 88,
-    right: 24,
-    // marginTop: 680,
-  },
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    // marginBottom: 20,
-  },
   listContainer: {
-    marginBottom: 100,
+    marginBottom: 75,
     position: "relative",
   },
 });
