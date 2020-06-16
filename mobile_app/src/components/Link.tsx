@@ -73,7 +73,7 @@ const link = ({ data }: Url): JSX.Element => {
         </Title>
         {data.og_description && renderDesc(data.og_description)}
         <_Url>{sliceText(data.url, 36)}</_Url>
-        {/* <FlatList
+        <FlatList
           data={data.tags}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -81,7 +81,7 @@ const link = ({ data }: Url): JSX.Element => {
           scrollEnabled={false}
           keyExtractor={(item) => item}
           renderItem={({ item }) => <Tag>{item}</Tag>}
-        /> */}
+        />
       </TouchableOpacity>
       <Img
         source={{
