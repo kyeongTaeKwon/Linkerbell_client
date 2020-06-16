@@ -12,7 +12,7 @@ export const Count = styled.Text`
   margin-left: 2px;
   color: #000;
   border-radius: 12px;
-  min-width: 42px;
+  min-width: 34px;
   overflow: hidden;
   background-color: ${(props: Props) => (props.isnew ? "#FF5E5E" : "#686868")};
   border-width: 0px;
