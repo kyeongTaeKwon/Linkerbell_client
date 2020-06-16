@@ -29,10 +29,11 @@ const HomeStack = (): JSX.Element => {
 
 const BottomTabNav = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
-  const { fetchAllList } = useLinkData();
+  const { fetchAllList, categories } = useLinkData();
   useEffect(() => {
     fetchAllList();
-  }, []);
+  }, [categories]);
+
   const renderTapBarStyle = ():
     | Animated.WithAnimatedValue<StyleProp<ViewStyle>>
     | undefined => {

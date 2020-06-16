@@ -61,17 +61,30 @@ const List = ({ route }: ListProps): JSX.Element => {
     const cur_list = filterLinkByTag();
     setValue({ ...value, cur_list });
   }, [value.cur_tag]);
-
-  useEffect(() => {
-    const sortLink = (array: Url[]) => {
+  const sortLink = (array: Url[]) => {
+    if (array) {
       return array.sort((a, b) => {
         if (a.isnew > b.isnew) return 1;
         if (a.isnew < b.isnew) return -1;
         if (a.og_title > b.og_title) return -1;
         if (a.og_title > b.og_title) return 1;
       });
-    };
-
+    }
+  };
+  const updateList = (category_id: number) => {
+    let list;
+    if (category_id === 0) {
+      list = sortLink(all_category_url_list);
+    } else {
+      list = sortLink(categories_url_list[category_id]);
+    }
+    setValue({ ...value, list, cur_list: list });
+  };
+  useEffect(() => {
+    const { category_id } = route.params;
+    updateList(category_id);
+  }, [categories_url_list]);
+  useEffect(() => {
     // const updateList = async (category_id: number) => {
     //   const res = await fetchList(category_id);
     //   const { lists, tag_list } = res.data;
@@ -99,15 +112,6 @@ const List = ({ route }: ListProps): JSX.Element => {
     //   });
     // };
     const { category_id } = route.params;
-    const updateList = (category_id: number) => {
-      let list;
-      if (category_id === 0) {
-        list = sortLink(all_category_url_list);
-      } else {
-        list = sortLink(categories_url_list[category_id]);
-      }
-      setValue({ ...value, list, cur_list: list });
-    };
     updateList(category_id);
   }, []);
 
