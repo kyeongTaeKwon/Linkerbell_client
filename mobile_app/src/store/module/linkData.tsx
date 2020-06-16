@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { produce } from "immer";
+import _ from "lodash";
 import {
   ListState,
   Category,
@@ -12,6 +14,7 @@ export const FETCH_CATEGORY_DATA = "FETCH_CATEGORY_DATA" as const;
 export const FETCH_ALL_LIST = "FETCH_ALL_LIST" as const;
 export const FETCH_ALL_LIST_REQUEST = "FETCH_ALL_LIST_REQUEST" as const;
 export const FETCH_CATEGORIES_URL_LIST = "FETCH_CATEGORIES_URL_LIST" as const;
+export const UPDATE_CATEGORIES_URL_LIST = "UPDATE_CATEGORIES_URL_LIST" as const;
 export const CATEGORISE_FAVORITE_LIST = "CATEGORISE_FAVORITE_LIST" as const;
 export const HANDLE_URL_FAVORITE = "HANDLE_URL_FAVORITE" as const;
 
@@ -38,9 +41,13 @@ export const categoriesFavList = (favorite_list: Url[]) => ({
   type: CATEGORISE_FAVORITE_LIST,
   payload: { favorite_list },
 });
-export const handleUrlFavorite = (id: number) => ({
+export const handleUrlFavorite = (item: Url) => ({
   type: HANDLE_URL_FAVORITE,
-  payload: { id },
+  payload: { item },
+});
+export const updateCategoriesList = (AllList: Url[]) => ({
+  type: UPDATE_CATEGORIES_URL_LIST,
+  payload: { AllList },
 });
 export const initialLinkDataState: ListState = {
   categories: [],
@@ -55,6 +62,7 @@ export type linkActions =
   | ReturnType<typeof fetchAllListRequest>
   | ReturnType<typeof fetchAllUrlList>
   | ReturnType<typeof fetchCategoriesUrlList>
+  | ReturnType<typeof updateCategoriesList>
   | ReturnType<typeof categoriesFavList>
   | ReturnType<typeof handleUrlFavorite>;
 
@@ -76,11 +84,19 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
       return { ...state, favorite_list };
     }
     case HANDLE_URL_FAVORITE: {
-      const { id } = action.payload;
+      const { item } = action.payload;
+      console.log(item);
+      const current_All_category_url_list = _.map(
+        state.all_category_url_list,
+        (urlData) =>
+          urlData.id === item.id
+            ? { ...urlData, favorite: !urlData.favorite }
+            : urlData,
+      );
+      return { ...state, all_category_url_list: current_All_category_url_list };
     }
     default:
       return state;
   }
 };
-
 export default reducer;

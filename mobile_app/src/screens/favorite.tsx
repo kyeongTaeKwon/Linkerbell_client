@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import _ from "lodash";
 import { Platform } from "react-native";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import LinkList from "../components/LinksList";
-import fetchAllList from "../core/apis/fetchAllList";
 import Header from "../components/ListHeader";
+import sortLink from "../core/utils/sortLink";
+import useLinkData from "../hooks/useLinkData";
 const { Container } = styled;
 
 type value = {
   cur_list: Url[];
   list: Url[];
   text: string;
+  orderType: string;
 };
 
 const Favorite = (): JSX.Element => {
@@ -20,31 +21,9 @@ const Favorite = (): JSX.Element => {
     list: [],
     cur_list: [],
     text: "",
+    orderType: "asc",
   });
-
-  useEffect(() => {
-    const sortLink = (array: Url[]) => {
-      return array.sort((a, b) => {
-        if (a.isnew > b.isnew) return 1;
-        if (a.isnew < b.isnew) return -1;
-        if (a.og_title > b.og_title) return -1;
-        if (a.og_title > b.og_title) return 1;
-      });
-    };
-
-    const updateList = async () => {
-      const res = await fetchAllList();
-      const { lists } = res.data;
-      const Favorite_list = _.filter(lists, { favorite: true });
-      const cur_list = sortLink(Favorite_list);
-      setValue({
-        ...value,
-        list: lists,
-        cur_list,
-      });
-    };
-    updateList();
-  }, []);
+  const { favorite_list } = useLinkData();
 
   useEffect(() => {
     const filterLinkBySearch = () => {
@@ -60,13 +39,35 @@ const Favorite = (): JSX.Element => {
     setValue({ ...value, cur_list });
   }, [value.text]);
 
+  useEffect(() => {
+    const current_list = sortLink(favorite_list, value.orderType);
+    setValue({
+      ...value,
+      list: current_list,
+      cur_list: current_list,
+    });
+  }, [favorite_list]);
+
+  useEffect(() => {
+    const current_list = sortLink(favorite_list, value.orderType);
+    setValue({
+      ...value,
+      list: current_list,
+      cur_list: current_list,
+    });
+  }, []);
+
   const handleTextChange = (text: string) => {
     setValue({ ...value, text });
   };
 
   return (
     <Container OS={Platform.OS}>
-      <Header onTextChange={handleTextChange} category_name="즐겨찾기" />
+      <Header
+        onTextChange={handleTextChange}
+        category_name="즐겨찾기"
+        ordered={value.orderType}
+      />
       <ShortBar />
       <LinkList list={value.cur_list} />
     </Container>
