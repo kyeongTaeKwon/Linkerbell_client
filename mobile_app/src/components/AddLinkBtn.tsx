@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: "flex-end",
     position: "absolute",
-    marginTop: 680,
+    bottom: 92,
+    right: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

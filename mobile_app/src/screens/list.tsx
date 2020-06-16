@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Platform, StyleSheet } from "react-native";
+import { Platform } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
-import fetchList from "../core/apis/fetchList";
-import fetchAllList from "../core/apis/fetchAllList";
 import Header from "../components/ListHeader";
 import useLinkData from "../hooks/useLinkData";
 import sortLink from "../core/utils/sortLink";
-import SortButton from "../components/SortButton";
 
-const { Container, CategoryText } = styled;
+const { Container } = styled;
 
 export type value = {
   category_name: string;
@@ -66,22 +63,13 @@ const List = ({ route }: ListProps): JSX.Element => {
     const cur_list = filterLinkByTag();
     setValue({ ...value, cur_list });
   }, [value.cur_tag]);
-  const sortLink = (array: Url[]) => {
-    if (array) {
-      return array.sort((a, b) => {
-        if (a.isnew > b.isnew) return 1;
-        if (a.isnew < b.isnew) return -1;
-        if (a.og_title > b.og_title) return -1;
-        if (a.og_title > b.og_title) return 1;
-      });
-    }
-  };
+
   const updateList = (category_id: number) => {
     let list;
     if (category_id === 0) {
-      list = sortLink(all_category_url_list);
+      list = sortLink(all_category_url_list, value.orderType);
     } else {
-      list = sortLink(categories_url_list[category_id]);
+      list = sortLink(categories_url_list[category_id], value.orderType);
     }
     setValue({ ...value, list, cur_list: list });
   };
@@ -89,37 +77,6 @@ const List = ({ route }: ListProps): JSX.Element => {
     const { category_id } = route.params;
     updateList(category_id);
   }, [categories_url_list]);
-  
-  useEffect(() => {
-    // const updateList = async (category_id: number) => {
-    //   const res = await fetchList(category_id);
-    //   const { lists, tag_list } = res.data;
-    //   const tags = ["All", ...tag_list];
-    //   const cur_list = sortLink(lists);
-    //   console.log(cur_list);
-    //   setValue({
-    //     ...value,
-    //     list: lists,
-    //     cur_list,
-    //     tags,
-    //   });
-    // };
-    // const updateAllList = async () => {
-    //   const res = await fetchAllList();
-    //   const { lists, tag_list } = res.data;
-    //   const tags = ["All", ...tag_list];
-    //   const cur_list = sortLink(lists);
-    //   console.log(lists);
-    //   setValue({
-    //     ...value,
-    //     list: lists,
-    //     cur_list,
-    //     tags,
-    //   });
-    // };
-    const { category_id } = route.params;
-    updateList(category_id);
-  }, []);
 
   useEffect(() => {
     const { list, orderType } = value;
@@ -127,24 +84,29 @@ const List = ({ route }: ListProps): JSX.Element => {
     setValue({ ...value, cur_list });
   }, [value.orderType]);
 
+  useEffect(() => {
+    const { category_id } = route.params;
+    updateList(category_id);
+  }, []);
+
   const handlePress = (tagName: string): void => {
     setValue({ ...value, cur_tag: tagName });
   };
   const handleTextChange = (text: string) => {
     setValue({ ...value, text });
   };
-
   const handleSortButton = (order: string) => {
     setValue({ ...value, orderType: order });
   };
-
   return (
     <Container OS={Platform.OS}>
       <Header
         category_name={value.category_name}
         onTextChange={handleTextChange}
+        ordered={value.orderType}
+        onSort={handleSortButton}
       />
-       <SortButton orderType={value.orderType} onPress={handleSortButton} />   
+
       <ShortBar />
       <TagList
         currentTag={value.cur_tag}
@@ -157,32 +119,3 @@ const List = ({ route }: ListProps): JSX.Element => {
 };
 
 export default List;
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "wrap",
-    paddingRight: 18,
-  },
-  searchSection: {
-    marginLeft: 50,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#FAFAFA",
-    borderRadius: 11,
-    height: 36,
-  },
-  searchIcon: {
-    backgroundColor: "transparent",
-  },
-  input: {
-    flex: 1,
-    paddingLeft: 10,
-    backgroundColor: "transparent",
-    marginLeft: 10,
-    fontSize: 16,
-  },
-});
