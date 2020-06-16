@@ -13,6 +13,7 @@ import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
 import AddLinkButton from "../components/AddLinkBtn";
+import { MaterialIcons } from "@expo/vector-icons";
 const Home = ({
   navigation,
 }: {
@@ -33,7 +34,6 @@ const Home = ({
   const getCategoryList = async () => {
     const categories = await fetchCategoryRequest();
     await sortCategory(categories);
-    // console.log("!!!!SORTED", sortedCategories);
     onHome(categories);
   };
 
