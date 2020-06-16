@@ -9,10 +9,11 @@ import useLinkData from "../hooks/useLinkData";
 import Item from "../components/Category";
 import fetchCategoryRequest from "../core/apis/fetchCategory";
 import { Category } from "../models/UrlStateTypes";
-import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
 import AddLinkButton from "../components/AddLinkBtn";
+import { _getContent } from "../core/utils/getClipboard";
+import { validateUrl } from "../core/utils/validateUrl";
 import { MaterialIcons } from "@expo/vector-icons";
 const Home = ({
   navigation,
@@ -59,14 +60,6 @@ const Home = ({
     checkClipboard();
   });
 
-  const _getContent = async () => {
-    const content = await Clipboard.getString();
-    return content;
-  };
-  const validateUrl = (text: string) => {
-    const url_pattern = /^(https?|ftp|torrent|image|irc):\/\/(-\.)?([^\s\/?\.#]+\.?)+(\/[^\s]*)?$/i;
-    return text.match(url_pattern) ? true : false;
-  };
   const checkClipboard = async (): Promise<void> => {
     try {
       const content = await _getContent();
