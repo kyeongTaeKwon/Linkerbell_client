@@ -76,7 +76,7 @@ const List = ({ route }: ListProps): JSX.Element => {
   useEffect(() => {
     const { category_id } = route.params;
     updateList(category_id);
-  }, [categories_url_list]);
+  }, [categories_url_list, all_category_url_list]);
 
   useEffect(() => {
     const { list, orderType } = value;
