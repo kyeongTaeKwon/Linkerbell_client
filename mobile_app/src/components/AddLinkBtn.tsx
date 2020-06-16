@@ -9,7 +9,7 @@ type Props = {
 const AddLinkBtn = ({ onPress }: Props): JSX.Element => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <MaterialCommunityIcons name="plus" size={43} color="white" />
+      <MaterialCommunityIcons name="plus" size={36} color="white" />
     </TouchableOpacity>
   );
 };
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     elevation: 6,
     borderRadius: 10,
     backgroundColor: "#FFD93B",
-    height: 55,
-    width: 55,
+    height: 48,
+    width: 48,
     alignItems: "center",
     justifyContent: "center",
   },

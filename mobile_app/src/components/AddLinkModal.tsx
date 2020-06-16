@@ -6,6 +6,7 @@ import postUrl from "../core/apis/postUrl";
 import useServices from "../hooks/useServices";
 import { _getContent } from "../core/utils/getClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
+import useLinkData from "../hooks/useLinkData";
 
 const { LinkAddBtn, LinkModal, MainText, SubText } = styled;
 type Props = {
@@ -20,11 +21,13 @@ const AddLinkModal = ({
   onReload,
 }: Props): JSX.Element => {
   const { copiedUrl } = useServices();
+  const { fetchAllList } = useLinkData();
   const handlePress = async () => {
     try {
       await postUrl(copiedUrl);
       await onReload();
       toggleModal();
+      await fetchAllList();
     } catch (e) {
       console.log(e);
     }

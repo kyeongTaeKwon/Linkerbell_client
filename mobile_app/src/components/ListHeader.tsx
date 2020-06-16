@@ -7,8 +7,8 @@ const { CategoryText, SearchInput, SearchContainer } = styled;
 
 type Props = {
   category_name: string;
-  onTextChange: (text: string) => void;
   ordered: string;
+  onTextChange: (text: string) => void;
   onSort: (orderType: string) => void;
 };
 

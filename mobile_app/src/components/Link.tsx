@@ -10,9 +10,11 @@ import { _Url } from "../styles/listStyles/LinkUrl";
 import { Tag } from "../styles/listStyles/LinkTag";
 import { Img, FakeImg } from "../styles/listStyles/LinkImg";
 import { AntDesign } from "@expo/vector-icons";
+import useLinkData from "../hooks/useLinkData";
 import sendFavoriteRequest from "../core/apis/favorite";
 const link = ({ data }: Url): JSX.Element => {
   // const [lastTap, setLastTap] = useState<number>(Date.now());
+  const { onFavoriteBtnPress } = useLinkData();
   const sliceText = (text: string, length: number) => {
     return truncate(text, { length });
   };
@@ -44,20 +46,18 @@ const link = ({ data }: Url): JSX.Element => {
   //     // lastTap = now;
   //   }
   // };
-  const handleFavoriteDoublePress = async (
-    url_id: number,
-    favorite: boolean,
-  ) => {
+  const handleFavoriteBtnPress = async (linkData: Url) => {
+    const { id, favorite } = linkData;
     try {
-      const res = await sendFavoriteRequest(url_id, favorite);
-      console.log(res.status);
+      sendFavoriteRequest(id, favorite);
+      await onFavoriteBtnPress(linkData);
     } catch (e) {
       console.log(e);
     }
   };
   return (
     <LinkBox>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => handleFavoriteBtnPress(data)}>
         <AntDesign
           name={data.favorite ? "star" : "staro"}
           size={20}
@@ -94,6 +94,11 @@ const link = ({ data }: Url): JSX.Element => {
           scrollEnabled={false}
           keyExtractor={(item) => item}
           renderItem={({ item }) => <Tag>{item}</Tag>}
+        />
+        <Img
+          source={{
+            uri: `${data.og_image}`,
+          }}
         />
       </TouchableOpacity>
       {renderImage()}
