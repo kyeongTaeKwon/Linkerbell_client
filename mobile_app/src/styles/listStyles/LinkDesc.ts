@@ -6,4 +6,5 @@ export const Desc = styled.Text`
   margin-bottom: 4px;
   font-size: 13px;
   color: #a8a8a8;
+  letter-spacing: -0.6px;
 `;

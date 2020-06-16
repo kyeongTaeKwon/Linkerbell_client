@@ -7,6 +7,10 @@ export const CategoryText = styled.Text`
   font-family: "NMedium";
   font-size: 18px;
   padding: 0px;
+  margin: 10px;
+  line-height: ${18 * 1.6}px;
+  /* margin-top: 0px; */
+  margin-left: 0px;
   color: #000;
 `;
 

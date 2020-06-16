@@ -5,12 +5,12 @@ type Props = {
 export const Tag = styled.Text`
   font-family: "NBold";
   margin-right: 8px;
-  font-size: 13px;
-  line-height: ${13 * 1.6}px;
+  font-size: 12px;
+  line-height: ${12 * 1.4}px;
   background-color: #f2f2f2;
-  border-radius: 16px;
-  padding: 10px;
-  padding-bottom: 4px;
+  border-radius: 10px;
+  padding: 8px;
+  padding-bottom: 2px;
   padding-top: 2px;
   color: #c5c5c5;
   min-width: 44px;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Animated, StyleProp, ViewStyle } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,6 +8,7 @@ import Home from "../screens/home";
 import Trending from "../screens/trending";
 import List from "../screens/list";
 import Mypage from "../screens/myPage";
+import useLinkData from "../hooks/useLinkData";
 type NavProps = {
   focused: boolean;
   color: string;
@@ -28,6 +29,10 @@ const HomeStack = (): JSX.Element => {
 
 const BottomTabNav = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
+  const { fetchAllList, categories } = useLinkData();
+  useEffect(() => {
+    fetchAllList();
+  }, [categories]);
 
   const renderTapBarStyle = ():
     | Animated.WithAnimatedValue<StyleProp<ViewStyle>>
@@ -72,7 +77,7 @@ const BottomTabNav = (): JSX.Element => {
           return (
             <MaterialCommunityIcons
               name={`${iconName}-outline`}
-              size={name === "Home" ? 40 : 36}
+              size={name === "Home" ? 32 : 28}
               color={renderColor}
             />
           );

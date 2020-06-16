@@ -6,4 +6,5 @@ export const _Url = styled.Text`
   line-height: ${11 * 1.6}px;
   font-size: 11px;
   color: #cbcbcb;
+  letter-spacing: -0.3px;
 `;

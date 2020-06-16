@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Platform, TextInput, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
-import { EvilIcons } from "@expo/vector-icons";
 import fetchList from "../core/apis/fetchList";
 import fetchAllList from "../core/apis/fetchAllList";
+import Header from "../components/ListHeader";
+import useLinkData from "../hooks/useLinkData";
 import sortLink from "../core/utils/sortLink";
 import SortButton from "../components/SortButton";
 
@@ -38,55 +39,88 @@ const List = ({ route }: ListProps): JSX.Element => {
     text: "",
     orderType: "asc",
   });
+  const { all_category_url_list, categories_url_list } = useLinkData();
 
   useEffect(() => {
+    const filterLinkBySearch = () => {
+      const { list, text } = value;
+      if (text !== "") {
+        return list.filter((link) =>
+          link.og_title.toLowerCase().includes(text.toLowerCase()),
+        );
+      }
+      return list;
+    };
     const cur_list = filterLinkBySearch();
     setValue({ ...value, cur_list });
   }, [value.text]);
 
   useEffect(() => {
-    const updateList = async (category_id: number) => {
-      const res = await fetchList(category_id);
-      const { lists, tag_list } = res.data;
-      const tags = ["All", ...tag_list];
-      const cur_list = sortLink(lists, value.orderType);
-      console.log(cur_list);
-      setValue({
-        ...value,
-        list: lists,
-        cur_list,
-        tags,
-      });
+    const filterLinkByTag = () => {
+      const { cur_tag, list } = value;
+      if (cur_tag === "All") return list;
+      else {
+        return _.filter(list, (link) => _.includes(link.tags, cur_tag));
+      }
     };
-    const updateAllList = async () => {
-      const res = await fetchAllList();
-      const { lists, tag_list } = res.data;
-      const tags = ["All", ...tag_list];
-      const cur_list = sortLink(lists, value.orderType);
-      // console.log(cur_list);
-      setValue({
-        ...value,
-        list: lists,
-        cur_list,
-        tags,
-      });
-    };
-    const { category_id } = route.params;
-    category_id === 0 ? updateAllList() : updateList(category_id);
-  }, []);
-
-  useEffect(() => {
     const cur_list = filterLinkByTag();
     setValue({ ...value, cur_list });
   }, [value.cur_tag]);
-
-  const filterLinkByTag = () => {
-    const { cur_tag, list } = value;
-    if (cur_tag === "All") return list;
-    else {
-      return _.filter(list, (link) => _.includes(link.tags, cur_tag));
+  const sortLink = (array: Url[]) => {
+    if (array) {
+      return array.sort((a, b) => {
+        if (a.isnew > b.isnew) return 1;
+        if (a.isnew < b.isnew) return -1;
+        if (a.og_title > b.og_title) return -1;
+        if (a.og_title > b.og_title) return 1;
+      });
     }
   };
+  const updateList = (category_id: number) => {
+    let list;
+    if (category_id === 0) {
+      list = sortLink(all_category_url_list);
+    } else {
+      list = sortLink(categories_url_list[category_id]);
+    }
+    setValue({ ...value, list, cur_list: list });
+  };
+  useEffect(() => {
+    const { category_id } = route.params;
+    updateList(category_id);
+  }, [categories_url_list]);
+  
+  useEffect(() => {
+    // const updateList = async (category_id: number) => {
+    //   const res = await fetchList(category_id);
+    //   const { lists, tag_list } = res.data;
+    //   const tags = ["All", ...tag_list];
+    //   const cur_list = sortLink(lists);
+    //   console.log(cur_list);
+    //   setValue({
+    //     ...value,
+    //     list: lists,
+    //     cur_list,
+    //     tags,
+    //   });
+    // };
+    // const updateAllList = async () => {
+    //   const res = await fetchAllList();
+    //   const { lists, tag_list } = res.data;
+    //   const tags = ["All", ...tag_list];
+    //   const cur_list = sortLink(lists);
+    //   console.log(lists);
+    //   setValue({
+    //     ...value,
+    //     list: lists,
+    //     cur_list,
+    //     tags,
+    //   });
+    // };
+    const { category_id } = route.params;
+    updateList(category_id);
+  }, []);
+
   useEffect(() => {
     const { list, orderType } = value;
     const cur_list = sortLink(list, orderType);
@@ -95,17 +129,9 @@ const List = ({ route }: ListProps): JSX.Element => {
 
   const handlePress = (tagName: string): void => {
     setValue({ ...value, cur_tag: tagName });
-    console.log(value.list[1].image);
   };
-
-  const filterLinkBySearch = () => {
-    const { list, text } = value;
-    if (text !== "") {
-      return list.filter((link) =>
-        link.og_title.toLowerCase().includes(text.toLowerCase()),
-      );
-    }
-    return list;
+  const handleTextChange = (text: string) => {
+    setValue({ ...value, text });
   };
 
   const handleSortButton = (order: string) => {
@@ -114,23 +140,11 @@ const List = ({ route }: ListProps): JSX.Element => {
 
   return (
     <Container OS={Platform.OS}>
-      <View style={styles.container}>
-        <CategoryText>{value.category_name}</CategoryText>
-        <SortButton orderType={value.orderType} onPress={handleSortButton} />
-        <View style={styles.searchSection}>
-          <TextInput
-            onChangeText={(text) => setValue({ ...value, text })}
-            style={styles.input}
-            underlineColorAndroid="transparent"
-          />
-          <EvilIcons
-            name="search"
-            size={35}
-            color="black"
-            style={styles.searchIcon}
-          />
-        </View>
-      </View>
+      <Header
+        category_name={value.category_name}
+        onTextChange={handleTextChange}
+      />
+       <SortButton orderType={value.orderType} onPress={handleSortButton} />   
       <ShortBar />
       <TagList
         currentTag={value.cur_tag}

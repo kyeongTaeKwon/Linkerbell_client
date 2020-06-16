@@ -109,6 +109,7 @@ const Home = ({
         />
         <AddLinkButton onPress={handleAddLinkBtn} />
       </HContainer>
+
       <LinkModal
         isVisible={isModalVisible}
         toggleModal={closeModal}
