@@ -2,20 +2,27 @@ import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import styled from "../styles/listStyles/index";
+import SortButton from "../components/SortButton";
 const { CategoryText } = styled;
 
 type Props = {
   category_name: string;
   onTextChange: (text: string) => void;
+  ordered: string;
+  onSort: (orderType: string) => void;
 };
+
 const HeaderContainer = ({
   category_name,
   onTextChange,
+  ordered,
+  onSort,
 }: Props): JSX.Element => {
   return (
     <View style={styles.container}>
       <CategoryText>{category_name}</CategoryText>
       <View style={styles.searchSection}>
+        <SortButton orderType={ordered} onPress={onSort} />
         <TextInput
           onChangeText={(text) => onTextChange(text)}
           style={styles.input}
@@ -23,7 +30,7 @@ const HeaderContainer = ({
         />
         <EvilIcons
           name="search"
-          size={35}
+          size={32}
           color="black"
           style={styles.searchIcon}
         />

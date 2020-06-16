@@ -27,6 +27,13 @@ const AddLinkModal = ({
       console.log(e);
     }
   };
+  const renderMessage = () => {
+    //! _getContent 의 리턴값이 빈스트링이 아니라면
+    //! 리턴값이 url 유효성 검증을 통과 했다면
+    // 클립보드에 저장된 링크를 추가할까요?
+    //else 링크를 복사해주세요
+    //return msg
+  };
 
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
