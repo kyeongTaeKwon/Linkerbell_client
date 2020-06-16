@@ -8,7 +8,7 @@ import { _Url } from "./LinkUrl";
 import { LinkBox } from "./Linkbox";
 import { CategoryText } from "./categoryText";
 import { SelectTagBtn } from "./tag";
-
+import { SearchInput, SearchContainer } from "./SearchBar";
 export default {
   Container,
   Desc,
@@ -20,4 +20,6 @@ export default {
   LinkBox,
   CategoryText,
   SelectTagBtn,
+  SearchInput,
+  SearchContainer,
 };
