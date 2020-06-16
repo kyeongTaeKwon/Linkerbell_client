@@ -11,10 +11,9 @@ import fetchCategoryRequest from "../core/apis/fetchCategory";
 import { Category } from "../models/UrlStateTypes";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
-import AddLinkButton from "../components/AddLinkBtn";
+import AddLinkBtn from "../components/AddLinkBtn";
 import { _getContent } from "../core/utils/getClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
-import { MaterialIcons } from "@expo/vector-icons";
 const Home = ({
   navigation,
 }: {
@@ -100,7 +99,7 @@ const Home = ({
           showsVerticalScrollIndicator={false}
           style={styles.listContainer}
         />
-        <AddLinkButton onPress={handleAddLinkBtn} />
+        <AddLinkBtn onPress={handleAddLinkBtn} />
       </HContainer>
 
       <LinkModal
