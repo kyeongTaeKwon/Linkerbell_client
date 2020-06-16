@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { produce } from "immer";
 import _ from "lodash";
 import {
   ListState,
@@ -9,7 +8,7 @@ import {
   Url,
 } from "../../models/UrlStateTypes";
 
-//1. 액션 함수
+//1. 액션
 export const FETCH_CATEGORY_DATA = "FETCH_CATEGORY_DATA" as const;
 export const FETCH_ALL_LIST = "FETCH_ALL_LIST" as const;
 export const FETCH_ALL_LIST_REQUEST = "FETCH_ALL_LIST_REQUEST" as const;
@@ -85,7 +84,6 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
     }
     case HANDLE_URL_FAVORITE: {
       const { item } = action.payload;
-      console.log(item);
       const current_All_category_url_list = _.map(
         state.all_category_url_list,
         (urlData) =>

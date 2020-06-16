@@ -82,12 +82,12 @@ const link = ({ data }: Url): JSX.Element => {
           keyExtractor={(item) => item}
           renderItem={({ item }) => <Tag>{item}</Tag>}
         />
+        <Img
+          source={{
+            uri: `${data.og_image}`,
+          }}
+        />
       </TouchableOpacity>
-      <Img
-        source={{
-          uri: `${data.og_image}`,
-        }}
-      />
     </LinkBox>
   );
 };

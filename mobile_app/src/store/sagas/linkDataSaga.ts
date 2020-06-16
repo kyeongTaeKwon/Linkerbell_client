@@ -19,7 +19,7 @@ export default function* authSaga() {
   ]);
 }
 
-function* fetchAllList$(action: any) {
+function* fetchAllList$() {
   try {
     const res = yield fetchAllListApi();
     const AllList = { ...res.data };

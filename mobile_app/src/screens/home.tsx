@@ -14,7 +14,6 @@ import LinkModal from "../components/AddLinkModal";
 import AddLinkButton from "../components/AddLinkBtn";
 import { _getContent } from "../core/utils/getClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
-import { MaterialIcons } from "@expo/vector-icons";
 const Home = ({
   navigation,
 }: {

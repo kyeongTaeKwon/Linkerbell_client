@@ -60,15 +60,18 @@ const Favorite = (): JSX.Element => {
   const handleTextChange = (text: string) => {
     setValue({ ...value, text });
   };
-
+  const handleSortButton = (order: string) => {
+    setValue({ ...value, orderType: order });
+  };
   return (
     <Container OS={Platform.OS}>
       <Header
         onTextChange={handleTextChange}
         category_name="즐겨찾기"
         ordered={value.orderType}
+        onSort={handleSortButton}
       />
-      <ShortBar />
+      <ShortBar style={{ marginBottom: 48 }} />
       <LinkList list={value.cur_list} />
     </Container>
   );

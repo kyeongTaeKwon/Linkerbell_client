@@ -8,7 +8,7 @@ const LinkList = ({ list }): JSX.Element => {
       data={list}
       renderItem={({ item }) => <Link data={item}>{item.title}</Link>}
       keyExtractor={(item) => item.id.toString()}
-      style={{ marginLeft: 0 }}
+      style={{ marginLeft: 0, marginBottom: 80 }}
     />
   );
 };
