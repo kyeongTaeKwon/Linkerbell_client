@@ -19,7 +19,6 @@ import { Clipboard } from "react-native";
 import useServices from "../hooks/useServices";
 import LinkModal from "../components/AddLinkModal";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
 const Home = ({
   navigation,
 }: {
@@ -40,7 +39,6 @@ const Home = ({
   const getCategoryList = async () => {
     const categories = await fetchCategoryRequest();
     await sortCategory(categories);
-    // console.log("!!!!SORTED", sortedCategories);
     onHome(categories);
   };
 
@@ -104,8 +102,6 @@ const Home = ({
         <TouchableWithoutFeedback>
           <View style={styles.titleContainer}>
             <TitleText>카테고리</TitleText>
-            {/* <Ionicons name="ios-arrow-down" size={24} color="black" /> */}
-            {/* <Ionicons name="ios-arrow-up" size={24} color="black" /> */}
           </View>
         </TouchableWithoutFeedback>
 

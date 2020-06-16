@@ -8,6 +8,7 @@ export type Url = {
   isnew: 0 | 1;
   tags: string[] | [];
   category_id: number;
+  createdAt: string;
 };
 export type Category = {
   category_id: number;
