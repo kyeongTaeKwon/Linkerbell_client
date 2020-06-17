@@ -48,9 +48,10 @@ const BottomTabNav = (): JSX.Element => {
     | Animated.WithAnimatedValue<StyleProp<ViewStyle>>
     | undefined => {
     return {
-      borderTopLeftRadius: 32,
-      borderTopRightRadius: 32,
-      // borderRadius: 32,
+      borderRadius: 0,
+      borderTopLeftRadius: 28,
+      borderTopRightRadius: 28,
+
       backgroundColor: "#fff",
       position: "absolute",
       bottom: 0,
