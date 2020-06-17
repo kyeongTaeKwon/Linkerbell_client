@@ -57,6 +57,7 @@ const link = ({ data }: Url): JSX.Element => {
     try {
       sendFavoriteRequest(id, favorite);
       await onFavoriteBtnPress(linkData);
+      console.log("여기!!!!!!!!!!!!!!1");
     } catch (e) {
       console.log(e);
     }
@@ -85,6 +86,7 @@ const link = ({ data }: Url): JSX.Element => {
           }}
         />
       </TouchableOpacity>
+
       <View>
         <TouchableOpacity
           style={renderLinkDataBoxStyle()}
@@ -109,14 +111,10 @@ const link = ({ data }: Url): JSX.Element => {
             keyExtractor={(item) => item}
             renderItem={({ item }) => <Tag>{item}</Tag>}
           />
-          {/* <Img
-            source={{
-              uri: `${data.og_image && data.og_image}`,
-            }}
-          /> */}
           {renderImage()}
         </TouchableOpacity>
       </View>
+
     </LinkBox>
   );
 };

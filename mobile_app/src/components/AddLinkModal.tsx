@@ -79,7 +79,7 @@ const AddLinkModal = ({
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
       <LinkModal width={Dimensions.get("window").width}>
-        <MainText onPress={() => renderMessage()}>{renderMessage()}</MainText>
+        <MainText>{renderMessage()}</MainText>
         <SubText>
           북마크에 글을 추가 하시면 {"\n"}링커벨이 카테고리를 분류해드릴게요
         </SubText>
