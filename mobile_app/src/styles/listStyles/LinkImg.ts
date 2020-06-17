@@ -7,3 +7,12 @@ export const Img = styled.Image`
   height: 60px;
   border-radius: 4px;
 `;
+
+export const FakeImg = styled.View`
+  position: absolute;
+  right: 36px;
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  background-color: #fafafa;
+`;
