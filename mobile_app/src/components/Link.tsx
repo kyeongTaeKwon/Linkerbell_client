@@ -52,13 +52,13 @@ const link = ({ data }: Url): JSX.Element => {
     try {
       sendFavoriteRequest(id, favorite);
       await onFavoriteBtnPress(linkData);
+      console.log("여기!!!!!!!!!!!!!!1");
     } catch (e) {
       console.log(e);
     }
   };
   const renderNewDot = (isNew: boolean) => {
     if (isNew) {
-      console.log(data);
       return <NewDot />;
     }
   };
@@ -73,13 +73,11 @@ const link = ({ data }: Url): JSX.Element => {
             height: 32,
             top: 20,
             left: 20,
-
             position: "absolute",
             color: `${data.favorite ? "#ffd93b" : "#dedede"}`,
           }}
         />
       </TouchableOpacity>
-
       <TouchableOpacity
         style={{ marginLeft: 64 }}
         onPress={() => Linking.openURL(data.url)}
@@ -92,7 +90,7 @@ const link = ({ data }: Url): JSX.Element => {
         >
           {sliceText(data.og_title, 17)}
         </Title>
-        {data.og_description && renderDesc(data.og_description)}
+        {data.og_description !== "" && renderDesc(data.og_description)}
         <_Url>{sliceText(data.url, 36)}</_Url>
         <FlatList
           data={data.tags}
@@ -103,13 +101,8 @@ const link = ({ data }: Url): JSX.Element => {
           keyExtractor={(item) => item}
           renderItem={({ item }) => <Tag>{item}</Tag>}
         />
-        <Img
-          source={{
-            uri: `${data.og_image}`,
-          }}
-        />
+        {renderImage()}
       </TouchableOpacity>
-      {renderImage()}
     </LinkBox>
   );
 };
