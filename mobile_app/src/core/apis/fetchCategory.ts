@@ -1,6 +1,5 @@
 import Axios from "axios";
 import url from "./url";
-import fakeData from "../services/fakeData";
 import { Category } from "../../models/UrlStateTypes";
 
 // type Category = {
@@ -10,11 +9,8 @@ import { Category } from "../../models/UrlStateTypes";
 // };
 
 const fetchCategoryRequest = async (): Promise<Category[]> => {
-  // return await fakeData.home.data;
-
   try {
     const res = await Axios.get(`${url}/links/home`);
-    // console.log(res.data);
     return res.data;
   } catch (e) {
     console.log(e);
