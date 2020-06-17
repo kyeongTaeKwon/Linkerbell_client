@@ -8,8 +8,8 @@ import { Title } from "../styles/listStyles/LinkTitle";
 import { Desc } from "../styles/listStyles/LinkDesc";
 import { _Url } from "../styles/listStyles/LinkUrl";
 import { Tag } from "../styles/listStyles/LinkTag";
-import { Img } from "../styles/listStyles/LinkImg";
 import { NewDot } from "../styles/listStyles/LinkNewDot";
+import { Img, FakeImg } from "../styles/listStyles/LinkImg";
 import { AntDesign } from "@expo/vector-icons";
 import useLinkData from "../hooks/useLinkData";
 import sendFavoriteRequest from "../core/apis/favorite";
@@ -24,6 +24,19 @@ const link = ({ data }: Url): JSX.Element => {
     return <Desc>{sliceText(description, 20)}</Desc>;
   };
 
+  const renderImage = (): JSX.Element => {
+    if (data.og_image) {
+      return (
+        <Img
+          source={{
+            uri: `${data.og_image}`,
+          }}
+        />
+      );
+    } else {
+      return <FakeImg />;
+    }
+  };
   // const handleDoubleTap = (url_id: number, favorite: boolean) => {
   //   const now = Date.now();
   //   const DOUBLE_PRESS_DELAY = 300;
@@ -96,6 +109,7 @@ const link = ({ data }: Url): JSX.Element => {
           }}
         />
       </TouchableOpacity>
+      {renderImage()}
     </LinkBox>
   );
 };

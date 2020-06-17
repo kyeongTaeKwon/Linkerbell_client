@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     backgroundColor: "transparent",
     marginLeft: 36,
-    marginRight: 36,
+    maxWidth: "58%",
     height: 80,
   },
 });
