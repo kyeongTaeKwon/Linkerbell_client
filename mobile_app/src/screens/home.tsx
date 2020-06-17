@@ -115,7 +115,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   listContainer: {
-    marginBottom: 80,
+    marginBottom: 75,
     position: "relative",
   },
 });
