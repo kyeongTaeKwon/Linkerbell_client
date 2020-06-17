@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Linking } from "expo";
 import { truncate } from "lodash";
-import { FlatList, View, TouchableOpacity } from "react-native";
+import { FlatList, View, TouchableOpacity, Dimensions } from "react-native";
 import { Url } from "../models/UrlStateTypes";
 import { LinkBox } from "../styles/listStyles/Linkbox";
 import { Title } from "../styles/listStyles/LinkTitle";
@@ -13,6 +13,7 @@ import { Img, FakeImg } from "../styles/listStyles/LinkImg";
 import { AntDesign } from "@expo/vector-icons";
 import useLinkData from "../hooks/useLinkData";
 import sendFavoriteRequest from "../core/apis/favorite";
+
 const link = ({ data }: Url): JSX.Element => {
   // const [lastTap, setLastTap] = useState<number>(Date.now());
   const { onFavoriteBtnPress } = useLinkData();
@@ -37,6 +38,10 @@ const link = ({ data }: Url): JSX.Element => {
       return <FakeImg />;
     }
   };
+  const renderLinkDataBoxStyle = () => {
+    const width = Dimensions.get("window").width - 80;
+    return { marginLeft: 28, width };
+  };
   // const handleDoubleTap = (url_id: number, favorite: boolean) => {
   //   const now = Date.now();
   //   const DOUBLE_PRESS_DELAY = 300;
@@ -58,58 +63,60 @@ const link = ({ data }: Url): JSX.Element => {
   };
   const renderNewDot = (isNew: boolean) => {
     if (isNew) {
-      console.log(data);
       return <NewDot />;
     }
   };
   return (
     <LinkBox>
-      <TouchableOpacity onPress={() => handleFavoriteBtnPress(data)}>
+      <TouchableOpacity
+        onPress={() => handleFavoriteBtnPress(data)}
+        style={{ width: 40 }}
+      >
         <AntDesign
           name={data.favorite ? "star" : "staro"}
           size={20}
           style={{
-            width: 32,
-            height: 32,
-            top: 20,
+            position: "relative",
             left: 20,
-
-            position: "absolute",
+            width: 40,
+            height: 40,
+            top: 15,
             color: `${data.favorite ? "#ffd93b" : "#dedede"}`,
           }}
         />
       </TouchableOpacity>
-
-      <TouchableOpacity
-        style={{ marginLeft: 64 }}
-        onPress={() => Linking.openURL(data.url)}
-      >
-        {renderNewDot(data.isnew)}
-        <Title
-          adjustsFontSizeToFit={true}
-          numberOfLines={1}
-          minimumFontScale={0.01}
+      <View>
+        <TouchableOpacity
+          style={renderLinkDataBoxStyle()}
+          onPress={() => Linking.openURL(data.url)}
         >
-          {sliceText(data.og_title, 17)}
-        </Title>
-        {data.og_description && renderDesc(data.og_description)}
-        <_Url>{sliceText(data.url, 36)}</_Url>
-        <FlatList
-          data={data.tags}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ flexGrow: 0 }}
-          scrollEnabled={false}
-          keyExtractor={(item) => item}
-          renderItem={({ item }) => <Tag>{item}</Tag>}
-        />
-        <Img
-          source={{
-            uri: `${data.og_image}`,
-          }}
-        />
-      </TouchableOpacity>
-      {renderImage()}
+          {renderNewDot(data.isnew)}
+          <Title
+            adjustsFontSizeToFit={true}
+            numberOfLines={1}
+            minimumFontScale={0.01}
+          >
+            {sliceText(data.og_title, 17)}
+          </Title>
+          {data.og_description !== "" && renderDesc(data.og_description)}
+          <_Url>{sliceText(data.url, 36)}</_Url>
+          <FlatList
+            data={data.tags}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{ flexGrow: 0 }}
+            scrollEnabled={false}
+            keyExtractor={(item) => item}
+            renderItem={({ item }) => <Tag>{item}</Tag>}
+          />
+          {/* <Img
+            source={{
+              uri: `${data.og_image && data.og_image}`,
+            }}
+          /> */}
+          {renderImage()}
+        </TouchableOpacity>
+      </View>
     </LinkBox>
   );
 };
