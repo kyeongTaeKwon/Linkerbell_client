@@ -4,12 +4,12 @@ import styled from "styled-components/native";
 // };
 
 export const CategoryText = styled.Text`
-  font-family: "NBold";
+  font-family: "NMedium";
   font-size: 18px;
   padding: 0px;
   margin: 10px;
   line-height: ${18 * 1.6}px;
-  letter-spacing: 0.7px;
+  letter-spacing: -0.3px;
   /* margin-top: 0px; */
   margin-left: 0px;
   color: #000;
