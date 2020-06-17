@@ -10,7 +10,7 @@ export type Categories = {
   [index: number]: Category;
 };
 
-export const renderCategoryText = (category_id: number): Category => {
+export const renderCategoryText = (category_id: number): Category | string => {
   const category_object: Categories = {
     1: { name: "문화·예술", emoji: "🎨" },
     2: { name: "자동차", emoji: "🚙" },

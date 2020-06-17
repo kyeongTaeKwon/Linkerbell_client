@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 import styled from "../styles/LinkModalStyles/index";
@@ -20,6 +20,7 @@ const AddLinkModal = ({
   toggleModal,
   onReload,
 }: Props): JSX.Element => {
+  const [text, setText] = useState("");
   const { copiedUrl } = useServices();
   const { fetchAllList } = useLinkData();
   const handlePress = async () => {
@@ -33,33 +34,52 @@ const AddLinkModal = ({
     }
   };
 
-  const renderMessage = async () => {
-    try {
-      let message;
-      const url = await _getContent();
-      console.log(url);
-      if (url) {
-        const result = await validateUrl(url);
-        if (result) {
-          message = "클립보드에 저장된 링크를 추가할까요?";
-        }
-      } else {
-        message =
-          "클립보드에 저장된 링크가 없습니다.\
-      링크를 복사해 주세요";
+  useEffect(() => {
+    handleCopiedUrl();
+  }, [isVisible]);
+
+  const handleCopiedUrl = async () => {
+    const url = await _getContent();
+    if (url) {
+      const result = await validateUrl(url);
+      if (result) {
+        setText(url);
       }
-      console.log(message);
-      return message;
-    } catch (err) {
-      console.log(err);
     }
   };
+
+  const renderMessage = () => {
+    if (text === "") {
+      return `클립보드에 저장된 링크가 없습니다.\n링크를 복사해 주세요`;
+    } else {
+      return "클립보드에 저장된 링크를 추가할까요?";
+    }
+  };
+  // const renderMessage = async () => {
+  //   try {
+  //     let message;
+  //     const url = await _getContent();
+  //     console.log(url);
+  //     if (url) {
+  //       const result = await validateUrl(url);
+  //       if (result) {
+  //         message = "클립보드에 저장된 링크를 추가할까요?";
+  //       }
+  //     } else {
+  //       message =
+  //         "클립보드에 저장된 링크가 없습니다.\
+  //     링크를 복사해 주세요";
+  //     }
+  //     console.log(message);
+  //     return message;
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
       <LinkModal width={Dimensions.get("window").width}>
-        <MainText onPress={() => renderMessage()}>
-          클립보드에 저장된 링크를 추가할까요?
-        </MainText>
+        <MainText onPress={() => renderMessage()}>{renderMessage()}</MainText>
         <SubText>
           북마크에 글을 추가 하시면 {"\n"}링커벨이 카테고리를 분류해드릴게요
         </SubText>
