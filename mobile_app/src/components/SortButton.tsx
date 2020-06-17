@@ -16,6 +16,7 @@ const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
           name="ios-arrow-down"
           size={24}
           color="black"
+          style={{ marginLeft: 12, paddingTop: 4 }}
           onPress={() => onPress("desc")}
         />
       );
@@ -25,6 +26,7 @@ const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
         name="ios-arrow-up"
         size={24}
         color="black"
+        style={{ marginLeft: 12, paddingTop: 4 }}
         onPress={() => onPress("asc")}
       />
     );

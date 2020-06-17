@@ -4,7 +4,7 @@ export const ShortBar = styled.View`
   padding: 0px;
   margin: 0px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   margin-left: 36px;
   /* margin-right: 300px; */
   width: 36px;
