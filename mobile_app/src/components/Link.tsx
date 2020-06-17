@@ -9,6 +9,7 @@ import { Desc } from "../styles/listStyles/LinkDesc";
 import { _Url } from "../styles/listStyles/LinkUrl";
 import { Tag } from "../styles/listStyles/LinkTag";
 import { Img } from "../styles/listStyles/LinkImg";
+import { NewDot } from "../styles/listStyles/LinkNewDot";
 import { AntDesign } from "@expo/vector-icons";
 import useLinkData from "../hooks/useLinkData";
 import sendFavoriteRequest from "../core/apis/favorite";
@@ -42,6 +43,12 @@ const link = ({ data }: Url): JSX.Element => {
       console.log(e);
     }
   };
+  const renderNewDot = (isNew: boolean) => {
+    if (isNew) {
+      console.log(data);
+      return <NewDot />;
+    }
+  };
   return (
     <LinkBox>
       <TouchableOpacity onPress={() => handleFavoriteBtnPress(data)}>
@@ -64,6 +71,7 @@ const link = ({ data }: Url): JSX.Element => {
         style={{ marginLeft: 64 }}
         onPress={() => Linking.openURL(data.url)}
       >
+        {renderNewDot(data.isnew)}
         <Title
           adjustsFontSizeToFit={true}
           numberOfLines={1}
