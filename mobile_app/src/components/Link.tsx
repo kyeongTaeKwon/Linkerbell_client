@@ -25,6 +25,7 @@ const link = ({ data, onCategoryEdit }: Props): JSX.Element => {
         </LinkBox>
       </SwipeLink>
       <LinkInMenu onCategoryEdit={onCategoryEdit} id={data.id} />
+
     </View>
   );
 };

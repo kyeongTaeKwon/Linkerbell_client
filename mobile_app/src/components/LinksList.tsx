@@ -1,5 +1,5 @@
-import React from "react";
-import { FlatList } from "react-native";
+import React, { useState } from "react";
+import { FlatList, NativeScrollEvent } from "react-native";
 import Link from "../components/Link";
 
 const LinkList = ({ list, onCategoryEdit }): JSX.Element => {
