@@ -28,9 +28,10 @@ const SwipeLink = ({ setSwipe, children }: Props): JSX.Element => {
     },
     onPanResponderRelease: (e, { dx }) => {
       const screenWidth = Dimensions.get("window").width;
+      console.log(screenWidth * 0.65);
       if (Math.abs(dx) >= 0.3 * screenWidth) {
         Animated.timing(translateX, {
-          toValue: dx < 0 ? -screenWidth * 0.5 : 0,
+          toValue: dx < 0 ? -240 : 0,
           duration: 600,
         }).start();
       } else {
