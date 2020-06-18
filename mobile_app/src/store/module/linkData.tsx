@@ -16,6 +16,7 @@ export const FETCH_CATEGORIES_URL_LIST = "FETCH_CATEGORIES_URL_LIST" as const;
 export const UPDATE_CATEGORIES_URL_LIST = "UPDATE_CATEGORIES_URL_LIST" as const;
 export const CATEGORISE_FAVORITE_LIST = "CATEGORISE_FAVORITE_LIST" as const;
 export const HANDLE_URL_FAVORITE = "HANDLE_URL_FAVORITE" as const;
+export const EDIT_LINK_CATEGORY = "EDIT_LINK_CATEGORY" as const;
 
 //2 .생성자 (영수증)
 export const fetchCategories = (categoryData: Category[]) => ({
@@ -48,6 +49,10 @@ export const updateCategoriesList = (AllList: Url[]) => ({
   type: UPDATE_CATEGORIES_URL_LIST,
   payload: { AllList },
 });
+export const editCategory = (link: Url) => ({
+  type: EDIT_LINK_CATEGORY,
+  payload: { link },
+});
 export const initialLinkDataState: ListState = {
   categories: [],
   categories_url_list: {},
@@ -63,7 +68,8 @@ export type linkActions =
   | ReturnType<typeof fetchCategoriesUrlList>
   | ReturnType<typeof updateCategoriesList>
   | ReturnType<typeof categoriesFavList>
-  | ReturnType<typeof handleUrlFavorite>;
+  | ReturnType<typeof handleUrlFavorite>
+  | ReturnType<typeof editCategory>;
 
 const reducer = (state = initialLinkDataState, action: linkActions) => {
   switch (action.type) {
@@ -93,6 +99,10 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
     }
+    // case EDIT_LINK_CATEGORY: {
+    //   const { link } = action.payload;
+    //   return {...state, all_category_url_list: }
+    // }
     default:
       return state;
   }

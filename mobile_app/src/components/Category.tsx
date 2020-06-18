@@ -19,7 +19,6 @@ const Item = ({ item, onPress }: Props): JSX.Element => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        console.log(item.category_id);
         onPress(item.category_id);
       }}
     >
@@ -36,10 +35,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+    alignSelf: "flex-start",
     flexWrap: "wrap",
-    backgroundColor: "transparent",
     marginLeft: 36,
-    maxWidth: "58%",
     height: 80,
   },
 });

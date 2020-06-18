@@ -12,6 +12,7 @@ type Props = {
 const link = ({ data }: Props): JSX.Element => {
   const [isSwipe, setSwipe] = useState(false);
 
+
   const handleSwipe = (bool: boolean): void => {
     setSwipe(bool);
   };
