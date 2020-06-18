@@ -46,6 +46,7 @@ export default function useLinkData() {
     (list) => dispatch(updateCategoriesList(list)),
     [dispatch],
   );
+
   return {
     categories,
     all_category_url_list,

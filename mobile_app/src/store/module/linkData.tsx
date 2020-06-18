@@ -49,9 +49,10 @@ export const updateCategoriesList = (AllList: Url[]) => ({
   type: UPDATE_CATEGORIES_URL_LIST,
   payload: { AllList },
 });
-export const editCategory = (link: Url) => ({
+//바굴
+export const editCategory = (id: number, category_id: number) => ({
   type: EDIT_LINK_CATEGORY,
-  payload: { link },
+  payload: { id, category_id },
 });
 export const initialLinkDataState: ListState = {
   categories: [],
@@ -102,6 +103,8 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
     // case EDIT_LINK_CATEGORY: {
     //   const { link } = action.payload;
     //   return {...state, all_category_url_list: }
+    // 필터 반복문을 돌려서
+    // 만약 item.id === link.id => link.category_id : category_id
     // }
     default:
       return state;

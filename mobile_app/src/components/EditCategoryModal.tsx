@@ -35,9 +35,14 @@ const numColumns = 4;
 type Props = {
   isVisible: boolean;
   toggleModal: () => void;
+  currentLinkId: number;
 };
 
-const EditCategoryModal = ({ isVisible, toggleModal }: Props): JSX.Element => {
+const EditCategoryModal = ({
+  isVisible,
+  toggleModal,
+  currentLinkId,
+}: Props): JSX.Element => {
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
       <CategoryModal>

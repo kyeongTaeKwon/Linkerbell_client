@@ -10,6 +10,7 @@ import LinkList from "../components/LinksList";
 import Header from "../components/ListHeader";
 import useLinkData from "../hooks/useLinkData";
 import sortLink from "../core/utils/sortLink";
+import EditCategoryModal from "../components/EditCategoryModal";
 
 const { Container } = styled;
 
@@ -36,6 +37,8 @@ const List = ({ route }: ListProps): JSX.Element => {
     text: "",
     orderType: "asc",
   });
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [currentLinkId, setCurrentLinkId] = useState(0);
   const { all_category_url_list, categories_url_list } = useLinkData();
 
   useEffect(() => {
@@ -98,6 +101,14 @@ const List = ({ route }: ListProps): JSX.Element => {
   const handleSortButton = (order: string) => {
     setValue({ ...value, orderType: order });
   };
+
+  const handleEditCategoryModal = (id: number) => {
+    setCurrentLinkId(id);
+    setModalVisible(true);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   return (
     <Container OS={Platform.OS}>
       <Header
@@ -113,7 +124,15 @@ const List = ({ route }: ListProps): JSX.Element => {
         tags={value.tags}
         onPress={handlePress}
       />
-      <LinkList list={value.cur_list} />
+      <LinkList
+        list={value.cur_list}
+        onCategoryEdit={handleEditCategoryModal}
+      />
+      <EditCategoryModal
+        isVisible={isModalVisible}
+        toggleModal={closeModal}
+        currentLinkId={currentLinkId}
+      />
     </Container>
   );
 };

@@ -8,9 +8,11 @@ type Props = {
   name: string;
   emoji: string;
 };
+
 const CategoryItem = ({ item }: Props): JSX.Element => {
   const handlePress = () => {
     console.log(item.id);
+    //func(?,item.id)
   };
 
   return (
