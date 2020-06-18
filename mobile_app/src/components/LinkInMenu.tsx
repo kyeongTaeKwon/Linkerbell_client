@@ -4,7 +4,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Fontisto } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-const LinkInMenu = (): JSX.Element => {
+
+const LinkInMenu = ({ onCategoryEdit, id }): JSX.Element => {
+
   const renderBtnStyle = (color: string, border?: number) => {
     return {
       width: 80,
@@ -31,7 +33,11 @@ const LinkInMenu = (): JSX.Element => {
         borderRadius: 8,
       }}
     >
-      <TouchableOpacity style={renderBtnStyle("#525252", 0.5)}>
+      <TouchableOpacity
+        style={renderBtnStyle("#525252", 0.5)}
+        onPress={() => onCategoryEdit(id)}
+      >
+
         <AntDesign
           name="swap"
           size={30}
