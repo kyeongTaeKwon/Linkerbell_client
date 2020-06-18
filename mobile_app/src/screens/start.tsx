@@ -26,9 +26,9 @@ const Start = ({
 }): JSX.Element => {
   const { onLogin, onOauthLogin, isLogin } = useAuth();
 
-  // useEffect(() => {
-  //   onLogin({});
-  // }, []);
+  useEffect(() => {
+    onLogin({});
+  }, []);
 
   useEffect(() => {
     isLogin && navigation.navigate("Home");

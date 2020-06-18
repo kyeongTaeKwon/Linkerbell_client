@@ -55,27 +55,6 @@ const AddLinkModal = ({
       return "클립보드에 저장된 링크를 추가할까요?";
     }
   };
-  // const renderMessage = async () => {
-  //   try {
-  //     let message;
-  //     const url = await _getContent();
-  //     console.log(url);
-  //     if (url) {
-  //       const result = await validateUrl(url);
-  //       if (result) {
-  //         message = "클립보드에 저장된 링크를 추가할까요?";
-  //       }
-  //     } else {
-  //       message =
-  //         "클립보드에 저장된 링크가 없습니다.\
-  //     링크를 복사해 주세요";
-  //     }
-  //     console.log(message);
-  //     return message;
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
       <LinkModal width={Dimensions.get("window").width}>
