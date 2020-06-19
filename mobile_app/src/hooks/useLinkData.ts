@@ -4,12 +4,11 @@ import { RootState } from "../store/module/index";
 import {
   fetchCategories,
   fetchAllListRequest,
-  handleUrlFavorite,>>>>>> Dev
-75
- 
+  handleUrlFavorite,
   updateCategoriesList,
   editCategory,
   editTag,
+  deleteLink,
 } from "../store/module/linkData";
 import { useCallback } from "react";
 
@@ -60,6 +59,9 @@ export default function useLinkData() {
     },
     [dispatch],
   );
+  const onDeleteLink = useCallback((id) => dispatch(deleteLink(id)), [
+    dispatch,
+  ]);
 
   return {
     categories,
@@ -73,5 +75,6 @@ export default function useLinkData() {
     updateCategoriesUrlList,
     onEditCategory,
     onAddTag,
+    onDeleteLink,
   };
 }

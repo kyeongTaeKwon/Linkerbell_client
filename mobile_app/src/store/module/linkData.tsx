@@ -18,6 +18,7 @@ export const CATEGORISE_FAVORITE_LIST = "CATEGORISE_FAVORITE_LIST" as const;
 export const HANDLE_URL_FAVORITE = "HANDLE_URL_FAVORITE" as const;
 export const EDIT_LINK_CATEGORY = "EDIT_LINK_CATEGORY" as const;
 export const EDIT_TAG = "EDIT_TAG" as const;
+export const DELETE_LINK = "DELETE_LINK" as const;
 //2 .생성자 (영수증)
 export const fetchCategories = (categoryData: Category[]) => ({
   type: FETCH_CATEGORY_DATA,
@@ -60,6 +61,11 @@ export const editTag = (id: number, tags: string[]) => ({
   payload: { id, tags },
 });
 
+export const deleteLink = (id: number) => ({
+  type: DELETE_LINK,
+  payload: { id },
+});
+
 export const initialLinkDataState: ListState = {
   categories: [],
   categories_url_list: {},
@@ -77,7 +83,8 @@ export type linkActions =
   | ReturnType<typeof categoriesFavList>
   | ReturnType<typeof handleUrlFavorite>
   | ReturnType<typeof editCategory>
-  | ReturnType<typeof editTag>;
+  | ReturnType<typeof editTag>
+  | ReturnType<typeof deleteLink>;
 
 const reducer = (state = initialLinkDataState, action: linkActions) => {
   switch (action.type) {
@@ -115,14 +122,20 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
           link.id === id ? { ...link, category_id: category_id } : link,
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
-      // 필터 반복문을 돌려서
-      // 만약 item.id === link.id => link.category_id : category_id
     }
     case EDIT_TAG: {
       const { tags, id } = action.payload;
       const current_All_category_url_list = _.map(
         state.all_category_url_list,
         (urlData) => (urlData.id === id ? { ...urlData, tags: tags } : urlData),
+      );
+      return { ...state, all_category_url_list: current_All_category_url_list };
+    }
+    case DELETE_LINK: {
+      const { id } = action.payload;
+      const current_All_category_url_list = _.filter(
+        state.all_category_url_list,
+        (link) => link.id !== id,
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
     }

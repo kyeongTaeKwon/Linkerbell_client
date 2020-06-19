@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Platform } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
-import { Url } from "../models/UrlStateTypes";
+import { Url, Category_url_list } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
@@ -12,6 +12,8 @@ import useLinkData from "../hooks/useLinkData";
 import sortLink from "../core/utils/sortLink";
 import EditCategoryModal from "../components/EditCategoryModal";
 import EditTagModal from "../components/EditTagModal";
+import DeleteLinkModal from "../components/DeleteLinkModal";
+
 const { Container } = styled;
 
 export type value = {
@@ -147,6 +149,11 @@ const List = ({ route }: ListProps): JSX.Element => {
         isVisible={isEdigTagModalVisible}
         toggleModal={closeTagEditModal}
         currentLink={currentLink}
+      />
+      <DeleteLinkModal
+        isVisible={isModalVisible}
+        toggleModal={closeModal}
+        // list={Category_url_list}
       />
     </Container>
   );
