@@ -6,6 +6,7 @@ import {
   fetchAllListRequest,
   handleUrlFavorite,
   updateCategoriesList,
+  editCategory,
 } from "../store/module/linkData";
 import { useCallback } from "react";
 
@@ -46,6 +47,10 @@ export default function useLinkData() {
     (list) => dispatch(updateCategoriesList(list)),
     [dispatch],
   );
+  const onEditCategory = useCallback(
+    (id, category_id) => dispatch(editCategory(id, category_id)),
+    [dispatch],
+  );
 
   return {
     categories,
@@ -57,5 +62,6 @@ export default function useLinkData() {
     categories_url_list,
     onFavoriteBtnPress,
     updateCategoriesUrlList,
+    onEditCategory,
   };
 }
