@@ -4,9 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Fontisto } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
-
-const LinkInMenu = ({ onCategoryEdit, id }): JSX.Element => {
-
+const LinkInMenu = ({ onCategoryEdit, onTagEdit, id, data }): JSX.Element => {
   const renderBtnStyle = (color: string, border?: number) => {
     return {
       width: 80,
@@ -14,8 +12,7 @@ const LinkInMenu = ({ onCategoryEdit, id }): JSX.Element => {
       backgroundColor: `${color ? color : "#fff"}`,
       alignContent: "center",
       justifyContent: "center",
-      borderRightWidth: `${border ? border : "0"}`,
-      borderRightColor: "#464646",
+      // borderRightColor: "#464646",
     };
   };
   return (
@@ -37,7 +34,6 @@ const LinkInMenu = ({ onCategoryEdit, id }): JSX.Element => {
         style={renderBtnStyle("#525252", 0.5)}
         onPress={() => onCategoryEdit(id)}
       >
-
         <AntDesign
           name="swap"
           size={30}
@@ -55,7 +51,10 @@ const LinkInMenu = ({ onCategoryEdit, id }): JSX.Element => {
           카테고리
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={renderBtnStyle("#525252")}>
+      <TouchableOpacity
+        style={renderBtnStyle("#525252")}
+        onPress={() => onTagEdit(data)}
+      >
         <Fontisto
           name="hashtag"
           size={20}

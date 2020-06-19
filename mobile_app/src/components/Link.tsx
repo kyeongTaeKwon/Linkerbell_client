@@ -9,8 +9,9 @@ import LinkInMenu from "../components/LinkInMenu";
 type Props = {
   data: Url;
   onCategoryEdit: () => void;
+  onTagEdit: () => void;
 };
-const link = ({ data, onCategoryEdit }: Props): JSX.Element => {
+const link = ({ data, onCategoryEdit, onTagEdit }: Props): JSX.Element => {
   const [isSwipe, setSwipe] = useState(false);
 
   const handleSwipe = (bool: boolean): void => {
@@ -24,8 +25,12 @@ const link = ({ data, onCategoryEdit }: Props): JSX.Element => {
           <LinkContents data={data} isSwipe={isSwipe} />
         </LinkBox>
       </SwipeLink>
-      <LinkInMenu onCategoryEdit={onCategoryEdit} id={data.id} />
-
+      <LinkInMenu
+        onCategoryEdit={onCategoryEdit}
+        onTagEdit={onTagEdit}
+        id={data.id}
+        data={data}
+      />
     </View>
   );
 };
