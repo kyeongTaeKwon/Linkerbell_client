@@ -11,7 +11,7 @@ import Header from "../components/ListHeader";
 import useLinkData from "../hooks/useLinkData";
 import sortLink from "../core/utils/sortLink";
 import EditCategoryModal from "../components/EditCategoryModal";
-
+import EditTagModal from "../components/EditTagModal";
 const { Container } = styled;
 
 export type value = {
@@ -38,7 +38,9 @@ const List = ({ route }: ListProps): JSX.Element => {
     orderType: "asc",
   });
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isEdigTagModalVisible, setEdigTagModalVisible] = useState(false);
   const [currentLinkId, setCurrentLinkId] = useState(0);
+  const [currentLink, setCurrentLink] = useState<Url>();
   const { all_category_url_list, categories_url_list } = useLinkData();
 
   useEffect(() => {
@@ -106,8 +108,15 @@ const List = ({ route }: ListProps): JSX.Element => {
     setCurrentLinkId(id);
     setModalVisible(true);
   };
+  const handleEditTagModal = (linkData: Url) => {
+    setCurrentLink(linkData);
+    setEdigTagModalVisible(true);
+  };
   const closeModal = () => {
     setModalVisible(false);
+  };
+  const closeTagEditModal = () => {
+    setEdigTagModalVisible(false);
   };
   return (
     <Container OS={Platform.OS}>
@@ -127,11 +136,17 @@ const List = ({ route }: ListProps): JSX.Element => {
       <LinkList
         list={value.cur_list}
         onCategoryEdit={handleEditCategoryModal}
+        onTagEdit={handleEditTagModal}
       />
       <EditCategoryModal
         isVisible={isModalVisible}
         toggleModal={closeModal}
         currentLinkId={currentLinkId}
+      />
+      <EditTagModal
+        isVisible={isEdigTagModalVisible}
+        toggleModal={closeTagEditModal}
+        currentLink={currentLink}
       />
     </Container>
   );
