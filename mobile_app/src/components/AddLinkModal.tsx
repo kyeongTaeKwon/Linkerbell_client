@@ -22,13 +22,14 @@ const AddLinkModal = ({
 }: Props): JSX.Element => {
   const [text, setText] = useState("");
   const { copiedUrl } = useServices();
-  const { fetchAllList } = useLinkData();
+  const { fetchAllList, onAddLink } = useLinkData();
   const handlePress = async () => {
     try {
-      await postUrl(copiedUrl);
+      const res = await postUrl(copiedUrl);
       await onReload();
+      await onAddLink(res);
       toggleModal();
-      await fetchAllList();
+      // await fetchAllList();
     } catch (e) {
       console.log(e);
     }

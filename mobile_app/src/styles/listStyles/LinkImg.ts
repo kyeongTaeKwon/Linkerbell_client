@@ -14,5 +14,5 @@ export const FakeImg = styled.View`
   width: 60px;
   height: 60px;
   border-radius: 4px;
-  background-color: #fafafa;
+  background-color: #d1d1d1;
 `;

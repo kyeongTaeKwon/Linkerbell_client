@@ -8,6 +8,7 @@ import {
   updateCategoriesList,
   editCategory,
   editTag,
+  addLink,
 } from "../store/module/linkData";
 import { useCallback } from "react";
 
@@ -61,6 +62,12 @@ export default function useLinkData() {
     },
     [dispatch],
   );
+  const onAddLink = useCallback(
+    (linkData) => {
+      dispatch(addLink(linkData));
+    },
+    [dispatch],
+  );
 
   return {
     categories,
@@ -75,5 +82,6 @@ export default function useLinkData() {
     onEditCategory,
     onEditTag,
     categories_tag_list,
+    onAddLink,
   };
 }

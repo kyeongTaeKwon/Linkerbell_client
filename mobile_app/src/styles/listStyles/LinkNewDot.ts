@@ -8,5 +8,5 @@ export const NewDot = styled.View`
   overflow: hidden;
   position: absolute;
   left: -8px;
-  top: -6px;
+  /* top: px; */
 `;
