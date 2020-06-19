@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Fontisto } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 
+
 const LinkInMenu = ({ onCategoryEdit, onTagEdit, id, data }): JSX.Element => {
   const renderBtnStyle = (color: string, border?: number) => {
     return {
@@ -12,7 +13,6 @@ const LinkInMenu = ({ onCategoryEdit, onTagEdit, id, data }): JSX.Element => {
       backgroundColor: `${color ? color : "#fff"}`,
       alignContent: "center",
       justifyContent: "center",
-      // borderRightColor: "#464646",
     };
   };
   return (

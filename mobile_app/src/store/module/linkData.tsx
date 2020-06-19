@@ -107,6 +107,17 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
     }
+    case EDIT_LINK_CATEGORY: {
+      const { id, category_id } = action.payload;
+      const current_All_category_url_list = _.map(
+        state.all_category_url_list,
+        (link) =>
+          link.id === id ? { ...link, category_id: category_id } : link,
+      );
+      return { ...state, all_category_url_list: current_All_category_url_list };
+      // 필터 반복문을 돌려서
+      // 만약 item.id === link.id => link.category_id : category_id
+    }
     case EDIT_TAG: {
       const { tags, id } = action.payload;
       const current_All_category_url_list = _.map(
@@ -115,12 +126,6 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
     }
-    // case EDIT_LINK_CATEGORY: {
-    //   const { link } = action.payload;
-    //   return {...state, all_category_url_list: }
-    // 필터 반복문을 돌려서
-    // 만약 item.id === link.id => link.category_id : category_id
-    // }
     default:
       return state;
   }

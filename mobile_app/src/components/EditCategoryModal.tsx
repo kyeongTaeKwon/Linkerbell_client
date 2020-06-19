@@ -50,7 +50,9 @@ const EditCategoryModal = ({
         <FlatList
           keyExtractor={(item) => item.id.toString()}
           data={categoryList}
-          renderItem={({ item }) => <CategoryItem item={item} />}
+          renderItem={({ item }) => (
+            <CategoryItem item={item} linkId={currentLinkId} />
+          )}
           numColumns={numColumns}
           style={{
             width: "86%",
