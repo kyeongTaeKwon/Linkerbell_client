@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useLinkData from "../hooks/useLinkData";
 import editCategoryApi from "../core/apis/editCategory";
 import styled from "../styles/EditCategoryModalStyles/index";
-const { Category, NameText, Emoji } = styled;
+import fetchCategoryRequest from "../core/apis/fetchCategory";
+import sortCategory from "../core/utils/sortCategory";
+import { Category } from "../models/UrlStateTypes";
+
+const { CategoryTouch, NameText, Emoji } = styled;
 
 type Props = {
   item: {
@@ -14,7 +18,8 @@ type Props = {
 };
 
 const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
-  const { onEditCategory } = useLinkData();
+  const { onEditCategory, onHome, categories } = useLinkData();
+  const [data, setData] = useState<Category[]>([]);
   const category_id = item.id;
 
   const handlePress = async () => {
@@ -22,16 +27,23 @@ const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
     try {
       editCategoryApi(linkId, category_id);
       await onEditCategory(linkId, category_id);
+      // const categories = await fetchCategoryRequest();
+      // await sortCategory(categories);
+      // onHome(categories);
+      // setData(categories);
+      // console.log(categories);
+
+      // home 34 getCategoryList , categories 다시 받아오는 요청.
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <Category onPress={handlePress} item={item}>
+    <CategoryTouch onPress={handlePress} item={item}>
       <Emoji>{item.emoji}</Emoji>
       <NameText>{item.name}</NameText>
-    </Category>
+    </CategoryTouch>
   );
 };
 

@@ -3,7 +3,7 @@ type Props = {
   isClicked?: boolean;
 };
 
-export const Category = styled.TouchableOpacity`
+export const CategoryTouch = styled.TouchableOpacity`
   align-items: center;
   margin-vertical: 4px;
   margin-horizontal: 2px;
