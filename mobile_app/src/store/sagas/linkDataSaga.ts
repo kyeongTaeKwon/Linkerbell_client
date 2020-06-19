@@ -10,6 +10,7 @@ import {
   FETCH_CATEGORIES_URL_LIST,
   CATEGORISE_FAVORITE_LIST,
   UPDATE_CATEGORIES_URL_LIST,
+  CATEGORISE_TAG_LIST,
 } from "../module/linkData";
 
 export default function* authSaga() {
@@ -47,14 +48,31 @@ function* fetchList$(lists: Url[]) {
   try {
     const categories_url_list: Category_url_list = {};
     const favorite_list: Url[] = [];
+    let all_tags: string[] = [];
+    const catgories_tags: { [index: number]: string[] } = {};
     _.forEach(lists, (item: Url) => {
       const { category_id } = item;
       item.favorite && favorite_list.push(item);
+      all_tags = [...all_tags, ...item.tags];
+
       if (categories_url_list[category_id]) {
         categories_url_list[category_id].push(item);
       } else {
         categories_url_list[category_id] = [];
         categories_url_list[category_id].push(item);
+      }
+
+      if (catgories_tags[category_id]) {
+        catgories_tags[category_id] = [
+          ...catgories_tags[category_id],
+          ...item.tags,
+        ];
+      } else {
+        catgories_tags[category_id] = [];
+        catgories_tags[category_id] = [
+          ...catgories_tags[category_id],
+          ...item.tags,
+        ];
       }
     });
     yield put({
@@ -62,6 +80,7 @@ function* fetchList$(lists: Url[]) {
       payload: { categories_url_list },
     });
     yield categoriseFavList(favorite_list);
+    yield categoriseTagList(all_tags, catgories_tags);
   } catch (e) {
     console.log(e.response.data);
   }
@@ -71,5 +90,21 @@ function* categoriseFavList(favorite_list: Url[]) {
   yield put({
     type: CATEGORISE_FAVORITE_LIST,
     payload: { favorite_list },
+  });
+}
+
+function* categoriseTagList(
+  all_tags: string[],
+  cetegories_tags: { [index: number]: string[] },
+) {
+  const all_tag_list = _.uniq(all_tags);
+  const categories_tag_list: { [key: string]: string[] } = {};
+  for (const key in cetegories_tags) {
+    const tags: string[] = _.uniq(cetegories_tags[key]);
+    categories_tag_list[key] = tags;
+  }
+  yield put({
+    type: CATEGORISE_TAG_LIST,
+    payload: { all_tag_list, categories_tag_list },
   });
 }

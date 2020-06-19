@@ -18,6 +18,7 @@ export const CATEGORISE_FAVORITE_LIST = "CATEGORISE_FAVORITE_LIST" as const;
 export const HANDLE_URL_FAVORITE = "HANDLE_URL_FAVORITE" as const;
 export const EDIT_LINK_CATEGORY = "EDIT_LINK_CATEGORY" as const;
 export const EDIT_TAG = "EDIT_TAG" as const;
+export const CATEGORISE_TAG_LIST = "CATEGORISE_TAG_LIST" as const;
 //2 .생성자 (영수증)
 export const fetchCategories = (categoryData: Category[]) => ({
   type: FETCH_CATEGORY_DATA,
@@ -59,12 +60,19 @@ export const editTag = (id: number, tags: string[]) => ({
   type: EDIT_TAG,
   payload: { id, tags },
 });
-
+export const categoriseTagList = (
+  all_tag_list: string[],
+  categories_tag_list: { [key: string]: string[] },
+) => ({
+  type: CATEGORISE_TAG_LIST,
+  payload: { all_tag_list, categories_tag_list },
+});
 export const initialLinkDataState: ListState = {
   categories: [],
   categories_url_list: {},
   all_category_url_list: [],
   all_tag_list: [],
+  categories_tag_list: {},
   favorite_list: [],
 };
 
@@ -77,7 +85,8 @@ export type linkActions =
   | ReturnType<typeof categoriesFavList>
   | ReturnType<typeof handleUrlFavorite>
   | ReturnType<typeof editCategory>
-  | ReturnType<typeof editTag>;
+  | ReturnType<typeof editTag>
+  | ReturnType<typeof categoriseTagList>;
 
 const reducer = (state = initialLinkDataState, action: linkActions) => {
   switch (action.type) {
@@ -125,6 +134,10 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
         (urlData) => (urlData.id === id ? { ...urlData, tags: tags } : urlData),
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
+    }
+    case CATEGORISE_TAG_LIST: {
+      const { all_tag_list, categories_tag_list } = action.payload;
+      return { ...state, all_tag_list, categories_tag_list };
     }
     default:
       return state;

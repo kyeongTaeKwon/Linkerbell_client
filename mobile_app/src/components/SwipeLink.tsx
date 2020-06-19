@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Animated, PanResponder, Dimensions } from "react-native";
 
 type Props = {
@@ -28,13 +28,13 @@ const SwipeLink = ({ setSwipe, children }: Props): JSX.Element => {
     },
     onPanResponderRelease: (e, { dx }) => {
       const screenWidth = Dimensions.get("window").width;
-      console.log(screenWidth * 0.65);
       if (Math.abs(dx) >= 0.3 * screenWidth) {
         Animated.timing(translateX, {
           toValue: dx < 0 ? -240 : 0,
           duration: 600,
         }).start();
       } else {
+        // setSwipe(false);
         Animated.spring(translateX, {
           toValue: 0,
           bounciness: 0,
@@ -42,6 +42,9 @@ const SwipeLink = ({ setSwipe, children }: Props): JSX.Element => {
       }
     },
   });
+  useEffect(() => {
+    translateX.addListener(({ value }) => value === 0 && setSwipe(false));
+  }, [translateX]);
 
   return (
     <Animated.View

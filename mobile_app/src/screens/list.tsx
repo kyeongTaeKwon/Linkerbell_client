@@ -41,7 +41,12 @@ const List = ({ route }: ListProps): JSX.Element => {
   const [isEdigTagModalVisible, setEdigTagModalVisible] = useState(false);
   const [currentLinkId, setCurrentLinkId] = useState(0);
   const [currentLink, setCurrentLink] = useState<Url>();
-  const { all_category_url_list, categories_url_list } = useLinkData();
+  const {
+    all_category_url_list,
+    categories_url_list,
+    all_tag_list,
+    categories_tag_list,
+  } = useLinkData();
 
   useEffect(() => {
     const filterLinkBySearch = () => {
@@ -55,6 +60,7 @@ const List = ({ route }: ListProps): JSX.Element => {
     };
     const cur_list = filterLinkBySearch();
     setValue({ ...value, cur_list });
+    console.log(categories_tag_list);
   }, [value.text]);
 
   useEffect(() => {
@@ -71,13 +77,21 @@ const List = ({ route }: ListProps): JSX.Element => {
 
   const updateList = (category_id: number) => {
     let list;
+    let tags = ["All"];
     if (category_id === 0) {
       list = sortLink(all_category_url_list, value.orderType);
+      if (all_tag_list) {
+        tags = ["All", ...all_tag_list];
+      }
     } else {
       list = sortLink(categories_url_list[category_id], value.orderType);
+      if (categories_tag_list[category_id]) {
+        tags = ["All", ...categories_tag_list[category_id]];
+      }
     }
-    setValue({ ...value, list, cur_list: list });
+    setValue({ ...value, list, cur_list: list, tags });
   };
+
   useEffect(() => {
     const { category_id } = route.params;
     updateList(category_id);
