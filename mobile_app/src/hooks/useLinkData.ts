@@ -4,9 +4,12 @@ import { RootState } from "../store/module/index";
 import {
   fetchCategories,
   fetchAllListRequest,
-  handleUrlFavorite,
+  handleUrlFavorite,>>>>>> Dev
+75
+ 
   updateCategoriesList,
   editCategory,
+  editTag,
 } from "../store/module/linkData";
 import { useCallback } from "react";
 
@@ -51,6 +54,12 @@ export default function useLinkData() {
     (id, category_id) => dispatch(editCategory(id, category_id)),
     [dispatch],
   );
+  const onAddTag = useCallback(
+    (id, tag) => {
+      dispatch(editTag(id, tag));
+    },
+    [dispatch],
+  );
 
   return {
     categories,
@@ -63,5 +72,6 @@ export default function useLinkData() {
     onFavoriteBtnPress,
     updateCategoriesUrlList,
     onEditCategory,
+    onAddTag,
   };
 }
