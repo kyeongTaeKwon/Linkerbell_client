@@ -32,6 +32,9 @@ export type ListState = {
   all_tag_list: string[];
   categories_url_list: Category_url_list;
   favorite_list: Url[];
+  categories_tag_list: {
+    [key: string]: string[];
+  };
   // cur_category_tag_list: string[];
   // cur_category_url_list: Category_url_list; //category links list
   // current_category: number; // 0~14

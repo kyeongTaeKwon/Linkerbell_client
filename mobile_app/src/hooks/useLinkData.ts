@@ -9,6 +9,7 @@ import {
   editCategory,
   editTag,
   deleteLink,
+  addLink,
 } from "../store/module/linkData";
 import { useCallback } from "react";
 
@@ -27,6 +28,9 @@ export default function useLinkData() {
   );
   const favorite_list = useSelector(
     (state: RootState) => state.linkData.favorite_list,
+  );
+  const categories_tag_list = useSelector(
+    (state: RootState) => state.linkData.categories_tag_list,
   );
   const dispatch = useDispatch();
 
@@ -53,7 +57,7 @@ export default function useLinkData() {
     (id, category_id) => dispatch(editCategory(id, category_id)),
     [dispatch],
   );
-  const onAddTag = useCallback(
+  const onEditTag = useCallback(
     (id, tag) => {
       dispatch(editTag(id, tag));
     },
@@ -62,6 +66,12 @@ export default function useLinkData() {
   const onDeleteLink = useCallback((id) => dispatch(deleteLink(id)), [
     dispatch,
   ]);
+  const onAddLink = useCallback(
+    (linkData) => {
+      dispatch(addLink(linkData));
+    },
+    [dispatch],
+  );
 
   return {
     categories,
@@ -74,7 +84,9 @@ export default function useLinkData() {
     onFavoriteBtnPress,
     updateCategoriesUrlList,
     onEditCategory,
-    onAddTag,
     onDeleteLink,
+    onEditTag,
+    categories_tag_list,
+    onAddLink,
   };
 }

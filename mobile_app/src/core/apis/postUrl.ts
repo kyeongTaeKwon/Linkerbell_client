@@ -8,8 +8,7 @@ const postUrl = async (link: string): Promise<any> => {
   };
   try {
     const res = await Axios.post(`${url}/links/`, data);
-    console.log(res.data);
-    return res.data.category_id;
+    return res.data.link_data;
   } catch (e) {
     console.log(e);
   }
