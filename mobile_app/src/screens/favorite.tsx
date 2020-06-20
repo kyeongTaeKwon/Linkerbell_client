@@ -7,6 +7,8 @@ import LinkList from "../components/LinksList";
 import Header from "../components/ListHeader";
 import sortLink from "../core/utils/sortLink";
 import useLinkData from "../hooks/useLinkData";
+import EditCategoryModal from "../components/EditCategoryModal";
+import EditTagModal from "../components/EditTagModal";
 const { Container } = styled;
 
 type value = {
@@ -23,6 +25,10 @@ const Favorite = (): JSX.Element => {
     text: "",
     orderType: "asc",
   });
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [isEdigTagModalVisible, setEdigTagModalVisible] = useState(false);
+  const [currentLinkId, setCurrentLinkId] = useState(0);
+  const [currentLink, setCurrentLink] = useState<Url>();
   const { favorite_list } = useLinkData();
 
   useEffect(() => {
@@ -63,6 +69,20 @@ const Favorite = (): JSX.Element => {
   const handleSortButton = (order: string) => {
     setValue({ ...value, orderType: order });
   };
+  const handleEditCategoryModal = (id: number) => {
+    setCurrentLinkId(id);
+    setModalVisible(true);
+  };
+  const handleEditTagModal = (linkData: Url) => {
+    setCurrentLink(linkData);
+    setEdigTagModalVisible(true);
+  };
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+  const closeTagEditModal = () => {
+    setEdigTagModalVisible(false);
+  };
   return (
     <Container OS={Platform.OS}>
       <Header
@@ -72,7 +92,21 @@ const Favorite = (): JSX.Element => {
         onSort={handleSortButton}
       />
       <ShortBar style={{ marginBottom: 48 }} />
-      <LinkList list={value.cur_list} />
+      <LinkList
+        list={value.cur_list}
+        onCategoryEdit={handleEditCategoryModal}
+        onTagEdit={handleEditTagModal}
+      />
+      <EditCategoryModal
+        isVisible={isModalVisible}
+        toggleModal={closeModal}
+        currentLinkId={currentLinkId}
+      />
+      <EditTagModal
+        isVisible={isEdigTagModalVisible}
+        toggleModal={closeTagEditModal}
+        currentLink={currentLink}
+      />
     </Container>
   );
 };

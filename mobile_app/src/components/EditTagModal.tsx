@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import _ from "lodash";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import useLinkData from "../hooks/useLinkData";
 import styled from "../styles/EditTagModal/ETStyleIndex";
 import editTagRequest from "../core/apis/editTag";
 import { Url } from "../models/UrlStateTypes";
-const { TagModal, InputForm, InputWrapper, HashTag, AddBtn, Tag } = styled;
+import Tag from "../components/EditTag";
+const { TagModal, InputForm, InputWrapper, HashTag, AddBtn } = styled;
 
 type Props = {
   isVisible: boolean;
@@ -19,7 +21,7 @@ const EditTagModal = ({
 }: Props): JSX.Element => {
   const [tagText, setTagText] = useState("");
   const [link, setLink] = useState<Url>(currentLink);
-  const { onAddTag } = useLinkData();
+  const { onEditTag } = useLinkData();
 
   useEffect(() => {
     setLink(currentLink);
@@ -28,17 +30,26 @@ const EditTagModal = ({
   const handlePress = async () => {
     const { id, tags } = currentLink;
     const tags_list = [...tags, tagText];
-    console.log(tagText, tags_list, id);
     try {
       if (tagText !== "" && tags.length < 3) {
         await editTagRequest({ id, tags: tags_list });
         setLink({ ...link, tags: tags_list });
-        await onAddTag(id, tags_list);
+        await onEditTag(id, tags_list);
       }
     } catch (e) {
       console.log(e);
     } finally {
       await setTagText("");
+    }
+  };
+  const handleDeletePress = async (id: number, targetTag: string) => {
+    const tags_list = _.filter(link.tags, (tag) => targetTag !== tag);
+    try {
+      await editTagRequest({ id, tags: tags_list });
+      setLink({ ...link, tags: tags_list });
+      onEditTag(id, tags_list);
+    } catch (e) {
+      console.log(e);
     }
   };
   const renderTags = () => {
@@ -51,7 +62,9 @@ const EditTagModal = ({
           style={{ flexGrow: 0 }}
           scrollEnabled={false}
           keyExtractor={(item) => item}
-          renderItem={({ item }) => <Tag>{item}</Tag>}
+          renderItem={({ item }) => (
+            <Tag currentTag={item} onDelete={handleDeletePress} id={link.id} />
+          )}
         />
       );
     }
@@ -82,7 +95,7 @@ const EditTagModal = ({
             </AddBtn>
           </TouchableOpacity>
         </InputWrapper>
-        <View style={{ marginLeft: 28, marginTop: 20 }}>{renderTags()}</View>
+        <View style={{ marginLeft: 28, marginTop: 16 }}>{renderTags()}</View>
       </TagModal>
     </Modal>
   );
