@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Text, FlatList } from "react-native";
+import React from "react";
+import { FlatList } from "react-native";
 import Modal from "react-native-modal";
-import useLinkData from "../hooks/useLinkData";
 import CategoryItem from "../components/CategoryItem";
 
 import styled from "../styles/EditCategoryModalStyles/index";
-// patch api
-// hooks
 
 const { CategoryModal, Title } = styled;
 const categoryList = [
@@ -54,7 +51,7 @@ const EditCategoryModal = ({
             <CategoryItem
               item={item}
               linkId={currentLinkId}
-              onPress={toggleModal}
+              closeModal={toggleModal}
             />
           )}
           numColumns={numColumns}

@@ -2,8 +2,6 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
-  // state: LoginValue | UserDetailValue;
-  // setState: React.Dispatch<React.SetStateAction<LoginValue>>;
   orderType: string;
   onPress?: any;
 };
