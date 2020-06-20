@@ -28,11 +28,11 @@ const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
     try {
       await editCategoryApi(linkId, category_id);
       await onEditCategory(linkId, category_id);
-      // const categories = await fetchCategoryRequest();
-      // await sortCategory(categories);
-      // onHome(categories);
+      const categories = await fetchCategoryRequest();
+      await sortCategory(categories);
+      onHome(categories);
       // setData(categories);
-      // console.log(categories);
+      console.log(categories);
 
       //? home 34 getCategoryList , categories 다시 받아오는 요청.
       //? toggle 닫히게
