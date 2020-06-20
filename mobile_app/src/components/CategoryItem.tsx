@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useLinkData from "../hooks/useLinkData";
 import editCategoryApi from "../core/apis/editCategory";
 import styled from "../styles/EditCategoryModalStyles/index";
 import fetchCategoryRequest from "../core/apis/fetchCategory";
 import sortCategory from "../core/utils/sortCategory";
-import { Category } from "../models/UrlStateTypes";
 
 const { CategoryTouch, NameText, Emoji } = styled;
 
@@ -15,27 +14,21 @@ type Props = {
     emoji: string;
   };
   linkId: number;
-  // onPress: () => void;
+  closeModal: () => void;
 };
 
-const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
-  const { onEditCategory, onHome, categories } = useLinkData();
-  const [data, setData] = useState<Category[]>([]);
+const CategoryItem = ({ linkId, item, closeModal }: Props): JSX.Element => {
+  const { onEditCategory, onHome } = useLinkData();
   const category_id = item.id;
 
   const handlePress = async () => {
-    console.log(category_id);
     try {
+      onEditCategory(linkId, category_id);
       await editCategoryApi(linkId, category_id);
-      await onEditCategory(linkId, category_id);
-      // const categories = await fetchCategoryRequest();
-      // await sortCategory(categories);
-      // onHome(categories);
-      // setData(categories);
-      // console.log(categories);
-
-      //? home 34 getCategoryList , categories 다시 받아오는 요청.
-      //? toggle 닫히게
+      closeModal();
+      const categories = await fetchCategoryRequest();
+      await sortCategory(categories);
+      onHome(categories);
     } catch (error) {
       console.error(error);
     }

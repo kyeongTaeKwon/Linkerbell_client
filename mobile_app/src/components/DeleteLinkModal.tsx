@@ -6,6 +6,8 @@ import styled from "../styles/DeleteCategoryModal/index";
 import deleteLink from "../core/apis/deleteLink";
 import { Url } from "../models/UrlStateTypes";
 import deleteLinkApi from "../core/apis/deleteLink";
+import fetchCategoryRequest from "../core/apis/fetchCategory";
+import sortCategory from "../core/utils/sortCategory";
 const { DeleteModal, ButtonWrapper, Link, Title } = styled;
 
 type Props = {
@@ -19,18 +21,17 @@ const DeleteLinkModal = ({
   toggleModal,
   currentLinkId,
 }: Props): JSX.Element => {
-  const { onDeleteLink } = useLinkData();
-
-  // useEffect(() => {
-  //   setList();
-  // }, []);
+  const { onDeleteLink, onHome } = useLinkData();
 
   const handlePress = async () => {
     try {
-      deleteLinkApi(currentLinkId);
-      await onDeleteLink(currentLinkId);
+      onDeleteLink(currentLinkId);
+      await deleteLinkApi(currentLinkId);
+      toggleModal();
+      const categories = await fetchCategoryRequest();
+      await sortCategory(categories);
+      onHome(categories);
 
-      //? homme 에 반영되게
       //? toggle false 모달 닫히게
     } catch (error) {
       console.log(error);

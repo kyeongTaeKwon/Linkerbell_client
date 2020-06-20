@@ -16,12 +16,13 @@ const SwipeLink = ({ setSwipe, children }: Props): JSX.Element => {
     onPanResponderTerminationRequest: () => false,
     onStartShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
+    onShouldBlockNativeResponder: () => false,
     onPanResponderMove: (e, gestureState) => {
       if (gestureState.dx < -35) {
         const newX = gestureState.dx + gestureDelay;
         position.setValue({ x: newX, y: 0 });
       }
-      if (gestureState.dx < 0) {
+      if (gestureState.dx < -10) {
         setSwipe(true);
         Animated.event([null, { dx: translateX }])(e, gestureState);
       }
