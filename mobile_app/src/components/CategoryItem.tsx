@@ -15,6 +15,7 @@ type Props = {
     emoji: string;
   };
   linkId: number;
+  // onPress: () => void;
 };
 
 const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
@@ -25,7 +26,7 @@ const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
   const handlePress = async () => {
     console.log(category_id);
     try {
-      editCategoryApi(linkId, category_id);
+      await editCategoryApi(linkId, category_id);
       await onEditCategory(linkId, category_id);
       // const categories = await fetchCategoryRequest();
       // await sortCategory(categories);
@@ -33,7 +34,8 @@ const CategoryItem = ({ linkId, item }: Props): JSX.Element => {
       // setData(categories);
       // console.log(categories);
 
-      // home 34 getCategoryList , categories 다시 받아오는 요청.
+      //? home 34 getCategoryList , categories 다시 받아오는 요청.
+      //? toggle 닫히게
     } catch (error) {
       console.error(error);
     }

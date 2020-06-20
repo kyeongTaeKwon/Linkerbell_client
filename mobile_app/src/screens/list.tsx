@@ -44,6 +44,7 @@ const List = ({ route }: ListProps): JSX.Element => {
   const [currentLinkId, setCurrentLinkId] = useState(0);
   const [currentLink, setCurrentLink] = useState<Url>();
   const { all_category_url_list, categories_url_list } = useLinkData();
+  const [isDeleteLinkModalVisible, setDeleteLinkModalVisible] = useState(false);
 
   useEffect(() => {
     const filterLinkBySearch = () => {
@@ -120,6 +121,13 @@ const List = ({ route }: ListProps): JSX.Element => {
   const closeTagEditModal = () => {
     setEdigTagModalVisible(false);
   };
+  const handleDeleteLinkModal = (id: number) => {
+    setCurrentLinkId(id);
+    setDeleteLinkModalVisible(true);
+  };
+  const closeDeleteModal = () => {
+    setDeleteLinkModalVisible(false);
+  };
   return (
     <Container OS={Platform.OS}>
       <Header
@@ -139,6 +147,7 @@ const List = ({ route }: ListProps): JSX.Element => {
         list={value.cur_list}
         onCategoryEdit={handleEditCategoryModal}
         onTagEdit={handleEditTagModal}
+        onDeleteLink={handleDeleteLinkModal}
       />
       <EditCategoryModal
         isVisible={isModalVisible}
@@ -151,9 +160,9 @@ const List = ({ route }: ListProps): JSX.Element => {
         currentLink={currentLink}
       />
       <DeleteLinkModal
-        isVisible={isModalVisible}
-        toggleModal={closeModal}
-        // list={Category_url_list}
+        isVisible={isDeleteLinkModalVisible}
+        toggleModal={closeDeleteModal}
+        currentLinkId={currentLinkId}
       />
     </Container>
   );

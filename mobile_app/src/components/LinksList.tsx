@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import { FlatList, NativeScrollEvent } from "react-native";
 import Link from "../components/Link";
 
-const LinkList = ({ list, onCategoryEdit, onTagEdit }): JSX.Element => {
+const LinkList = ({
+  list,
+  onCategoryEdit,
+  onTagEdit,
+  onDeleteLink,
+}): JSX.Element => {
   return (
     <FlatList
       data={list}
       renderItem={({ item }) => (
-        <Link data={item} onCategoryEdit={onCategoryEdit} onTagEdit={onTagEdit}>
+        <Link
+          data={item}
+          onCategoryEdit={onCategoryEdit}
+          onTagEdit={onTagEdit}
+          onDeleteLink={onDeleteLink}
+        >
           {item.title}
         </Link>
       )}

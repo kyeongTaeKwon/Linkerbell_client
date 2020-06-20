@@ -4,33 +4,34 @@ import Modal from "react-native-modal";
 import useLinkData from "../hooks/useLinkData";
 import styled from "../styles/DeleteCategoryModal/index";
 import deleteLink from "../core/apis/deleteLink";
-import { Url, Category_url_list } from "../models/UrlStateTypes";
+import { Url } from "../models/UrlStateTypes";
 import deleteLinkApi from "../core/apis/deleteLink";
 const { DeleteModal, ButtonWrapper, Link, Title } = styled;
 
 type Props = {
   isVisible: boolean;
   toggleModal: () => void;
-  //   linkId: number;
+  currentLinkId: number;
 };
 
 const DeleteLinkModal = ({
   isVisible,
   toggleModal,
-}: //   linkId,
-Props): JSX.Element => {
-  // const [list, setList] = useState<Category_url_list>(currentLink);
-  const { onDeleteLink, all_category_url_list } = useLinkData();
+  currentLinkId,
+}: Props): JSX.Element => {
+  const { onDeleteLink } = useLinkData();
 
   // useEffect(() => {
   //   setList();
   // }, []);
 
   const handlePress = async () => {
-    //   const { } = ;
     try {
-      deleteLinkApi(id);
-      await onDeleteLink(id);
+      deleteLinkApi(currentLinkId);
+      await onDeleteLink(currentLinkId);
+
+      //? homme 에 반영되게
+      //? toggle false 모달 닫히게
     } catch (error) {
       console.log(error);
     }
