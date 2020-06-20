@@ -81,13 +81,13 @@ const List = ({ route }: ListProps): JSX.Element => {
 
   useEffect(() => {
     const filterLinkBySearch = () => {
-      const { cur_list, text } = value;
+      const { list, text } = value;
       if (text.trim() !== "") {
-        return cur_list.filter((link) =>
+        return list.filter((link) =>
           link.og_title.toLowerCase().includes(text.toLowerCase()),
         );
       }
-      return cur_list;
+      return list;
     };
     const cur_list = filterLinkBySearch();
     setValue({ ...value, cur_list });
