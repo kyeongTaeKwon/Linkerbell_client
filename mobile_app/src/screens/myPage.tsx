@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Platform } from "react-native";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { ShortBar } from "../styles/ShortBar";
 import { LogOutBtn, LogOutText } from "../styles/MypageStyles./logOutBtn";
@@ -21,7 +21,7 @@ const Mypage = (): JSX.Element => {
   };
   return (
     <View>
-      <UpperText>마이페이지</UpperText>
+      <UpperText OS={Platform.OS}>마이페이지</UpperText>
       <ShortBar />
       <LogOutBtn onPress={handleLogOutBtnPress}>
         <LogOutText>{"👋  로그아웃"}</LogOutText>

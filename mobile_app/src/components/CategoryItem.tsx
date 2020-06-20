@@ -24,7 +24,7 @@ const CategoryItem = ({ linkId, item, closeModal }: Props): JSX.Element => {
   const handlePress = async () => {
     try {
       onEditCategory(linkId, category_id);
-      await editCategoryApi(linkId, category_id);
+      await editCategoryApi(linkId, category_id)
       closeModal();
       const categories = await fetchCategoryRequest();
       await sortCategory(categories);

@@ -22,7 +22,8 @@ const LinkList = ({
         </Link>
       )}
       keyExtractor={(item) => item.id.toString()}
-      style={{ marginLeft: 0, marginBottom: 80, paddingTop: 10 }}
+      style={{ marginLeft: 0, marginBottom: 20 }}
+      contentContainerStyle={{ paddingBottom: 40 }}
     />
   );
 };

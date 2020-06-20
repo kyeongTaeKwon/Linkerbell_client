@@ -28,7 +28,7 @@ const EditTagModal = ({
   }, [currentLink]);
 
   const handlePress = async () => {
-    const { id, tags } = currentLink;
+    const { id, tags } = link;
     const tags_list = [...tags, tagText];
     try {
       if (tagText !== "" && tags.length < 3) {

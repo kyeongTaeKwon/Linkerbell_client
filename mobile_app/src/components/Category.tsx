@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     flexWrap: "wrap",
     marginLeft: 36,
-    height: 80,
+    height: 72,
   },
 });

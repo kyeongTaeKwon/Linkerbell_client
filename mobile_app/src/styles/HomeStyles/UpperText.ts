@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
-// type Props = {
-//   OS?: string;
-// };
+type Props = {
+  OS?: string;
+};
 
 export const UpperText = styled.Text`
   font-family: "NBold";
@@ -9,6 +9,6 @@ export const UpperText = styled.Text`
   padding: 0px;
   margin: 0px;
   margin-left: 36px;
-  margin-top: 100px;
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "100px" : "80px")};
   color: #000;
 `;
