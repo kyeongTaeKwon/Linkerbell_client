@@ -10,8 +10,14 @@ type Props = {
   data: Url;
   onCategoryEdit: () => void;
   onTagEdit: () => void;
+  onDeleteLink: () => void;
 };
-const link = ({ data, onCategoryEdit, onTagEdit }: Props): JSX.Element => {
+const link = ({
+  data,
+  onCategoryEdit,
+  onTagEdit,
+  onDeleteLink,
+}: Props): JSX.Element => {
   const [isSwipe, setSwipe] = useState(false);
 
   const handleSwipe = (bool: boolean): void => {
@@ -30,6 +36,7 @@ const link = ({ data, onCategoryEdit, onTagEdit }: Props): JSX.Element => {
         onTagEdit={onTagEdit}
         id={data.id}
         data={data}
+        onDeleteLink={onDeleteLink}
       />
     </View>
   );

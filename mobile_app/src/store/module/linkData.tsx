@@ -18,6 +18,7 @@ export const CATEGORISE_FAVORITE_LIST = "CATEGORISE_FAVORITE_LIST" as const;
 export const HANDLE_URL_FAVORITE = "HANDLE_URL_FAVORITE" as const;
 export const EDIT_LINK_CATEGORY = "EDIT_LINK_CATEGORY" as const;
 export const EDIT_TAG = "EDIT_TAG" as const;
+export const DELETE_LINK = "DELETE_LINK" as const;
 export const CATEGORISE_TAG_LIST = "CATEGORISE_TAG_LIST" as const;
 export const ADD_LINK = "ADD_LINK" as const;
 //2 .생성자 (영수증)
@@ -61,6 +62,12 @@ export const editTag = (id: number, tags: string[]) => ({
   type: EDIT_TAG,
   payload: { id, tags },
 });
+
+export const deleteLink = (id: number) => ({
+  type: DELETE_LINK,
+  payload: { id },
+});
+
 export const addLink = (linkData: Url) => ({
   type: ADD_LINK,
   payload: { linkData },
@@ -91,6 +98,7 @@ export type linkActions =
   | ReturnType<typeof handleUrlFavorite>
   | ReturnType<typeof editCategory>
   | ReturnType<typeof editTag>
+  | ReturnType<typeof deleteLink>
   | ReturnType<typeof categoriseTagList>
   | ReturnType<typeof addLink>;
 
@@ -130,8 +138,6 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
           link.id === id ? { ...link, category_id: category_id } : link,
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
-      // 필터 반복문을 돌려서
-      // 만약 item.id === link.id => link.category_id : category_id
     }
     case EDIT_TAG: {
       const { tags, id } = action.payload;
@@ -141,6 +147,15 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
     }
+    case DELETE_LINK: {
+      const { id } = action.payload;
+      const current_All_category_url_list = _.filter(
+        state.all_category_url_list,
+        (link) => link.id !== id,
+      );
+      return { ...state, all_category_url_list: current_All_category_url_list };
+     }
+
     case CATEGORISE_TAG_LIST: {
       const { all_tag_list, categories_tag_list } = action.payload;
       return { ...state, all_tag_list, categories_tag_list };

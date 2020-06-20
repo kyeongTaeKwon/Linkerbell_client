@@ -14,6 +14,7 @@ import LinkModal from "../components/AddLinkModal";
 import AddLinkBtn from "../components/AddLinkBtn";
 import { _getContent } from "../core/utils/getClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
+import sortCategory from "../core/utils/sortCategory";
 const Home = ({
   navigation,
 }: {
@@ -37,22 +38,13 @@ const Home = ({
     onHome(categories);
   };
 
-  const sortCategory = (array: any) => {
-    array.sort((a, b) => {
-      if (a.isnew > b.isnew) return -1;
-      if (a.isnew < b.isnew) return 1;
-      if (a.count > b.count) return -1;
-      if (a.count < b.count) return 1;
-    });
-  };
-
   useEffect(() => {
     getCategoryList();
   }, []);
 
   useEffect(() => {
     setData(categories);
-    console.log(categories);
+    console.log("onHOME", categories);
   }, [categories]);
 
   useFocusEffect(() => {

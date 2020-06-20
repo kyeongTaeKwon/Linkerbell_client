@@ -8,6 +8,7 @@ import {
   updateCategoriesList,
   editCategory,
   editTag,
+  deleteLink,
   addLink,
 } from "../store/module/linkData";
 import { useCallback } from "react";
@@ -62,6 +63,9 @@ export default function useLinkData() {
     },
     [dispatch],
   );
+  const onDeleteLink = useCallback((id) => dispatch(deleteLink(id)), [
+    dispatch,
+  ]);
   const onAddLink = useCallback(
     (linkData) => {
       dispatch(addLink(linkData));
@@ -80,6 +84,7 @@ export default function useLinkData() {
     onFavoriteBtnPress,
     updateCategoriesUrlList,
     onEditCategory,
+    onDeleteLink,
     onEditTag,
     categories_tag_list,
     onAddLink,

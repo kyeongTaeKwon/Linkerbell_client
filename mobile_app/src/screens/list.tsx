@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Platform } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
-import { Url } from "../models/UrlStateTypes";
+import { Url, Category_url_list } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
@@ -12,6 +12,8 @@ import useLinkData from "../hooks/useLinkData";
 import sortLink from "../core/utils/sortLink";
 import EditCategoryModal from "../components/EditCategoryModal";
 import EditTagModal from "../components/EditTagModal";
+import DeleteLinkModal from "../components/DeleteLinkModal";
+
 const { Container } = styled;
 
 export type value = {
@@ -41,6 +43,7 @@ const List = ({ route }: ListProps): JSX.Element => {
   const [isEdigTagModalVisible, setEdigTagModalVisible] = useState(false);
   const [currentLinkId, setCurrentLinkId] = useState(0);
   const [currentLink, setCurrentLink] = useState<Url>();
+  const [isDeleteLinkModalVisible, setDeleteLinkModalVisible] = useState(false);
   const {
     all_category_url_list,
     categories_url_list,
@@ -139,6 +142,13 @@ const List = ({ route }: ListProps): JSX.Element => {
   const closeTagEditModal = () => {
     setEdigTagModalVisible(false);
   };
+  const handleDeleteLinkModal = (id: number) => {
+    setCurrentLinkId(id);
+    setDeleteLinkModalVisible(true);
+  };
+  const closeDeleteModal = () => {
+    setDeleteLinkModalVisible(false);
+  };
   return (
     <Container OS={Platform.OS}>
       <Header
@@ -158,6 +168,7 @@ const List = ({ route }: ListProps): JSX.Element => {
         list={value.cur_list}
         onCategoryEdit={handleEditCategoryModal}
         onTagEdit={handleEditTagModal}
+        onDeleteLink={handleDeleteLinkModal}
       />
       <EditCategoryModal
         isVisible={isModalVisible}
@@ -168,6 +179,11 @@ const List = ({ route }: ListProps): JSX.Element => {
         isVisible={isEdigTagModalVisible}
         toggleModal={closeTagEditModal}
         currentLink={currentLink}
+      />
+      <DeleteLinkModal
+        isVisible={isDeleteLinkModalVisible}
+        toggleModal={closeDeleteModal}
+        currentLinkId={currentLinkId}
       />
     </Container>
   );
