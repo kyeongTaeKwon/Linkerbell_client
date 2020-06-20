@@ -5,7 +5,7 @@ type Props = {
 
 export const CategoryTouch = styled.TouchableOpacity`
   align-items: center;
-  margin-vertical: 4px;
+  margin-vertical: 7px;
   margin-horizontal: 2px;
   padding-vertical: 8px;
   flex: 1;

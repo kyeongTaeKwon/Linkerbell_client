@@ -51,7 +51,11 @@ const EditCategoryModal = ({
           keyExtractor={(item) => item.id.toString()}
           data={categoryList}
           renderItem={({ item }) => (
-            <CategoryItem item={item} linkId={currentLinkId} />
+            <CategoryItem
+              item={item}
+              linkId={currentLinkId}
+              onPress={toggleModal}
+            />
           )}
           numColumns={numColumns}
           style={{
