@@ -31,8 +31,9 @@ function* fetchAllList$() {
   }
 }
 function* updateCategoriesList$(action: any) {
-  const { AllList } = action.payload;
+  // const { AllList } = action.payload;
   try {
+    const { AllList } = action.payload;
     yield fetchList$(AllList);
     const favorite_list: Url[] = [];
     _.forEach(AllList, (item: Url) => {
@@ -40,7 +41,7 @@ function* updateCategoriesList$(action: any) {
     });
     yield categoriseFavList(favorite_list);
   } catch (e) {
-    console.log(e.response.data);
+    console.log(e);
   }
 }
 

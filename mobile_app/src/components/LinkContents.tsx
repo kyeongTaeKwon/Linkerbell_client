@@ -43,7 +43,6 @@ const LinkContents = ({ data, isSwipe }: Props): JSX.Element => {
   };
 
   const renderNewDot = (isNew: boolean) => {
-    console.log(isNew);
     if (isNew) {
       return <NewDot />;
     }
@@ -52,7 +51,6 @@ const LinkContents = ({ data, isSwipe }: Props): JSX.Element => {
     <View>
       <TouchableWithoutFeedback
         style={renderLinkDataBoxStyle()}
-        // onPress={() => onSwipe(data.id)}
         onPress={() => !isSwipe && Linking.openURL(data.url)}
       >
         {renderNewDot(data.isnew)}

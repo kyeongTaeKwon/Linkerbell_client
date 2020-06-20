@@ -48,49 +48,56 @@ const List = ({ route }: ListProps): JSX.Element => {
     categories_tag_list,
   } = useLinkData();
 
-  useEffect(() => {
-    const filterLinkBySearch = () => {
-      const { list, text } = value;
-      if (text !== "") {
-        return list.filter((link) =>
-          link.og_title.toLowerCase().includes(text.toLowerCase()),
-        );
-      }
-      return list;
-    };
-    const cur_list = filterLinkBySearch();
-    setValue({ ...value, cur_list });
-    console.log(categories_tag_list);
-  }, [value.text]);
-
-  useEffect(() => {
-    const filterLinkByTag = () => {
-      const { cur_tag, list } = value;
-      if (cur_tag === "All") return list;
-      else {
-        return _.filter(list, (link) => _.includes(link.tags, cur_tag));
-      }
-    };
-    const cur_list = filterLinkByTag();
-    setValue({ ...value, cur_list });
-  }, [value.cur_tag]);
+  const filterLinkByTag = (list: Url[]) => {
+    const { cur_tag } = value;
+    if (cur_tag === "All") return list;
+    else {
+      return _.filter(list, (link) => _.includes(link.tags, cur_tag));
+    }
+  };
 
   const updateList = (category_id: number) => {
+    let all_list;
     let list;
     let tags = ["All"];
+    const { cur_tag } = value;
     if (category_id === 0) {
+      all_list = all_category_url_list;
       list = sortLink(all_category_url_list, value.orderType);
       if (all_tag_list) {
         tags = ["All", ...all_tag_list];
       }
+      list = filterLinkByTag(list);
     } else {
+      all_list = categories_url_list[category_id];
       list = sortLink(categories_url_list[category_id], value.orderType);
       if (categories_tag_list[category_id]) {
         tags = ["All", ...categories_tag_list[category_id]];
       }
+      list = filterLinkByTag(list);
     }
-    setValue({ ...value, list, cur_list: list, tags });
+    setValue({ ...value, list: all_list, cur_list: list, tags });
   };
+
+  useEffect(() => {
+    const filterLinkBySearch = () => {
+      const { cur_list, text } = value;
+      if (text.trim() !== "") {
+        return cur_list.filter((link) =>
+          link.og_title.toLowerCase().includes(text.toLowerCase()),
+        );
+      }
+      return cur_list;
+    };
+    const cur_list = filterLinkBySearch();
+    setValue({ ...value, cur_list });
+  }, [value.text]);
+
+  useEffect(() => {
+    const { list } = value;
+    const cur_list = filterLinkByTag(list);
+    setValue({ ...value, cur_list });
+  }, [value.cur_tag]);
 
   useEffect(() => {
     const { category_id } = route.params;
