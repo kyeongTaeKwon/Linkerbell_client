@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Platform } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
-import { Url, Category_url_list } from "../models/UrlStateTypes";
+import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
 import TagList from "../components/TagList";
 import LinkList from "../components/LinksList";
@@ -143,8 +143,8 @@ const List = ({ route }: ListProps): JSX.Element => {
   const closeTagEditModal = () => {
     setEdigTagModalVisible(false);
   };
-  const handleDeleteLinkModal = (id: number) => {
-    setCurrentLinkId(id);
+  const handleDeleteLinkModal = (linkData: Url) => {
+    setCurrentLink(linkData);
     setDeleteLinkModalVisible(true);
   };
   const closeDeleteModal = () => {
@@ -185,6 +185,7 @@ const List = ({ route }: ListProps): JSX.Element => {
         isVisible={isDeleteLinkModalVisible}
         toggleModal={closeDeleteModal}
         currentLinkId={currentLinkId}
+        currentLink={currentLink}
       />
     </Container>
   );
