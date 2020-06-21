@@ -21,6 +21,7 @@ export const LoginBtn = styled.TouchableOpacity`
   border: ${(props: Props) =>
     props.route === "google" ? "#b4b4b4 1px" : "0px"};
   align-items: center;
+  justify-content: center;
 `;
 export const LoginLabel = styled.Text`
   font-family: "NMedium";
@@ -32,6 +33,7 @@ export const LinkToBox = styled.View`
   flex-direction: row;
   margin-top: 28px;
   align-self: center;
+  justify-content: center;
 `;
 export const LinkToSignUp = styled.TouchableWithoutFeedback`
   color: #000;
@@ -40,6 +42,6 @@ export const LinkToLabel = styled.Text`
   font-family: "NBold";
   margin-left: 10px;
   font-size: 14px;
-  line-height: ${14 * 1.2}px;
+  line-height: ${14 * 1.4}px;
   color: #000;
 `;
