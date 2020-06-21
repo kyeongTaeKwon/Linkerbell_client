@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 
 type Props = {
-  width: number;
+  isEmpty?: boolean;
 };
 export const LinkAddBtn = styled.TouchableHighlight`
   position: absolute;
@@ -11,6 +11,7 @@ export const LinkAddBtn = styled.TouchableHighlight`
   justify-content: center;
   align-items: center;
   bottom: 60px;
-  background-color: #ffd93b;
+  background-color: ${(props: Props) =>
+    props.isEmpty ? "#9e9e9e" : "#ffd93b"};
   border-radius: 8px;
 `;

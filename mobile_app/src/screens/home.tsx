@@ -74,7 +74,6 @@ const Home = ({
   });
 
   const handleAddLinkBtn = () => {
-    console.log("Add link button clicked");
     setModalVisible(true);
   };
 
