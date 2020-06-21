@@ -7,6 +7,7 @@ import { Url } from "../models/UrlStateTypes";
 import deleteLinkApi from "../core/apis/deleteLink";
 import fetchCategoryRequest from "../core/apis/fetchCategory";
 import sortCategory from "../core/utils/sortCategory";
+import { truncate } from "lodash";
 const { DeleteModal, ButtonWrapper, Link, Title } = styled;
 
 type Props = {
@@ -41,10 +42,13 @@ const DeleteLinkModal = ({
     }
   };
 
+  const sliceText = (text: string, length: number) => {
+    return truncate(text, { length });
+  };
   const renderTitle = () => {
     if (link && link.og_title) {
       const { og_title } = link;
-      return og_title;
+      return sliceText(og_title, 30);
     }
   };
 
