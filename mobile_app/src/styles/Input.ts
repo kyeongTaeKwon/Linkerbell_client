@@ -12,5 +12,5 @@ export const InputForm = styled.TextInput`
   margin-top: ${(props: Platform) => (props.OS === "ios" ? "8px" : "0px")};
   margin-left: 56px;
   border-width: 0px;
-  /* height: ${(props: Platform) => (props.OS === "ios" ? "0px" : "45px")}; */
+  height: ${(props: Platform) => (props.OS === "ios" ? "32px" : "46px")};
 `;

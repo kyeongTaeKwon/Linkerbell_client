@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+} from "react-native";
 import Modal from "react-native-modal";
 import useLinkData from "../hooks/useLinkData";
 import styled from "../styles/EditTagModal/ETStyleIndex";
@@ -55,17 +61,28 @@ const EditTagModal = ({
   const renderTags = () => {
     if (link && link.tags) {
       return (
-        <FlatList
-          data={link.tags}
+        <ScrollView
           horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ flexGrow: 0 }}
           scrollEnabled={false}
-          keyExtractor={(item) => item}
-          renderItem={({ item }) => (
-            <Tag currentTag={item} onDelete={handleDeletePress} id={link.id} />
-          )}
-        />
+          contentContainerStyle={{
+            flex: 1,
+            flexDirection: "row",
+            flexWrap: "wrap",
+          }}
+        >
+          {_.map(link.tags, (tag) => (
+            <Tag currentTag={tag} onDelete={handleDeletePress} id={link.id} />
+          ))}
+        </ScrollView>
+        // <FlatList
+        //   data={link.tags}
+        //   horizontal={true} // showsHorizontalScrollIndicator={false}
+        //   scrollEnabled={false}
+        //   keyExtractor={(item) => item}
+        //   renderItem={({ item }) => (
+        //     <Tag currentTag={item} onDelete={handleDeletePress} id={link.id} />
+        //   )}
+        // />
       );
     }
   };
@@ -79,6 +96,7 @@ const EditTagModal = ({
             placeholderTextColor="#6c6c6c"
             onChangeText={(val) => setTagText(val)}
             value={tagText}
+            maxLength={7}
           />
           <TouchableOpacity onPress={handlePress}>
             <AddBtn>
@@ -95,7 +113,16 @@ const EditTagModal = ({
             </AddBtn>
           </TouchableOpacity>
         </InputWrapper>
-        <View style={{ marginLeft: 28, marginTop: 16 }}>{renderTags()}</View>
+        <View
+          style={{
+            marginLeft: 28,
+            marginTop: 16,
+            // flexWrap: "wrap",
+            // width: 200,
+          }}
+        >
+          {renderTags()}
+        </View>
       </TagModal>
     </Modal>
   );

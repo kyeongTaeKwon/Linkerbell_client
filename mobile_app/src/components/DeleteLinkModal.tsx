@@ -42,8 +42,10 @@ const DeleteLinkModal = ({
   };
 
   const renderTitle = () => {
-    const { og_title } = link;
-    return og_title;
+    if (link && link.og_title) {
+      const { og_title } = link;
+      return og_title;
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform } from "react-native";
+import { Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
 import { ShortBar } from "../styles/ShortBar";
@@ -46,6 +46,12 @@ const Favorite = (): JSX.Element => {
   }, [value.text]);
 
   useEffect(() => {
+    const { list, orderType } = value;
+    const cur_list = sortLink(list, orderType);
+    setValue({ ...value, cur_list });
+  }, [value.orderType]);
+
+  useEffect(() => {
     const current_list = sortLink(favorite_list, value.orderType);
     setValue({
       ...value,
@@ -84,30 +90,32 @@ const Favorite = (): JSX.Element => {
     setEdigTagModalVisible(false);
   };
   return (
-    <Container OS={Platform.OS}>
-      <Header
-        onTextChange={handleTextChange}
-        category_name="즐겨찾기"
-        ordered={value.orderType}
-        onSort={handleSortButton}
-      />
-      <ShortBar style={{ marginBottom: 48 }} />
-      <LinkList
-        list={value.cur_list}
-        onCategoryEdit={handleEditCategoryModal}
-        onTagEdit={handleEditTagModal}
-      />
-      <EditCategoryModal
-        isVisible={isModalVisible}
-        toggleModal={closeModal}
-        currentLinkId={currentLinkId}
-      />
-      <EditTagModal
-        isVisible={isEdigTagModalVisible}
-        toggleModal={closeTagEditModal}
-        currentLink={currentLink}
-      />
-    </Container>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <Container OS={Platform.OS}>
+        <Header
+          onTextChange={handleTextChange}
+          category_name="즐겨찾기"
+          ordered={value.orderType}
+          onSort={handleSortButton}
+        />
+        <ShortBar style={{ marginBottom: 48 }} />
+        <LinkList
+          list={value.cur_list}
+          onCategoryEdit={handleEditCategoryModal}
+          onTagEdit={handleEditTagModal}
+        />
+        <EditCategoryModal
+          isVisible={isModalVisible}
+          toggleModal={closeModal}
+          currentLinkId={currentLinkId}
+        />
+        <EditTagModal
+          isVisible={isEdigTagModalVisible}
+          toggleModal={closeTagEditModal}
+          currentLink={currentLink}
+        />
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 

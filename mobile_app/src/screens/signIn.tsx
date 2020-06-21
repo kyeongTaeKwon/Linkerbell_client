@@ -39,8 +39,18 @@ const Login = ({
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <Container>
         <MainText OS={Platform.OS}>로그인하기</MainText>
-        <Input name="email" value={value} onChange={setValue} />
-        <Input name="password" value={value} onChange={setValue} />
+        <Input
+          name="email"
+          value={value}
+          onChange={setValue}
+          OS={Platform.OS}
+        />
+        <Input
+          name="password"
+          value={value}
+          onChange={setValue}
+          OS={Platform.OS}
+        />
         <Btn
           name="signin"
           state={value}

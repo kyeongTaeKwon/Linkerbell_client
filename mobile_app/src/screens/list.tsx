@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Platform } from "react-native";
+import { Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { renderCategoryName } from "../core/utils/category";
 import styled from "../styles/listStyles/index";
 import { Url } from "../models/UrlStateTypes";
@@ -29,7 +29,7 @@ type ListProps = {
   route: any;
 };
 
-const List = ({ route }: ListProps): JSX.Element => {
+const List = ({ route, navigation }: ListProps): JSX.Element => {
   const [value, setValue] = useState<value>({
     cur_tag: "All",
     tags: ["All"],
@@ -83,6 +83,10 @@ const List = ({ route }: ListProps): JSX.Element => {
   };
 
   useEffect(() => {
+    value.cur_list.length === 0 && setValue({ ...value, cur_tag: "All" });
+  }, [value.cur_list]);
+
+  useEffect(() => {
     const filterLinkBySearch = () => {
       const { list, text } = value;
       const filtered_list = filterLinkByTag(list);
@@ -105,12 +109,17 @@ const List = ({ route }: ListProps): JSX.Element => {
 
   useEffect(() => {
     const { category_id } = route.params;
+
     updateList(category_id);
+    if (category_id !== 0 && !categories_url_list[category_id]) {
+      navigation.navigate("Home");
+    }
   }, [categories_url_list, all_category_url_list]);
 
   useEffect(() => {
     const { list, orderType } = value;
-    const cur_list = sortLink(list, orderType);
+    const filtered_list = filterLinkByTag(list);
+    const cur_list = sortLink(filtered_list, orderType);
     setValue({ ...value, cur_list });
   }, [value.orderType]);
 
@@ -151,43 +160,45 @@ const List = ({ route }: ListProps): JSX.Element => {
     setDeleteLinkModalVisible(false);
   };
   return (
-    <Container OS={Platform.OS}>
-      <Header
-        category_name={value.category_name}
-        onTextChange={handleTextChange}
-        ordered={value.orderType}
-        onSort={handleSortButton}
-      />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <Container OS={Platform.OS}>
+        <Header
+          category_name={value.category_name}
+          onTextChange={handleTextChange}
+          ordered={value.orderType}
+          onSort={handleSortButton}
+        />
 
-      <ShortBar />
-      <TagList
-        currentTag={value.cur_tag}
-        tags={value.tags}
-        onPress={handlePress}
-      />
-      <LinkList
-        list={value.cur_list}
-        onCategoryEdit={handleEditCategoryModal}
-        onTagEdit={handleEditTagModal}
-        onDeleteLink={handleDeleteLinkModal}
-      />
-      <EditCategoryModal
-        isVisible={isModalVisible}
-        toggleModal={closeModal}
-        currentLinkId={currentLinkId}
-      />
-      <EditTagModal
-        isVisible={isEdigTagModalVisible}
-        toggleModal={closeTagEditModal}
-        currentLink={currentLink}
-      />
-      <DeleteLinkModal
-        isVisible={isDeleteLinkModalVisible}
-        toggleModal={closeDeleteModal}
-        currentLinkId={currentLinkId}
-        currentLink={currentLink}
-      />
-    </Container>
+        <ShortBar />
+        <TagList
+          currentTag={value.cur_tag}
+          tags={value.tags}
+          onPress={handlePress}
+        />
+        <LinkList
+          list={value.cur_list}
+          onCategoryEdit={handleEditCategoryModal}
+          onTagEdit={handleEditTagModal}
+          onDeleteLink={handleDeleteLinkModal}
+        />
+        <EditCategoryModal
+          isVisible={isModalVisible}
+          toggleModal={closeModal}
+          currentLinkId={currentLinkId}
+        />
+        <EditTagModal
+          isVisible={isEdigTagModalVisible}
+          toggleModal={closeTagEditModal}
+          currentLink={currentLink}
+        />
+        <DeleteLinkModal
+          isVisible={isDeleteLinkModalVisible}
+          toggleModal={closeDeleteModal}
+          currentLinkId={currentLinkId}
+          currentLink={currentLink}
+        />
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 
