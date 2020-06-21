@@ -51,7 +51,11 @@ const SwipeLink = ({ setSwipe, children }: Props): JSX.Element => {
     },
   });
   useEffect(() => {
-    translateX.addListener(({ value }) => value === 0 && setSwipe(false));
+    translateX.addListener(({ value }) =>
+      setTimeout(() => {
+        value === 0 && setSwipe(false);
+      }, 200),
+    );
   }, [translateX]);
 
   return (

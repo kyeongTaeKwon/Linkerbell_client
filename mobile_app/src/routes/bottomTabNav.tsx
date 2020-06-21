@@ -110,13 +110,13 @@ const BottomTabNav = (): JSX.Element => {
           tabBarLabel: "",
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Trending"
         component={Trending}
         options={{
           tabBarLabel: "",
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Mypage"
         component={Mypage}

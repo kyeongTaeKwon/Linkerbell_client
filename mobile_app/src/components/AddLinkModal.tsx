@@ -5,6 +5,7 @@ import styled from "../styles/LinkModalStyles/index";
 import postUrl from "../core/apis/postUrl";
 import useServices from "../hooks/useServices";
 import { _getContent } from "../core/utils/getClipboard";
+import { _setContent } from "../core/utils/setClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
 import useLinkData from "../hooks/useLinkData";
 
@@ -28,7 +29,10 @@ const AddLinkModal = ({
       const res = await postUrl(copiedUrl);
       await onReload();
       await onAddLink(res);
+      await _setContent();
+      setText("");
       toggleModal();
+
       // await fetchAllList();
     } catch (e) {
       console.log(e);
@@ -37,6 +41,8 @@ const AddLinkModal = ({
 
   useEffect(() => {
     handleCopiedUrl();
+    console.log(text);
+    console.log("클립보드", _getContent());
   }, [isVisible]);
 
   const handleCopiedUrl = async () => {
@@ -63,6 +69,7 @@ const AddLinkModal = ({
         <SubText>
           북마크에 글을 추가 하시면 {"\n"}링커벨이 카테고리를 분류해드릴게요
         </SubText>
+        {/* <SubText>{text}</SubText> */}
         <LinkAddBtn onPress={handlePress}>
           <Text style={{ fontFamily: "NBold", fontSize: 17 }}>추가</Text>
         </LinkAddBtn>

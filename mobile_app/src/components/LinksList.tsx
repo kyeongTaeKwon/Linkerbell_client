@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { FlatList, NativeScrollEvent } from "react-native";
+import React from "react";
+import { FlatList, Platform } from "react-native";
 import Link from "../components/Link";
 
 const LinkList = ({
@@ -22,7 +22,11 @@ const LinkList = ({
         </Link>
       )}
       keyExtractor={(item) => item.id.toString()}
-      style={{ marginLeft: 0, marginBottom: 20 }}
+      style={{
+        marginLeft: 0,
+        marginBottom: 20,
+      }}
+      showsVerticalScrollIndicator={Platform.OS === "ios" ? false : true}
       contentContainerStyle={{ paddingBottom: 40 }}
     />
   );

@@ -11,6 +11,7 @@ export const TagWrapper = styled.TouchableOpacity`
   text-align: center;
   overflow: hidden;
   margin-right: 12px;
+  margin-bottom: 12px;
   flex-direction: row;
   align-items: center;
 `;
