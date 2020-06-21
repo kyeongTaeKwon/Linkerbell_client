@@ -79,7 +79,7 @@ const LinkInMenu = ({
       </TouchableOpacity>
       <TouchableOpacity
         style={renderBtnStyle("#ff4848")}
-        onPress={() => onDeleteLink(id)}
+        onPress={() => onDeleteLink(data)}
       >
         <AntDesign
           name="delete"

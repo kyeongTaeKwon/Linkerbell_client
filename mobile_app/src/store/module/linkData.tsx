@@ -154,8 +154,7 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
         (link) => link.id !== id,
       );
       return { ...state, all_category_url_list: current_All_category_url_list };
-     }
-
+    }
     case CATEGORISE_TAG_LIST: {
       const { all_tag_list, categories_tag_list } = action.payload;
       return { ...state, all_tag_list, categories_tag_list };

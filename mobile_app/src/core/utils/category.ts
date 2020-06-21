@@ -32,6 +32,7 @@ export const renderCategoryText = (category_id: number): Category | string => {
     18: { name: "쇼핑", emoji: "🛍️" },
     19: { name: "패션", emoji: "👗" },
     20: { name: "스포츠", emoji: "⚽️" },
+    21: { name: "기타", emoji: "" },
   };
   return category_object[category_id];
 };
