@@ -9,7 +9,7 @@ export const InputForm = styled.TextInput`
   line-height: ${14 * 1.6}px;
   padding: 0px;
   margin: 0px;
-  margin-top: ${(props: Platform) => (props.OS === "ios" ? "8px" : "0px")};
+  margin-top: ${(props: Platform) => (props.OS === "ios" ? "0px" : "0px")};
   margin-left: 56px;
   border-width: 0px;
   height: ${(props: Platform) => (props.OS === "ios" ? "32px" : "46px")};

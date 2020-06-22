@@ -44,7 +44,7 @@ const Home = ({
 
   useEffect(() => {
     setData(categories);
-    console.log("onHOME", categories);
+    // console.log("onHOME", categories);
   }, [categories]);
 
   useFocusEffect(() => {

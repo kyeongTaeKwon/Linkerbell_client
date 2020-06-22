@@ -25,7 +25,7 @@ export const LoginBtn = styled.TouchableOpacity`
 `;
 export const LoginLabel = styled.Text`
   font-family: "NMedium";
-  font-size: 15px;
+  font-size: 16px;
   color: ${(props: Props) => (props.route === "facebook" ? "#fff" : "#000")};
 `;
 export const LinkToBox = styled.View`

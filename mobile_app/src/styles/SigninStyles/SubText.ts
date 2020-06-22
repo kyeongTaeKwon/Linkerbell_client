@@ -8,7 +8,7 @@ type Props = {
 const calcMargin = (os: string, danger?: boolean) => {
   let margin = 20;
   if (danger) margin = 24;
-  if (os === "ios") margin *= 1.8;
+  if (os === "ios") margin *= 1.6;
   return margin;
 };
 const adjustMarginByOS = (os: string, danger?: boolean) => css`

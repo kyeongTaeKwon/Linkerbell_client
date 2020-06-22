@@ -49,7 +49,7 @@ function* updateCategoriesList$(action: any) {
 
 function* fetchList$(lists: Url[]) {
   try {
-    console.log("실행");
+    // console.log("실행");
     const categories_url_list: Category_url_list = {};
     const favorite_list: Url[] = [];
     let all_tags: string[] = [];
