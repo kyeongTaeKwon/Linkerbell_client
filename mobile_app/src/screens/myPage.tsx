@@ -28,7 +28,7 @@ const Mypage = (): JSX.Element => {
     }
   };
   return (
-    <View>
+    <View style={{ backgroundColor: "#fff", flex: 1 }}>
       <UpperText OS={Platform.OS}>마이페이지</UpperText>
       <ShortBar />
       <EmailView>

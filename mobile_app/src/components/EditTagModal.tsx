@@ -35,7 +35,7 @@ const EditTagModal = ({
 
   const handlePress = async () => {
     const { id, tags } = link;
-    const tags_list = [...tags, tagText];
+    const tags_list = _.uniq([...tags, tagText]);
     try {
       if (tagText !== "" && tags.length < 3) {
         await editTagRequest({ id, tags: tags_list });
@@ -74,15 +74,6 @@ const EditTagModal = ({
             <Tag currentTag={tag} onDelete={handleDeletePress} id={link.id} />
           ))}
         </ScrollView>
-        // <FlatList
-        //   data={link.tags}
-        //   horizontal={true} // showsHorizontalScrollIndicator={false}
-        //   scrollEnabled={false}
-        //   keyExtractor={(item) => item}
-        //   renderItem={({ item }) => (
-        //     <Tag currentTag={item} onDelete={handleDeletePress} id={link.id} />
-        //   )}
-        // />
       );
     }
   };
