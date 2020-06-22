@@ -13,7 +13,7 @@ import sortLink from "../core/utils/sortLink";
 import EditCategoryModal from "../components/EditCategoryModal";
 import EditTagModal from "../components/EditTagModal";
 import DeleteLinkModal from "../components/DeleteLinkModal";
-
+import useApp from "../hooks/useApp";
 const { Container } = styled;
 
 export type value = {
@@ -50,7 +50,7 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
     all_tag_list,
     categories_tag_list,
   } = useLinkData();
-
+  const { isDataLoading } = useApp();
   const filterLinkByTag = (list: Url[]) => {
     const { cur_tag } = value;
     if (cur_tag === "All") return list;
@@ -112,7 +112,7 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
 
     updateList(category_id);
     if (category_id !== 0 && !categories_url_list[category_id]) {
-      navigation.navigate("Home");
+      !isDataLoading && navigation.navigate("Home");
     }
   }, [categories_url_list, all_category_url_list]);
 

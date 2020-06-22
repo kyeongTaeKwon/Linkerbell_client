@@ -12,7 +12,7 @@ import {
   UPDATE_CATEGORIES_URL_LIST,
   CATEGORISE_TAG_LIST,
 } from "../module/linkData";
-
+import { LOAD_DATA_SUCCESS, LOAD_DATA_PENDING } from "../module/app";
 export default function* authSaga() {
   yield all([
     takeLatest(FETCH_ALL_LIST_REQUEST, fetchAllList$),
@@ -22,10 +22,12 @@ export default function* authSaga() {
 
 function* fetchAllList$() {
   try {
+    yield put({ type: LOAD_DATA_PENDING });
     const res = yield fetchAllListApi();
     const AllList = { ...res.data };
     yield put({ type: FETCH_ALL_LIST, payload: { AllList } });
     yield fetchList$(AllList.lists);
+    yield put({ type: LOAD_DATA_SUCCESS });
   } catch (e) {
     console.log(e.response.data);
   }
@@ -36,7 +38,7 @@ function* updateCategoriesList$(action: any) {
     const { AllList } = action.payload;
     yield fetchList$(AllList);
     const favorite_list: Url[] = [];
-    _.forEach(AllList, (item: Url) => {
+    yield _.forEach(AllList, (item: Url) => {
       item.favorite && favorite_list.push(item);
     });
     yield categoriseFavList(favorite_list);
@@ -47,14 +49,14 @@ function* updateCategoriesList$(action: any) {
 
 function* fetchList$(lists: Url[]) {
   try {
+    console.log("실행");
     const categories_url_list: Category_url_list = {};
     const favorite_list: Url[] = [];
     let all_tags: string[] = [];
     const catgories_tags: { [index: number]: string[] } = {};
-    _.forEach(lists, (item: Url) => {
+    yield _.forEach(lists, (item: Url) => {
       const { category_id } = item;
       item.favorite && favorite_list.push(item);
-      all_tags = [...all_tags, ...item.tags];
 
       if (categories_url_list[category_id]) {
         categories_url_list[category_id].push(item);
@@ -63,17 +65,20 @@ function* fetchList$(lists: Url[]) {
         categories_url_list[category_id].push(item);
       }
 
-      if (catgories_tags[category_id]) {
-        catgories_tags[category_id] = [
-          ...catgories_tags[category_id],
-          ...item.tags,
-        ];
-      } else {
-        catgories_tags[category_id] = [];
-        catgories_tags[category_id] = [
-          ...catgories_tags[category_id],
-          ...item.tags,
-        ];
+      if (item.tags) {
+        all_tags = [...all_tags, ...item.tags];
+        if (catgories_tags[category_id]) {
+          catgories_tags[category_id] = [
+            ...catgories_tags[category_id],
+            ...item.tags,
+          ];
+        } else {
+          catgories_tags[category_id] = [];
+          catgories_tags[category_id] = [
+            ...catgories_tags[category_id],
+            ...item.tags,
+          ];
+        }
       }
     });
     yield put({
@@ -83,7 +88,7 @@ function* fetchList$(lists: Url[]) {
     yield categoriseFavList(favorite_list);
     yield categoriseTagList(all_tags, catgories_tags);
   } catch (e) {
-    console.log(e.response.data);
+    console.log(e);
   }
 }
 
@@ -98,7 +103,7 @@ function* categoriseTagList(
   all_tags: string[],
   cetegories_tags: { [index: number]: string[] },
 ) {
-  const all_tag_list = _.uniq(all_tags);
+  const all_tag_list = yield _.uniq(all_tags);
   const categories_tag_list: { [key: string]: string[] } = {};
   for (const key in cetegories_tags) {
     const tags: string[] = _.uniq(cetegories_tags[key]);

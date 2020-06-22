@@ -5,7 +5,6 @@ export const getClipboard = (copiedUrl: string) => ({
   type: GET_COPY_TO_CLIPBOARD,
   payload: { copiedUrl },
 });
-
 export type InitialServicesState = {
   copiedUrl: string;
 };

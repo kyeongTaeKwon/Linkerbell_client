@@ -9,6 +9,7 @@ import Trending from "../screens/trending";
 import List from "../screens/list";
 import Mypage from "../screens/myPage";
 import useLinkData from "../hooks/useLinkData";
+import useApp from "../hooks/useApp";
 type NavProps = {
   focused: boolean;
   color: string;
@@ -31,14 +32,12 @@ const BottomTabNav = (): JSX.Element => {
   const Tab = createBottomTabNavigator();
   const {
     fetchAllList,
-    categories,
     updateCategoriesUrlList,
     all_category_url_list,
   } = useLinkData();
-
   useEffect(() => {
     fetchAllList();
-  }, [categories]);
+  }, []);
 
   useEffect(() => {
     updateCategoriesUrlList(all_category_url_list);

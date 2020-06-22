@@ -9,6 +9,7 @@ import sortLink from "../core/utils/sortLink";
 import useLinkData from "../hooks/useLinkData";
 import EditCategoryModal from "../components/EditCategoryModal";
 import EditTagModal from "../components/EditTagModal";
+import DeleteLinkModal from "../components/DeleteLinkModal";
 const { Container } = styled;
 
 type value = {
@@ -27,6 +28,7 @@ const Favorite = (): JSX.Element => {
   });
   const [isModalVisible, setModalVisible] = useState(false);
   const [isEdigTagModalVisible, setEdigTagModalVisible] = useState(false);
+  const [isDeleteLinkModalVisible, setDeleteLinkModalVisible] = useState(false);
   const [currentLinkId, setCurrentLinkId] = useState(0);
   const [currentLink, setCurrentLink] = useState<Url>();
   const { favorite_list } = useLinkData();
@@ -83,11 +85,18 @@ const Favorite = (): JSX.Element => {
     setCurrentLink(linkData);
     setEdigTagModalVisible(true);
   };
+  const handleDeleteLinkModal = (linkData: Url) => {
+    setCurrentLink(linkData);
+    setDeleteLinkModalVisible(true);
+  };
   const closeModal = () => {
     setModalVisible(false);
   };
   const closeTagEditModal = () => {
     setEdigTagModalVisible(false);
+  };
+  const closeDeleteModal = () => {
+    setDeleteLinkModalVisible(false);
   };
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -103,6 +112,7 @@ const Favorite = (): JSX.Element => {
           list={value.cur_list}
           onCategoryEdit={handleEditCategoryModal}
           onTagEdit={handleEditTagModal}
+          onDeleteLink={handleDeleteLinkModal}
         />
         <EditCategoryModal
           isVisible={isModalVisible}
@@ -112,6 +122,12 @@ const Favorite = (): JSX.Element => {
         <EditTagModal
           isVisible={isEdigTagModalVisible}
           toggleModal={closeTagEditModal}
+          currentLink={currentLink}
+        />
+        <DeleteLinkModal
+          isVisible={isDeleteLinkModalVisible}
+          toggleModal={closeDeleteModal}
+          currentLinkId={currentLinkId}
           currentLink={currentLink}
         />
       </Container>
