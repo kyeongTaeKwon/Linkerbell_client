@@ -2,10 +2,10 @@ import React from "react";
 import { Url } from "../models/UrlStateTypes";
 import { Img, FakeImg } from "../styles/listStyles/LinkImg";
 import { Linking } from "expo";
-import { truncate } from "lodash";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { FlatList, View, Dimensions } from "react-native";
 import styled from "../styles/listStyles/index";
+import { sliceText } from "../core/utils/sliceText";
 const { Desc, NewDot, Title, _Url, Tag } = styled;
 
 type Props = {
@@ -14,10 +14,6 @@ type Props = {
 };
 
 const LinkContents = ({ data, isSwipe }: Props): JSX.Element => {
-  const sliceText = (text: string, length: number) => {
-    return truncate(text, { length });
-  };
-
   const renderDesc = (description?: string): JSX.Element | void => {
     if (description) {
       return <Desc>{sliceText(description, 20)}</Desc>;

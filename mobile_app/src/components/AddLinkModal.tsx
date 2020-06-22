@@ -8,8 +8,9 @@ import { _getContent } from "../core/utils/getClipboard";
 import { _setContent } from "../core/utils/setClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
 import useLinkData from "../hooks/useLinkData";
+import { sliceText } from "../core/utils/sliceText";
 
-const { LinkAddBtn, LinkModal, MainText, SubText } = styled;
+const { LinkAddBtn, LinkModal, MainText, SubText, UrlText } = styled;
 type Props = {
   isVisible: boolean;
   toggleModal: () => void;
@@ -23,7 +24,7 @@ const AddLinkModal = ({
 }: Props): JSX.Element => {
   const [text, setText] = useState("");
   const { copiedUrl } = useServices();
-  const { fetchAllList, onAddLink } = useLinkData();
+  const { onAddLink } = useLinkData();
   const handlePress = async () => {
     try {
       const res = await postUrl(copiedUrl);
@@ -32,8 +33,6 @@ const AddLinkModal = ({
       await _setContent();
       setText("");
       toggleModal();
-
-      // await fetchAllList();
     } catch (e) {
       console.log(e);
     }
@@ -41,8 +40,6 @@ const AddLinkModal = ({
 
   useEffect(() => {
     handleCopiedUrl();
-    console.log(text);
-    console.log("클립보드", _getContent());
   }, [isVisible]);
 
   const handleCopiedUrl = async () => {
@@ -62,17 +59,30 @@ const AddLinkModal = ({
       return "클립보드에 저장된 링크를 추가할까요?";
     }
   };
+  const renderButton = () => {
+    if (text.length) {
+      return (
+        <LinkAddBtn onPress={handlePress}>
+          <Text style={{ fontFamily: "NBold", fontSize: 17 }}>추가</Text>
+        </LinkAddBtn>
+      );
+    } else {
+      return (
+        <LinkAddBtn isEmpty disabled={true}>
+          <Text style={{ fontFamily: "NBold", fontSize: 17 }}>추가</Text>
+        </LinkAddBtn>
+      );
+    }
+  };
   return (
     <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
       <LinkModal width={Dimensions.get("window").width}>
         <MainText>{renderMessage()}</MainText>
+        <UrlText>{sliceText(text, 50)}</UrlText>
         <SubText>
-          북마크에 글을 추가 하시면 {"\n"}링커벨이 카테고리를 분류해드릴게요
+          북마크에 글을 추가 하시면 {"\n"}링커벨이 카테고리를 분류해 드릴게요
         </SubText>
-        {/* <SubText>{text}</SubText> */}
-        <LinkAddBtn onPress={handlePress}>
-          <Text style={{ fontFamily: "NBold", fontSize: 17 }}>추가</Text>
-        </LinkAddBtn>
+        <React.Fragment>{renderButton()}</React.Fragment>
       </LinkModal>
     </Modal>
   );
