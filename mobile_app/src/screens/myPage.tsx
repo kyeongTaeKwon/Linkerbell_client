@@ -7,7 +7,7 @@ import {
   EmailText,
   EmailView,
   Email,
-  EmailContainer,
+  EditPWBtn,
 } from "../styles/MypageStyles./EmailView";
 import sendSignOutRequest from "../core/apis/logOut";
 import useAuth from "../hooks/useAuth";
@@ -33,13 +33,11 @@ const Mypage = (): JSX.Element => {
       <ShortBar />
       <EmailView>
         <EmailText>{"👤  이메일"}</EmailText>
-        {/* <EmailContainer> */}
         <Email>{"longeremail@longeremail.com"}</Email>
-        {/* </EmailContainer> */}
       </EmailView>
-      {/* <EmailView>
+      <EditPWBtn onPress={() => console.log("비밀번호를 수정하시겠습니까?")}>
         <EmailText>{"🔐  비밀번호 수정"}</EmailText>
-      </EmailView> */}
+      </EditPWBtn>
       <LogOutBtn onPress={handleLogOutBtnPress}>
         <LogOutText>{"👋  로그아웃"}</LogOutText>
       </LogOutBtn>
