@@ -33,10 +33,10 @@ const DeleteLinkModal = ({
     try {
       onDeleteLink(id);
       await deleteLinkApi(id);
-      toggleModal();
       const categories = await fetchCategoryRequest();
       await sortCategory(categories);
       onHome(categories);
+      toggleModal();
     } catch (error) {
       console.log(error);
     }

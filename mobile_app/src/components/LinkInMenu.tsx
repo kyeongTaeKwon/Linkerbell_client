@@ -30,6 +30,7 @@ const LinkInMenu = ({
         position: "absolute",
         width: 375,
         height: 100,
+        right: 0,
         maxHeight: 130,
         zIndex: -1,
         borderRadius: 8,
@@ -51,6 +52,7 @@ const LinkInMenu = ({
             color: "#fff",
             fontFamily: "NMedium",
             alignSelf: "center",
+            lineHeight: 18,
           }}
         >
           카테고리
@@ -73,13 +75,14 @@ const LinkInMenu = ({
             color: "#fff",
             fontFamily: "NMedium",
             alignSelf: "center",
+            lineHeight: 18,
           }}
         >
           태그
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={renderBtnStyle("#ff4848")}
+        style={renderBtnStyle("#ff6c6c")}
         onPress={() => onDeleteLink(data)}
       >
         <AntDesign
@@ -94,6 +97,7 @@ const LinkInMenu = ({
             color: "#fff",
             fontFamily: "NMedium",
             alignSelf: "center",
+            lineHeight: 18,
           }}
         >
           삭제

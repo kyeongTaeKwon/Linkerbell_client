@@ -55,7 +55,7 @@ const BottomTabNav = (): JSX.Element => {
       position: "absolute",
       bottom: 0,
       paddingBottom: 0,
-      height: 75,
+      height: 68,
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
