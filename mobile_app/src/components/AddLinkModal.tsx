@@ -70,7 +70,9 @@ const AddLinkModal = ({
     } else {
       return (
         <LinkAddBtn isEmpty disabled={true}>
-          <Text style={{ fontFamily: "NBold", fontSize: 17 }}>추가</Text>
+          <Text style={{ fontFamily: "NBold", fontSize: 17, color: "#fff" }}>
+            추가
+          </Text>
         </LinkAddBtn>
       );
     }
