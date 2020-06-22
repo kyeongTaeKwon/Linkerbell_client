@@ -62,10 +62,8 @@ const SwipeLink = ({ setSwipe, children }: Props): JSX.Element => {
     <Animated.View
       style={{
         transform: [{ translateX }],
-        // backgroundColor: "yellow",
         height: 130,
         maxHeight: 130,
-        width: 375,
         marginBottom: 4,
       }}
       {..._panResponder.panHandlers}
