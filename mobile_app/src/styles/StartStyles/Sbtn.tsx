@@ -25,7 +25,7 @@ export const LoginBtn = styled.TouchableOpacity`
 `;
 export const LoginLabel = styled.Text`
   font-family: "NMedium";
-  margin-top: ${(props: Props) => (props.OS === "ios" ? "12px" : "2px")};
+  /* margin-top: ${(props: Props) => (props.OS === "ios" ? "12px" : "2px")}; */
   font-size: 16px;
   color: ${(props: Props) => (props.route === "facebook" ? "#fff" : "#000")};
 `;

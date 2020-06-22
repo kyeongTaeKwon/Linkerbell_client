@@ -9,7 +9,7 @@ export const MainText = styled.Text`
   line-height: ${24 * 1.6}px;
   padding: 0px;
   margin: 0px;
-  margin-top: ${(props: Props) => (props.OS === "ios" ? "100px" : "80px")};
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "80px" : "80px")};
   margin-left: 44px;
   color: #000;
 `;

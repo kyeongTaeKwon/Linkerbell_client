@@ -69,6 +69,7 @@ const LinkInMenu = ({
         <Text
           style={{
             fontSize: 13,
+            lineHeight: 18,
             color: "#fff",
             fontFamily: "NMedium",
             alignSelf: "center",

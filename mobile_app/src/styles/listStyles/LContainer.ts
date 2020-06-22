@@ -5,6 +5,6 @@ type ContainerProps = {
 export const Container = styled.View`
   flex: 1;
   padding-top: ${(props: ContainerProps) =>
-    props.OS === "ios" ? "100px" : "60px"};
+    props.OS === "ios" ? "80px" : "80px"};
   background-color: #fff;
 `;

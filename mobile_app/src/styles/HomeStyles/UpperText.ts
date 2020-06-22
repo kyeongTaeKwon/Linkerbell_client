@@ -9,6 +9,6 @@ export const UpperText = styled.Text`
   padding: 0px;
   margin: 0px;
   margin-left: 36px;
-  margin-top: ${(props: Props) => (props.OS === "ios" ? "100px" : "80px")};
+  margin-top: ${(props: Props) => (props.OS === "ios" ? "80px" : "80px")};
   color: #000;
 `;
