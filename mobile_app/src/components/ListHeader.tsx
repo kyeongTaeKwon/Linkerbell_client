@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import styled from "../styles/listStyles/index";
@@ -10,6 +10,7 @@ type Props = {
   ordered: string;
   onTextChange: (text: string) => void;
   onSort: (orderType: string) => void;
+  length: number;
 };
 
 const HeaderContainer = ({
@@ -17,8 +18,13 @@ const HeaderContainer = ({
   onTextChange,
   ordered,
   onSort,
+  length,
 }: Props): JSX.Element => {
   const [isSearchable, setSearchable] = useState(false);
+  const handleBlur = () => {
+    setSearchable(false);
+    !length && onTextChange("");
+  };
   const renderInput = (): JSX.Element => {
     if (!isSearchable) {
       return (
@@ -41,9 +47,7 @@ const HeaderContainer = ({
           <SearchInput
             onChangeText={(text) => onTextChange(text)}
             underlineColorAndroid="transparent"
-            onBlur={() => {
-              setSearchable(false);
-            }}
+            onBlur={handleBlur}
             autoFocus={true}
           />
           <EvilIcons

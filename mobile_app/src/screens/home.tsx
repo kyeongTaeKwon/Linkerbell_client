@@ -15,6 +15,7 @@ import AddLinkBtn from "../components/AddLinkBtn";
 import { _getContent } from "../core/utils/getClipboard";
 import { validateUrl } from "../core/utils/validateUrl";
 import sortCategory from "../core/utils/sortCategory";
+import useAuth from "../hooks/useAuth";
 const Home = ({
   navigation,
 }: {
@@ -24,7 +25,7 @@ const Home = ({
   const { onHome, categories } = useLinkData();
   const [isModalVisible, setModalVisible] = useState(false);
   const { getCopiedUrl, copiedUrl } = useServices();
-
+  const { isOauthLogin } = useAuth();
   const handleAllListbtnPress = () => {
     navigation.navigate("List", { category_id: 0 });
   };
@@ -39,6 +40,7 @@ const Home = ({
   };
 
   useEffect(() => {
+    isOauthLogin && getCategoryList();
     setData(categories);
   }, []);
 

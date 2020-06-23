@@ -43,6 +43,9 @@ const EditTagModal = ({
     const tags_list = _.uniq([...tags, tagText]);
     const text: string = tagText.trim();
     try {
+      if (tags.length === 3) {
+        setMsg("태그는 3개까지 추가 가능합니다.");
+      }
       if (tags.includes(text)) {
         setMsg("이미 존재하는 태그입니다.");
       } else {
