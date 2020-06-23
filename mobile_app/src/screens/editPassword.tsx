@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextInput, View, Text } from "react-native";
 const EditPassword = (): JSX.Element => {
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: "center", alignContent: "center" }}>
       <Text> 현재 비밀번호 </Text>
       <TextInput placeholder="현재 비밀번호를 입력하세요"></TextInput>
       <Text> 새 비밀번호 </Text>
