@@ -26,6 +26,7 @@ const HomeStack = (): JSX.Element => {
     >
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="List" component={List} />
+      <Stack.Screen name="Mypage" component={Mypage} />
       <Stack.Screen name="EditPassword" component={EditPassword} />
     </Stack.Navigator>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { View, Platform } from "react-native";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { ShortBar } from "../styles/ShortBar";
@@ -19,8 +19,7 @@ const Mypage = ({
 }: {
   navigation: StackNavigationProp<any>;
 }): JSX.Element => {
-  const { onLogOut } = useAuth();
-
+  const { onLogOut, email } = useAuth();
 
   const onEditPassword = () => {
     navigation.navigate("EditPassword");
