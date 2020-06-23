@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Platform } from "react-native";
 import { LoginValue } from "../models/LoginTypes";
 import { InputForm } from "../styles/Input";
 import { InputWrapper } from "../styles/InputWrapper";
 import { isEmail } from "../core/utils/emailValidate";
 import { style } from "../styles/SigninStyles/StyleIndex";
+import useAuth from "../hooks/useAuth";
 const { SubText } = style;
 
 type stringOrNull = string | null;
@@ -27,21 +28,48 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     name === "passwordCheck" ? "다시 " : ""
   }`;
   const limit = name === "email" ? "" : "(8자 이상)";
+  const { err: requestError } = useAuth();
+
+  useEffect(() => {
+    const err = { ...value.err };
+    if (requestError === "check_email") {
+      err.email = "request wrong email";
+    }
+    if (requestError === "check_pw") {
+      err.password = "request wrong password";
+    }
+    onChange({ ...value, err });
+  }, [requestError]);
 
   const renderSubText = (err: err): JSX.Element => {
     let text = inputTitle;
     if (name in err) {
-      if (name === "email" && err[name] === `wrong ${name}`) {
-        text = "이메일 형식이 잘못되었습니다";
+      if (name === "email") {
+        if (err[name] === `wrong ${name}`) {
+          text = "이메일 형식이 잘못되었습니다";
+          return (
+            <SubText danger={true} OS={Platform.OS}>
+              {text}
+            </SubText>
+          );
+        } else if (err[name] === `request wrong ${name}`) {
+          text = "존재하지 않는 이메일 입니다";
+          return (
+            <SubText danger={true} OS={Platform.OS}>
+              {text}
+            </SubText>
+          );
+        }
+      }
+      if (name === "password" && err[name] === `request wrong ${name}`) {
+        text = "잘못된 비밀번호 입니다.";
         return (
           <SubText danger={true} OS={Platform.OS}>
             {text}
           </SubText>
         );
-      } else if (
-        name === "passwordCheck" &&
-        err[name] === "different password"
-      ) {
+      }
+      if (name === "passwordCheck" && err[name] === "different password") {
         text = "비밀번호가 다릅니다";
         return (
           <SubText danger={true} OS={Platform.OS}>

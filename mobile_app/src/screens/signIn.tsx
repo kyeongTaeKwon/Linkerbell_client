@@ -20,7 +20,7 @@ const Login = ({
     password: "",
     err: {},
   });
-  const { onLogin, isLogin } = useAuth();
+  const { onLogin, isLogin, err: requestError, handleErr } = useAuth();
 
   useEffect(() => {
     validateValue(value, setValue);
@@ -32,6 +32,7 @@ const Login = ({
 
   const handlePress = (value: LoginValue) => {
     // const { email, password } = value;
+    handleErr();
     const email = value.email.trim();
     const password = value.password.trim();
     onLogin({ email, password });

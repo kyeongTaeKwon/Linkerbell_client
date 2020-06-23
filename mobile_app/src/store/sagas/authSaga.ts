@@ -3,7 +3,8 @@
 import { all, takeLatest, put } from "redux-saga/effects";
 import callLoginApi from "../../core/apis/signin";
 import SignUpRequest from "../../core/apis/signUp";
-
+import fetchCategoryRequest from "../../core/apis/fetchCategory";
+import sortCategory from "../../core/utils/sortCategory";
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -13,7 +14,9 @@ import {
   USER_SIGNUP_FAILURE,
   USER_LOGOUT,
 } from "../module/auth";
+import { FETCH_CATEGORY_DATA } from "../module/linkData";
 import { INIT_LINK_DATA } from "../module/linkData";
+
 export default function* authSaga() {
   yield all([
     takeLatest(USER_LOGIN_REQUEST, fetchUserInfo$),
@@ -28,8 +31,12 @@ function* fetchUserInfo$(action: any) {
   try {
     const res = yield callLoginApi(payload.loginValue);
     const userInfo = { ...res.data, email };
-    console.log(userInfo);
+    const categoryData = yield fetchCategoryRequest();
+    sortCategory(categoryData);
+    console.log(categoryData);
+
     yield put({ type: USER_LOGIN_SUCCESS, payload: { userInfo } });
+    yield put({ type: FETCH_CATEGORY_DATA, payload: { categoryData } });
   } catch (e) {
     console.log(e.response.data);
     yield put({ type: USER_LOGIN_FAILURE, payload: { text: e.response.data } });

@@ -19,8 +19,7 @@ const Mypage = ({
 }: {
   navigation: StackNavigationProp<any>;
 }): JSX.Element => {
-  const { onLogOut } = useAuth();
-
+  const { onLogOut, email } = useAuth();
 
   const onEditPassword = () => {
     navigation.navigate("EditPassword");
