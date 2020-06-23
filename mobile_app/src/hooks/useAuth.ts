@@ -6,6 +6,7 @@ import {
   oauthLoginSuccess,
   signup,
   logout,
+  initailizeError,
 } from "../store/module/auth";
 import { useCallback } from "react";
 
@@ -44,6 +45,9 @@ export default function useAuth() {
   const onLogOut = useCallback(() => {
     dispatch(logout());
   }, [dispatch]);
+  const handleErr = useCallback(() => {
+    dispatch(initailizeError());
+  }, [dispatch]);
 
   return {
     user_id,
@@ -57,5 +61,6 @@ export default function useAuth() {
     onSignup,
     isLogin,
     onLogOut,
+    handleErr,
   };
 }

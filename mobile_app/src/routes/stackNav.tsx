@@ -6,12 +6,12 @@ import Signup from "../screens/signUp";
 import Loding from "../screens/loading";
 import UserDetail from "../screens/userDetail";
 import Home from "../screens/home";
-
+import Welcome from "../screens/welcome";
 const StackNav = (): JSX.Element => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator
-      initialRouteName="Start"
+      initialRouteName="Loading"
       screenOptions={{ header: () => null }}
     >
       <Stack.Screen name="Start" component={Start} />
@@ -20,6 +20,7 @@ const StackNav = (): JSX.Element => {
       <Stack.Screen name="Signup" component={Signup} />
       <Stack.Screen name="UserDetail" component={UserDetail} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Welcome" component={Welcome} />
     </Stack.Navigator>
   );
 };

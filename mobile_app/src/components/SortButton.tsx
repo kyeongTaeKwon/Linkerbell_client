@@ -1,12 +1,10 @@
 import React from "react";
 import { TouchableWithoutFeedback } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 type Props = {
   orderType: string;
   onPress?: any;
 };
-
 const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
   const renderSortButton = () => {
     if (orderType === "asc") {
@@ -39,5 +37,4 @@ const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
   };
   return renderSortButton();
 };
-
 export default SortButton;

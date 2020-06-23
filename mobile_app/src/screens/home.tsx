@@ -39,7 +39,7 @@ const Home = ({
   };
 
   useEffect(() => {
-    getCategoryList();
+    setData(categories);
   }, []);
 
   useEffect(() => {

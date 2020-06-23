@@ -23,11 +23,7 @@ const Start = ({
 }: {
   navigation: StackNavigationProp<AuthParamList, "Start">;
 }): JSX.Element => {
-  const { onLogin, onOauthLogin, isLogin } = useAuth();
-
-  useEffect(() => {
-    onLogin({});
-  }, []);
+  const { onOauthLogin, isLogin } = useAuth();
 
   useEffect(() => {
     isLogin && navigation.navigate("Home");
@@ -47,6 +43,7 @@ const Start = ({
   const handleFacebookLogin = async () => {
     try {
       const res = await loginWithFacebookApiRequest();
+      console.log(res.status);
       res.status === 200 && onOauthLogin(res.data);
     } catch (e) {
       console.log(e);

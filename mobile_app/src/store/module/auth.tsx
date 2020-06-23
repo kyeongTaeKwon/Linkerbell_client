@@ -10,6 +10,7 @@ export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS" as const;
 export const USER_SIGNUP_FAILURE = "USER_SIGNUP_FAILURE" as const;
 export const USER_PROFILE = "USER_PROFILE" as const;
 export const USER_OAUTH_LOGIN_SUECCESS = "USER_OAUTH_LOGIN_SUECESS" as const;
+export const INIT_ERROR = "INIT_ERROR" as const;
 
 type authState = {
   user_id: number;
@@ -70,6 +71,10 @@ export const profileUpdate = () => ({
   type: USER_PROFILE,
 });
 
+export const initailizeError = () => ({
+  type: INIT_ERROR,
+});
+
 const initialAuthState: authState = {
   user_id: -1,
   email: "",
@@ -87,13 +92,14 @@ export type authActions =
   | ReturnType<typeof userSignupSuccess>
   | ReturnType<typeof userSignupFailure>
   | ReturnType<typeof profileUpdate>
-  | ReturnType<typeof oauthLoginSuccess>;
+  | ReturnType<typeof oauthLoginSuccess>
+  | ReturnType<typeof initailizeError>;
 
 const reducer = (state = initialAuthState, action: authActions) => {
   switch (action.type) {
     case USER_LOGIN_SUCCESS: {
       const { user_id, age, gender, email } = action.payload.userInfo;
-      return { ...state, user_id, isLogin: true, age, gender, email };
+      return { ...state, user_id, isLogin: true, age, gender, email, err: "" };
     }
     case USER_LOGIN_FAILURE: {
       const { text } = action.payload;
@@ -117,6 +123,9 @@ const reducer = (state = initialAuthState, action: authActions) => {
     }
     case USER_PROFILE: {
       return { ...initialAuthState };
+    }
+    case INIT_ERROR: {
+      return { ...state, err: "Pending" };
     }
     default:
       return state;

@@ -34,7 +34,7 @@ const SignUp = ({
   }, [value.email, value.passowrd, value.passwordCheck]);
 
   useEffect(() => {
-    user_id !== -1 && navigation.navigate("UserDetail");
+    user_id !== -1 && navigation.replace("Welcome");
   }, [user_id]);
 
   return (
