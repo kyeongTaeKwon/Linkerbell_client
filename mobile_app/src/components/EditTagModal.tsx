@@ -28,6 +28,11 @@ const EditTagModal = ({
   const [tagText, setTagText] = useState("");
   const [link, setLink] = useState<Url>(currentLink);
   const { onEditTag } = useLinkData();
+  const [msg, setMsg] = useState("태그를 입력해주세요");
+
+  useEffect(() => {
+    tagText !== "" && setMsg("태그를 입력해주세요");
+  }, [tagText]);
 
   useEffect(() => {
     setLink(currentLink);
@@ -36,11 +41,16 @@ const EditTagModal = ({
   const handlePress = async () => {
     const { id, tags } = link;
     const tags_list = _.uniq([...tags, tagText]);
+    const text: string = tagText.trim();
     try {
-      if (tagText !== "" && tags.length < 3) {
-        await editTagRequest({ id, tags: tags_list });
-        setLink({ ...link, tags: tags_list });
-        await onEditTag(id, tags_list);
+      if (tags.includes(text)) {
+        setMsg("이미 존재하는 태그입니다.");
+      } else {
+        if (text !== "" && tags.length < 3) {
+          await editTagRequest({ id, tags: tags_list });
+          setLink({ ...link, tags: tags_list });
+          await onEditTag(id, tags_list);
+        }
       }
     } catch (e) {
       console.log(e);
@@ -71,7 +81,12 @@ const EditTagModal = ({
           }}
         >
           {_.map(link.tags, (tag) => (
-            <Tag currentTag={tag} onDelete={handleDeletePress} id={link.id} />
+            <Tag
+              currentTag={tag}
+              onDelete={handleDeletePress}
+              id={link.id}
+              key={tag}
+            />
           ))}
         </ScrollView>
       );
@@ -83,7 +98,7 @@ const EditTagModal = ({
         <InputWrapper>
           <HashTag>#</HashTag>
           <InputForm
-            placeholder="태그를 입력해주세요"
+            placeholder={msg}
             placeholderTextColor="#6c6c6c"
             onChangeText={(val) => setTagText(val)}
             value={tagText}

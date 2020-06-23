@@ -21,6 +21,7 @@ export const EDIT_TAG = "EDIT_TAG" as const;
 export const DELETE_LINK = "DELETE_LINK" as const;
 export const CATEGORISE_TAG_LIST = "CATEGORISE_TAG_LIST" as const;
 export const ADD_LINK = "ADD_LINK" as const;
+export const INIT_LINK_DATA = "INIT_LINK_DATA" as const;
 //2 .생성자 (영수증)
 export const fetchCategories = (categoryData: Category[]) => ({
   type: FETCH_CATEGORY_DATA,
@@ -79,6 +80,10 @@ export const categoriseTagList = (
   type: CATEGORISE_TAG_LIST,
   payload: { all_tag_list, categories_tag_list },
 });
+
+export const initiallizeLinkData = () => ({
+  type: INIT_LINK_DATA,
+});
 export const initialLinkDataState: ListState = {
   categories: [],
   categories_url_list: {},
@@ -100,7 +105,8 @@ export type linkActions =
   | ReturnType<typeof editTag>
   | ReturnType<typeof deleteLink>
   | ReturnType<typeof categoriseTagList>
-  | ReturnType<typeof addLink>;
+  | ReturnType<typeof addLink>
+  | ReturnType<typeof initiallizeLinkData>;
 
 const reducer = (state = initialLinkDataState, action: linkActions) => {
   switch (action.type) {
@@ -166,6 +172,9 @@ const reducer = (state = initialLinkDataState, action: linkActions) => {
         linkData,
       ];
       return { ...state, all_category_url_list: current_All_category_url_list };
+    }
+    case INIT_LINK_DATA: {
+      return { ...initialLinkDataState };
     }
     default:
       return state;

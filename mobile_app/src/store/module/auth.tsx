@@ -13,6 +13,7 @@ export const USER_OAUTH_LOGIN_SUECCESS = "USER_OAUTH_LOGIN_SUECESS" as const;
 
 type authState = {
   user_id: number;
+  email?: string;
   age?: number;
   gender?: number;
   isLogin: boolean;
@@ -71,6 +72,7 @@ export const profileUpdate = () => ({
 
 const initialAuthState: authState = {
   user_id: -1,
+  email: "",
   age: 0,
   gender: 0,
   isLogin: false,
@@ -90,8 +92,8 @@ export type authActions =
 const reducer = (state = initialAuthState, action: authActions) => {
   switch (action.type) {
     case USER_LOGIN_SUCCESS: {
-      const { user_id, age, gender } = action.payload.userInfo;
-      return { ...state, user_id, isLogin: true, age, gender };
+      const { user_id, age, gender, email } = action.payload.userInfo;
+      return { ...state, user_id, isLogin: true, age, gender, email };
     }
     case USER_LOGIN_FAILURE: {
       const { text } = action.payload;

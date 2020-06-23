@@ -24,14 +24,14 @@ const FavoriteBtn = ({ data }: Props): JSX.Element => {
   return (
     <TouchableWithoutFeedback
       onPress={() => handleFavoriteBtnPress(data)}
-      style={{ width: 40, height: 40 }}
+      style={{ width: 68, height: 52 }}
     >
       <AntDesign
         name={data.favorite ? "star" : "staro"}
         size={20}
         style={{
           position: "relative",
-          left: 20,
+          left: 24,
           width: 40,
           height: 40,
           top: 15,

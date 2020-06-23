@@ -12,7 +12,6 @@ import {
 } from "../styles/MypageStyles./EmailView";
 import sendSignOutRequest from "../core/apis/logOut";
 import useAuth from "../hooks/useAuth";
-import { LoginValue } from "../models/LoginTypes";
 const { UpperText } = style;
 
 const Mypage = ({
@@ -21,6 +20,7 @@ const Mypage = ({
   navigation: StackNavigationProp<any>;
 }): JSX.Element => {
   const { onLogOut } = useAuth();
+
 
   const onEditPassword = () => {
     navigation.navigate("EditPassword");
@@ -42,7 +42,7 @@ const Mypage = ({
       <ShortBar />
       <EmailView>
         <EmailText>{"👤  이메일"}</EmailText>
-        <Email>{"longeremail@longeremail.com"}</Email>
+        <Email>{email}</Email>
       </EmailView>
       <EditPWBtn onPress={onEditPassword}>
         <EmailText>{"🔐  비밀번호 수정"}</EmailText>

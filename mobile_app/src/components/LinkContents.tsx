@@ -35,7 +35,7 @@ const LinkContents = ({ data, isSwipe }: Props): JSX.Element => {
   };
   const renderLinkDataBoxStyle = () => {
     const width = Dimensions.get("window").width - 80;
-    return { marginLeft: 28, width, minHeight: 80 };
+    return { width, minHeight: 100 };
   };
 
   const renderNewDot = (isNew: boolean) => {
@@ -57,7 +57,11 @@ const LinkContents = ({ data, isSwipe }: Props): JSX.Element => {
         >
           {sliceText(data.og_title, 17)}
         </Title>
-        {data.og_description !== "" && renderDesc(data.og_description)}
+        {data.og_description !== "" ? (
+          renderDesc(data.og_description)
+        ) : (
+          <Desc>글에 대한 설명이 없습니다.</Desc>
+        )}
         <_Url>{sliceText(data.url, 36)}</_Url>
         <FlatList
           data={data.tags}
