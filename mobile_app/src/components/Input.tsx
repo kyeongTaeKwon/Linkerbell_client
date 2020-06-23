@@ -26,6 +26,7 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
   const signUpPlaceholder = `${placeholderKeyword} ${
     name === "passwordCheck" ? "다시 " : ""
   }`;
+  const limit = name === "email" ? "" : "(8자 이상)";
 
   const renderSubText = (err: err): JSX.Element => {
     let text = inputTitle;
@@ -74,7 +75,7 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     if (name === "passwordCheck" && passwordCheck.length !== 0) {
       const err = { ...value.err };
       if (passwordCheck !== value.password) {
-        err.passwordCheck = "different password";
+        err.passwordCheck = "unmatched password";
       } else {
         delete err.passwordCheck;
       }
@@ -96,7 +97,7 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
       <InputForm
         autoCapitalize="none"
         OS={Platform.OS}
-        placeholder={`${signUpPlaceholder} 입력해주세요`}
+        placeholder={`${signUpPlaceholder} 입력해주세요 ${limit}`}
         onChangeText={(val) => onChange({ ...value, [name]: val })}
         onFocus={() => initValidateEmail()}
         onBlur={() => (name === "email" ? validateEmail() : checkPassword())}

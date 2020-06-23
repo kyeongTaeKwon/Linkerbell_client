@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { EvilIcons } from "@expo/vector-icons";
 import styled from "../styles/listStyles/index";
 import SortButton from "../components/SortButton";

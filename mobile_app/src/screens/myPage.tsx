@@ -3,6 +3,7 @@ import { View, Platform } from "react-native";
 import { style } from "../styles/HomeStyles/HStyleIndex";
 import { ShortBar } from "../styles/ShortBar";
 import { LogOutBtn, LogOutText } from "../styles/MypageStyles./logOutBtn";
+import { StackNavigationProp } from "@react-navigation/stack";
 import {
   EmailText,
   EmailView,
@@ -13,8 +14,17 @@ import sendSignOutRequest from "../core/apis/logOut";
 import useAuth from "../hooks/useAuth";
 const { UpperText } = style;
 
-const Mypage = (): JSX.Element => {
-  const { onLogOut, email } = useAuth();
+const Mypage = ({
+  navigation,
+}: {
+  navigation: StackNavigationProp<any>;
+}): JSX.Element => {
+  const { onLogOut } = useAuth();
+
+
+  const onEditPassword = () => {
+    navigation.navigate("EditPassword");
+  };
 
   const handleLogOutBtnPress = async () => {
     try {
@@ -34,7 +44,7 @@ const Mypage = (): JSX.Element => {
         <EmailText>{"👤  이메일"}</EmailText>
         <Email>{email}</Email>
       </EmailView>
-      <EditPWBtn onPress={() => console.log("비밀번호를 수정하시겠습니까?")}>
+      <EditPWBtn onPress={onEditPassword}>
         <EmailText>{"🔐  비밀번호 수정"}</EmailText>
       </EditPWBtn>
       <LogOutBtn onPress={handleLogOutBtnPress}>
