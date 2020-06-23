@@ -19,6 +19,7 @@ type authState = {
   gender?: number;
   isLogin: boolean;
   err: string;
+  isOauthLogin: boolean;
 };
 
 type value = {
@@ -82,6 +83,7 @@ const initialAuthState: authState = {
   gender: 0,
   isLogin: false,
   err: "",
+  isOauthLogin: false,
 };
 export type authActions =
   | ReturnType<typeof callLoginAPi>
@@ -108,7 +110,7 @@ const reducer = (state = initialAuthState, action: authActions) => {
     case USER_OAUTH_LOGIN_SUECCESS: {
       const { user_id } = action.payload;
       console.log(user_id);
-      return { ...state, user_id, isLogin: true };
+      return { ...state, user_id, isLogin: true, isOauthLogin: true };
     }
     case USER_LOGOUT:
       return { ...initialAuthState };

@@ -83,7 +83,9 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
   };
 
   useEffect(() => {
-    value.cur_list.length === 0 && setValue({ ...value, cur_tag: "All" });
+    if (value.cur_list.length === 0) {
+      setValue({ ...value, cur_tag: "All" });
+    }
   }, [value.cur_list]);
 
   useEffect(() => {
@@ -167,6 +169,7 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
           onTextChange={handleTextChange}
           ordered={value.orderType}
           onSort={handleSortButton}
+          length={value.cur_list.length}
         />
 
         <ShortBar />

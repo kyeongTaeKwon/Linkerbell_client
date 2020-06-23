@@ -19,7 +19,14 @@ const Loading = ({
     err !== "" && navigation.replace("Start");
   }, [err]);
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+      }}
+    >
       <Image
         source={require("../../assets/logo_large.png")}
         style={{ alignSelf: "center", marginRight: 20 }}

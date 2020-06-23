@@ -106,6 +106,7 @@ const Favorite = (): JSX.Element => {
           category_name="즐겨찾기"
           ordered={value.orderType}
           onSort={handleSortButton}
+          length={value.cur_list.length}
         />
         <ShortBar style={{ marginBottom: 48 }} />
         <LinkList

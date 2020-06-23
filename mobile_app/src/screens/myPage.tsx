@@ -19,7 +19,7 @@ const Mypage = ({
 }: {
   navigation: StackNavigationProp<any>;
 }): JSX.Element => {
-  const { onLogOut, email } = useAuth();
+  const { onLogOut, email, isOauthLogin } = useAuth();
 
   const onEditPassword = () => {
     navigation.navigate("EditPassword");
@@ -35,17 +35,26 @@ const Mypage = ({
       console.log(e);
     }
   };
+  const renderAuthInfo = () => {
+    if (isOauthLogin) {
+      return (
+        <React.Fragment>
+          <EmailView>
+            <EmailText>{"👤  이메일"}</EmailText>
+            <Email>{email}</Email>
+          </EmailView>
+          <EditPWBtn onPress={onEditPassword}>
+            <EmailText>{"🔐  비밀번호 수정"}</EmailText>
+          </EditPWBtn>
+        </React.Fragment>
+      );
+    }
+  };
   return (
     <View style={{ backgroundColor: "#fff", flex: 1 }}>
       <UpperText OS={Platform.OS}>마이페이지</UpperText>
       <ShortBar />
-      <EmailView>
-        <EmailText>{"👤  이메일"}</EmailText>
-        <Email>{email}</Email>
-      </EmailView>
-      <EditPWBtn onPress={onEditPassword}>
-        <EmailText>{"🔐  비밀번호 수정"}</EmailText>
-      </EditPWBtn>
+      {renderAuthInfo()}
       <LogOutBtn onPress={handleLogOutBtnPress}>
         <LogOutText>{"👋  로그아웃"}</LogOutText>
       </LogOutBtn>
