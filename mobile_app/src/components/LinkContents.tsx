@@ -35,7 +35,7 @@ const LinkContents = ({ data, isSwipe }: Props): JSX.Element => {
   };
   const renderLinkDataBoxStyle = () => {
     const width = Dimensions.get("window").width - 80;
-    return { marginLeft: 28, width, minHeight: 100 };
+    return { marginLeft: 28, width, minHeight: 80 };
   };
 
   const renderNewDot = (isNew: boolean) => {

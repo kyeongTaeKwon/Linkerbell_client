@@ -14,7 +14,11 @@ const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
           name="ios-arrow-down"
           size={24}
           color="black"
-          style={{ marginLeft: 12, paddingTop: 4 }}
+          style={{
+            marginLeft: 12,
+            paddingTop: 4,
+            width: 30,
+          }}
           onPress={() => onPress("desc")}
         />
       );
@@ -24,12 +28,12 @@ const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
         name="ios-arrow-up"
         size={24}
         color="black"
-        style={{ marginLeft: 12, paddingTop: 4 }}
+        style={{ marginLeft: 12, paddingTop: 4, width: 30 }}
         onPress={() => onPress("asc")}
       />
     );
   };
-  return <React.Fragment>{renderSortButton()}</React.Fragment>;
+  return renderSortButton();
 };
 
 export default SortButton;
