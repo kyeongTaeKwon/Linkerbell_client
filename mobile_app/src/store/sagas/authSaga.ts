@@ -30,11 +30,11 @@ function* fetchUserInfo$(action: any) {
   const { email } = action.payload.loginValue;
   try {
     const res = yield callLoginApi(payload.loginValue);
-    const userInfo = { ...res.data, email };
+    console.log(res);
+    console.log(res.data);
+    const userInfo = { email, ...res.data };
     const categoryData = yield fetchCategoryRequest();
     sortCategory(categoryData);
-    console.log(categoryData);
-
     yield put({ type: USER_LOGIN_SUCCESS, payload: { userInfo } });
     yield put({ type: FETCH_CATEGORY_DATA, payload: { categoryData } });
   } catch (e) {

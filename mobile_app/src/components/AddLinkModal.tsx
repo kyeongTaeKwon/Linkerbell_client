@@ -30,7 +30,8 @@ const AddLinkModal = ({
       const res = await postUrl(copiedUrl);
       await onReload();
       console.log(res);
-      await onAddLink(res);
+      const result = { ...res, tags: [] };
+      await onAddLink(result);
       await _setContent();
       setText("");
       toggleModal();
