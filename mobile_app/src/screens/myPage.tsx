@@ -11,11 +11,10 @@ import {
 } from "../styles/MypageStyles./EmailView";
 import sendSignOutRequest from "../core/apis/logOut";
 import useAuth from "../hooks/useAuth";
-import { LoginValue } from "../models/LoginTypes";
 const { UpperText } = style;
 
 const Mypage = (): JSX.Element => {
-  const { onLogOut } = useAuth();
+  const { onLogOut, email } = useAuth();
 
   const handleLogOutBtnPress = async () => {
     try {
@@ -33,7 +32,7 @@ const Mypage = (): JSX.Element => {
       <ShortBar />
       <EmailView>
         <EmailText>{"👤  이메일"}</EmailText>
-        <Email>{"longeremail@longeremail.com"}</Email>
+        <Email>{email}</Email>
       </EmailView>
       <EditPWBtn onPress={() => console.log("비밀번호를 수정하시겠습니까?")}>
         <EmailText>{"🔐  비밀번호 수정"}</EmailText>

@@ -31,7 +31,9 @@ const Login = ({
   }, [isLogin]);
 
   const handlePress = (value: LoginValue) => {
-    const { email, password } = value;
+    // const { email, password } = value;
+    const email = value.email.trim();
+    const password = value.password.trim();
     onLogin({ email, password });
   };
 

@@ -12,6 +12,7 @@ import { useCallback } from "react";
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function useAuth() {
   const user_id = useSelector((state: RootState) => state.auth.user_id);
+  const email = useSelector((state: RootState) => state.auth.email);
   const age = useSelector((state: RootState) => state.auth.age);
   const gender = useSelector((state: RootState) => state.auth.gender);
   const err = useSelector((state: RootState) => state.auth.err);
@@ -48,6 +49,7 @@ export default function useAuth() {
     user_id,
     age,
     gender,
+    email,
     err,
     onLogin,
     updateProfile,
