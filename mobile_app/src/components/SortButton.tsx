@@ -34,16 +34,7 @@ const SortButton = ({ orderType, onPress }: Props): JSX.Element => {
           }}
           onPress={() => onPress("desc")}
         />
-      );
-    }
-    return (
-      <Ionicons
-        name="ios-arrow-up"
-        size={24}
-        color="black"
-        style={{ marginLeft: 12, paddingTop: 4, width: 30 }}
-        onPress={() => onPress("asc")}
-      />
+      </TouchableWithoutFeedback>
     );
   };
   return renderSortButton();

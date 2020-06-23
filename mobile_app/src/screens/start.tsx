@@ -11,7 +11,6 @@ import {
 } from "../core/apis/Oauth";
 
 const {
-  MainText,
   Container,
   LinkToSignUp,
   LinkToLabel,
