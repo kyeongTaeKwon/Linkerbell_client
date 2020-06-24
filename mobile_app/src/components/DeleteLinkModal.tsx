@@ -75,7 +75,7 @@ export default DeleteLinkModal;
 
 const styles = StyleSheet.create({
   delete: {
-    color: "#FF5E5E",
+    color: "#FF6c6c",
     fontSize: 15,
     fontFamily: "NMedium",
     letterSpacing: -0.3,
