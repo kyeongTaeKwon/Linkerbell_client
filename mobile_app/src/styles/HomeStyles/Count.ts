@@ -9,7 +9,7 @@ export const Count = styled.Text`
   font-family: "NMedium";
   font-size: 14px;
   margin: 10px;
-  margin-left: 2px;
+  margin-left: 0px;
   color: #000;
   border-radius: 12px;
   min-width: 34px;

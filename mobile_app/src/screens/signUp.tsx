@@ -22,10 +22,13 @@ const SignUp = ({
     err: {},
   });
 
-  const { user_id, onSignup } = useAuth();
+  const { user_id, onSignup, handleErr } = useAuth();
 
   const onPress = (value: LoginValue) => {
-    const { email, password } = value;
+    handleErr();
+    const email = value.email.trim();
+    const password = value.password.trim();
+    // const { email, password } = value;
     onSignup({ email, password });
   };
 
