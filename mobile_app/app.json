@@ -6,6 +6,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "sdkVersion": "37.0.0",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -16,13 +17,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "expo.exp.exponent",
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": "586259967632-jq36j98db3m26aqu2i5c614rpruuvnel.apps.googleusercontent.com"
-        }
-      },
-      "supportsTablet": true
+      "bundleIdentifier": "com.team7000.linkerbell"
+    },
+    "android": {
+      "package": "com.team7000.linkerbell"
     },
     "description": ""
   }
