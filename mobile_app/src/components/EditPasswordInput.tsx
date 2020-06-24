@@ -93,7 +93,7 @@ const EditPasswordInput = ({
     const newPasswordCheck = value.newPasswordCheck
       ? value.newPasswordCheck
       : "";
-    if (name === "newPasswordCheck" && newPasswordCheck.length !== 0) {
+    if (name === "newPasswordCheck" && newPasswordCheck.length >= 8) {
       const err = { ...value.err };
       if (newPasswordCheck !== value.newPassword) {
         err.newPasswordCheck = "unmatched password";
@@ -114,7 +114,9 @@ const EditPasswordInput = ({
         placeholder={`${signUpPlaceholder} 입력해주세요 (8자 이상)`}
         onChangeText={(val) => onChange({ ...value, [name]: val })}
         onBlur={() =>
-          name === "newPasswordCheck" ? checkNewPassword() : checkPassword()
+          name === "newPasswordCheck" || name === "newPassword"
+            ? checkNewPassword()
+            : checkPassword()
         }
         secureTextEntry
       ></InputForm>
