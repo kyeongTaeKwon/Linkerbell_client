@@ -33,14 +33,11 @@ const styles = StyleSheet.create({
   radioContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    width: "60%",
-    marginLeft: 50,
-    minHeight: 40,
-    backgroundColor: "transparent",
+    marginLeft: 52,
   },
   radio: {
-    margin: 2,
-    width: 70,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 

@@ -21,6 +21,7 @@ const AgeSelect = ({ value, setValue }: AgeProps): JSX.Element => {
   return (
     <Layout style={styles.container} level="1">
       <Select
+        style={{ marginTop: 10, marginBottom: 10 }}
         placeholder={"나이를 입력하세요"}
         value={displayValue}
         selectedIndex={selectedIndex}
