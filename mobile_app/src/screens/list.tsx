@@ -84,7 +84,10 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
 
   useEffect(() => {
     if (value.cur_list.length === 0) {
-      setValue({ ...value, cur_tag: "All" });
+      if (value.tags) {
+        !value.tags.includes(value.cur_tag) &&
+          setValue({ ...value, cur_tag: "All" });
+      }
     }
   }, [value.cur_list]);
 
