@@ -5,8 +5,8 @@ type Props = {
 
 export const TitleText = styled.Text`
   font-family: "NBold";
-  font-size: 21px;
-  line-height: ${21 * 1.6}px;
+  font-size: 22px;
+  line-height: ${22 * 1.6}px;
   padding: 0px;
   margin: 0px;
   margin-left: 36px;

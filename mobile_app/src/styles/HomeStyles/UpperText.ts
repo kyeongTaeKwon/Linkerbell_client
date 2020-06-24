@@ -6,6 +6,7 @@ type Props = {
 export const UpperText = styled.Text`
   font-family: "NBold";
   font-size: 20px;
+  line-height: ${20 * 1.5}px;
   padding: 0px;
   margin: 0px;
   margin-left: 36px;

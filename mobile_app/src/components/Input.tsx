@@ -38,6 +38,11 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
     if (requestError === "check_pw") {
       err.password = "request wrong password";
     }
+    if (requestError === "이미 존재하는 이메일 주소입니다.") {
+      // if(value.passwordCheck){
+      err.email = "request wrong email signup";
+      // }
+    }
     onChange({ ...value, err });
   }, [requestError]);
 
@@ -59,6 +64,13 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
               {text}
             </SubText>
           );
+        } else if (err.email === "request wrong email signup") {
+          text = "이미 존재하는 이메일 입니다";
+          return (
+            <SubText danger={true} OS={Platform.OS}>
+              {text}
+            </SubText>
+          );
         }
       }
       if (name === "password" && err[name] === `request wrong ${name}`) {
@@ -69,7 +81,7 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
           </SubText>
         );
       }
-      if (name === "passwordCheck" && err[name] === "different password") {
+      if (name === "passwordCheck" && err[name] === "unmatched password") {
         text = "비밀번호가 다릅니다";
         return (
           <SubText danger={true} OS={Platform.OS}>
@@ -94,19 +106,27 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
       } else {
         delete err.email;
       }
+      // if (name === "email" && err.email === "request wrong email signup") {
+      //   delete err.email;
+      // }
+      console.log(err);
       onChange({ ...value, err });
     }
   };
 
   const checkPassword = () => {
     const passwordCheck = value.passwordCheck ? value.passwordCheck : "";
-    if (name === "passwordCheck" && passwordCheck.length !== 0) {
+    if (
+      (name === "passwordCheck" || name === "password") &&
+      passwordCheck.length !== 0
+    ) {
       const err = { ...value.err };
       if (passwordCheck !== value.password) {
         err.passwordCheck = "unmatched password";
       } else {
         delete err.passwordCheck;
       }
+      console.log(err);
       onChange({ ...value, err });
     }
   };
@@ -114,6 +134,9 @@ const Input = ({ name, onChange, value }: InputProps): JSX.Element => {
   const initValidateEmail = () => {
     const err = { ...value.err };
     if (name === "email" && err.email === "wrong email") {
+      delete err.email;
+    }
+    if (name === "email" && err.email === "request wrong email signup") {
       delete err.email;
     }
     onChange({ ...value, err });
