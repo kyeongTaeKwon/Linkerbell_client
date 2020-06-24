@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Platform } from "react-native";
+import { Platform, TouchableWithoutFeedback, Keyboard } from "react-native";
 import EditPasswordInput from "../components/EditPasswordInput";
 import { EditPWType } from "../models/MyPageTypes";
 import EditPWBtn from "../components/EditPWBtn";
@@ -41,28 +41,30 @@ const EditPassword = ({
   };
 
   return (
-    <Container>
-      <MainText OS={Platform.OS}> 비밀번호 수정하기</MainText>
-      <EditPasswordInput
-        name="password"
-        value={value}
-        onChange={setValue}
-        OS={Platform.OS}
-      />
-      <EditPasswordInput
-        name="newPassword"
-        value={value}
-        onChange={setValue}
-        OS={Platform.OS}
-      />
-      <EditPasswordInput
-        name="newPasswordCheck"
-        value={value}
-        onChange={setValue}
-        OS={Platform.OS}
-      />
-      <EditPWBtn state={value} setState={setValue} onPress={handlePress} />
-    </Container>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <Container>
+        <MainText OS={Platform.OS}>비밀번호 수정하기</MainText>
+        <EditPasswordInput
+          name="password"
+          value={value}
+          onChange={setValue}
+          OS={Platform.OS}
+        />
+        <EditPasswordInput
+          name="newPassword"
+          value={value}
+          onChange={setValue}
+          OS={Platform.OS}
+        />
+        <EditPasswordInput
+          name="newPasswordCheck"
+          value={value}
+          onChange={setValue}
+          OS={Platform.OS}
+        />
+        <EditPWBtn state={value} setState={setValue} onPress={handlePress} />
+      </Container>
+    </TouchableWithoutFeedback>
   );
 };
 
