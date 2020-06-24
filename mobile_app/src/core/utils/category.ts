@@ -28,7 +28,7 @@ export const renderCategoryText = (category_id: number): Category | string => {
     14: { name: "사회", emoji: "🏙" },
     15: { name: "종교", emoji: "🙏" },
     16: { name: "컴퓨터·IT", emoji: "💻" },
-    17: { name: "과학", emoji: "🔬" },
+    17: { name: "과학", emoji: "🧪" },
     18: { name: "쇼핑", emoji: "🛍️" },
     19: { name: "패션", emoji: "👗" },
     20: { name: "스포츠", emoji: "⚽️" },

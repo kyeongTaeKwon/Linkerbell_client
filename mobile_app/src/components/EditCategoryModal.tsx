@@ -20,7 +20,7 @@ const categoryList = [
   { id: 3, name: "비즈니스", emoji: "💼" },
   { id: 6, name: "금융·부동산", emoji: "📈" },
   { id: 16, name: "컴퓨터·IT", emoji: "💻" },
-  { id: 17, name: "과학", emoji: "🔬" },
+  { id: 17, name: "과학", emoji: "🧪" },
   { id: 12, name: "법률·정치", emoji: "⚖️" },
   { id: 4, name: "교육·Job", emoji: "📚" },
   { id: 20, name: "스포츠", emoji: "⚽️" },
@@ -41,7 +41,11 @@ const EditCategoryModal = ({
   currentLinkId,
 }: Props): JSX.Element => {
   return (
-    <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
+    <Modal
+      isVisible={isVisible}
+      onBackdropPress={toggleModal}
+      style={{ justifyContent: "center" }}
+    >
       <CategoryModal>
         <Title>변경할 카테고리를 선택하세요.</Title>
         <FlatList

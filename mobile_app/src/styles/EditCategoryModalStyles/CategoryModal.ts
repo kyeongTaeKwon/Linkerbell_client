@@ -5,10 +5,10 @@ type Props = {
 };
 
 export const CategoryModal = styled.View`
+  flex: 1;
   position: absolute;
   align-self: center;
-  margin-vertical: 80px;
-  bottom: 0px;
+  justify-content: center;
   height: 70%;
   border-radius: 16px;
   width: 98%;
