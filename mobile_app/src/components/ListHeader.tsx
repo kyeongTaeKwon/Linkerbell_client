@@ -10,7 +10,7 @@ type Props = {
   ordered: string;
   onTextChange: (text: string) => void;
   onSort: (orderType: string) => void;
-  length: number;
+  length?: number;
 };
 
 const HeaderContainer = ({

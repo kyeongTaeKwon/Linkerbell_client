@@ -81,27 +81,29 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
     }
     setValue({ ...value, list: all_list, cur_list: list, tags });
   };
+  const filterLinkBySearch = () => {
+    const { list, text } = value;
+    const filtered_list = filterLinkByTag(list);
+    if (text.trim() !== "") {
+      return filtered_list.filter((link) =>
+        link.og_title.toLowerCase().includes(text.toLowerCase()),
+      );
+    }
+    return filtered_list;
+  };
 
   useEffect(() => {
-    if (value.cur_list.length === 0) {
-      if (value.tags) {
-        !value.tags.includes(value.cur_tag) &&
-          setValue({ ...value, cur_tag: "All" });
+    if (value.cur_list) {
+      if (value.cur_list.length === 0) {
+        if (value.tags) {
+          !value.tags.includes(value.cur_tag) &&
+            setValue({ ...value, cur_tag: "All" });
+        }
       }
     }
   }, [value.cur_list]);
 
   useEffect(() => {
-    const filterLinkBySearch = () => {
-      const { list, text } = value;
-      const filtered_list = filterLinkByTag(list);
-      if (text.trim() !== "") {
-        return filtered_list.filter((link) =>
-          link.og_title.toLowerCase().includes(text.toLowerCase()),
-        );
-      }
-      return filtered_list;
-    };
     const cur_list = filterLinkBySearch();
     setValue({ ...value, cur_list });
   }, [value.text]);
@@ -123,7 +125,10 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
 
   useEffect(() => {
     const { list, orderType } = value;
-    const filtered_list = filterLinkByTag(list);
+    let filtered_list = filterLinkByTag(list);
+    if (value.text !== "") {
+      filtered_list = filterLinkBySearch();
+    }
     const cur_list = sortLink(filtered_list, orderType);
     setValue({ ...value, cur_list });
   }, [value.orderType]);
@@ -172,7 +177,7 @@ const List = ({ route, navigation }: ListProps): JSX.Element => {
           onTextChange={handleTextChange}
           ordered={value.orderType}
           onSort={handleSortButton}
-          length={value.cur_list.length}
+          length={value.cur_list && value.cur_list.length}
         />
 
         <ShortBar />

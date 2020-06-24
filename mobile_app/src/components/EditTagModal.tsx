@@ -44,7 +44,7 @@ const EditTagModal = ({
     const text: string = tagText.trim();
     try {
       if (tags.length === 3) {
-        setMsg("태그는 3개까지 추가 가능합니다.");
+        setMsg("태그 최대 3개");
       }
       if (tags.includes(text)) {
         setMsg("이미 존재하는 태그입니다.");
