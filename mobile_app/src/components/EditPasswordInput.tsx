@@ -98,6 +98,7 @@ const EditPasswordInput = ({
       if (newPasswordCheck !== value.newPassword) {
         err.newPasswordCheck = "unmatched password";
       } else {
+        delete err.newPassword;
         delete err.newPasswordCheck;
       }
       onChange({ ...value, err });
